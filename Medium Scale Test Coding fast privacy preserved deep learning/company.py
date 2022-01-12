@@ -27,20 +27,27 @@ class Company:
         #     cols = np.matrix(table.col_values(x))  # 把list转换为矩阵进行矩阵操作
         #     self.convolution0_weight[:, x] = cols  # 按列把数据存进矩阵中
 
-        # 加载第二层的bias和weight
-        convolution_bias__3 = xlrd.open_workbook(r'.\convolution_bias_3.xls')
-        table = convolution_bias__3.sheet_by_name('Sheet1')
-        row = table.nrows  # 行数
-        col = table.ncols  # 列数
-        self.convolution_bias_row_3 = row
-        self.convolution_bias_col_3 = col
-        self.convolution_bias_3 = np.zeros(
-            (row, col))  # 生成一个nrows行ncols列，且元素均为0的初始矩阵
-        for x in range(col):
-            cols = np.matrix(table.col_values(x))  # 把list转换为矩阵进行矩阵操作
-            self.convolution_bias_3[:, x] = cols  # 按列把数据存进矩阵中
+        # # 加载第二层的bias和weight
+        # convolution_bias__3 = xlrd.open_workbook(r'.\convolution_bias_3.xls')
+        # table = convolution_bias__3.sheet_by_name('Sheet1')
+        # row = table.nrows  # 行数
+        # col = table.ncols  # 列数
+        # self.convolution_bias_row_3 = row
+        # self.convolution_bias_col_3 = col
+        # self.convolution_bias_3 = np.zeros(
+        #     (row, col))  # 生成一个nrows行ncols列，且元素均为0的初始矩阵
+        # for x in range(col):
+        #     cols = np.matrix(table.col_values(x))  # 把list转换为矩阵进行矩阵操作
+        #     self.convolution_bias_3[:, x] = cols  # 按列把数据存进矩阵中
 
-        self.convolution_weight_3 = np.load("./convolution_weight_3.npy")
+        # self.convolution_weight_3 = np.load("./convolution_weight_3.npy")
+        # print(self.convolution_weight_3.shape)
+
+        self.fc_weight = np.load("./fc_weight.npy")
+        print(self.fc_weight.shape)
+
+        self.fc_bias = np.load("./fc_bias.npy")
+        print(self.fc_bias.shape)
 
     def ran_(self):
         # convolution_bias0 = np.random.randint(-100,100,(self.convolution_bias_row,self.convolution_bias_col))
@@ -55,19 +62,35 @@ class Company:
         # np.save("./convolution0_weight.npy",convolution0_weight0)
         # np.save("./convolution1_weight.npy",convolution0_weight1)
 
-        convolution_bias_3_0 = np.random.randint(
-            -100, 100, self.convolution_bias_3.shape)
-        convolution_bias_3_1 = self.convolution_bias_3-convolution_bias_3_0
-        print(convolution_bias_3_0.shape)
-        np.save("./convolution0_bias_3.npy", convolution_bias_3_0)
-        np.save("./convolution1_bias_3.npy", convolution_bias_3_1)
+        # convolution_bias_3_0 = np.random.randint(
+        #     -100, 100, self.convolution_bias_3.shape)
+        # convolution_bias_3_1 = self.convolution_bias_3-convolution_bias_3_0
+        # print(convolution_bias_3_0.shape)
+        # np.save("./convolution0_bias_3.npy", convolution_bias_3_0)
+        # np.save("./convolution1_bias_3.npy", convolution_bias_3_1)
 
-        convolution_weight_3_0 = np.random.randint(
-            -100, 100, self.convolution_weight_3.shape)
-        convolution_weight_3_1 = self.convolution_weight_3-convolution_weight_3_0
-        print(convolution_weight_3_0.shape)
-        np.save("./convolution0_weight_3.npy", convolution_weight_3_0)
-        np.save("./convolution1_weight_3.npy", convolution_weight_3_1)
+        # convolution_weight_3_0 = np.random.randint(
+        #     -100, 100, self.convolution_weight_3.shape)
+        # convolution_weight_3_1 = self.convolution_weight_3-convolution_weight_3_0
+        # print(convolution_weight_3_0.shape)
+        # np.save("./convolution0_weight_3.npy", convolution_weight_3_0)
+        # np.save("./convolution1_weight_3.npy", convolution_weight_3_1)
+
+        fc_weight_0 = np.random.randint(
+            -100, 100, self.fc_weight.shape)
+        fc_weight_1 = self.fc_weight-fc_weight_0
+        print(fc_weight_0.shape)
+        np.save("./fc_weight_0.npy", fc_weight_0)
+        np.save("./fc_weight_1.npy", fc_weight_1)
+
+        fc_bias_0 = np.random.randint(
+            -100, 100, self.fc_bias.shape)
+        fc_bias_1 = self.fc_bias-fc_bias_0
+        print(fc_bias_0.shape)
+        np.save("./fc_bias_0.npy", fc_bias_0)
+        np.save("./fc_bias_1.npy", fc_bias_1)
+
+
 
 
 company = Company()
