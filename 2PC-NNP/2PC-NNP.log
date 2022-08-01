@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.8.29)  31 JUL 2022 10:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.8.29)  1 AUG 2022 15:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -361,28 +361,28 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 
 
 ] [2]
-Underfull \hbox (badness 1087) in paragraph at lines 584--587
+Underfull \hbox (badness 1087) in paragraph at lines 555--558
 []$ \OT1/ptm/m/n/10 pro-to-col with spe-cial in-put of $\OMS/cmsy/m/n/10 P[] \OT1/cmr/m/n/10 :
  []
 
 [3]
-Underfull \hbox (badness 1881) in paragraph at lines 663--665
+Underfull \hbox (badness 1881) in paragraph at lines 631--633
 []\OT1/ptm/b/n/10 2. Blind-ing\OT1/ptm/m/n/10 : $\OMS/cmsy/m/n/10 P[]$ \OT1/ptm/m/n/10 com-putes $\OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 z\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 u\OMS/cmsy/m/n/10 i 
  h\OML/cmm/m/it/10 x\OMS/cmsy/m/n/10 i$ \OT1/ptm/m/n/10 via
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
+Underfull \hbox (badness 10000) in paragraph at lines 696--697
 []\OT1/ptm/b/n/10 3. \OT1/ptm/m/n/10 Two par-ties cal-cu-late this ex-pres-sion via
  []
 
 
-Overfull \hbox (7.58156pt too wide) detected at line 731
+Overfull \hbox (7.58156pt too wide) detected at line 706
 []
  []
 
 
-Underfull \hbox (badness 2922) in paragraph at lines 788--790
+Underfull \hbox (badness 2922) in paragraph at lines 763--765
 []\OT1/ptm/b/n/10 3. \OT1/ptm/m/n/10 two par-ties com-putes $\OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 value\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 h\OML/cmm/m/it/10 F\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 i \OT1/cmr/m/n/10 =
  []
 
@@ -390,102 +390,96 @@ Underfull \hbox (badness 2922) in paragraph at lines 788--790
 <new_unrolling.png, id=32, 1962.33125pt x 808.01875pt>
 File: new_unrolling.png Graphic file (type png)
 <use new_unrolling.png>
-Package pdftex.def Info: new_unrolling.png  used on input line 845.
+Package pdftex.def Info: new_unrolling.png  used on input line 813.
 (pdftex.def)             Requested size: 113.81102pt x 46.85155pt.
 <new_unrolling2.png, id=34, 1811.76875pt x 1811.76875pt>
 File: new_unrolling2.png Graphic file (type png)
 <use new_unrolling2.png>
-Package pdftex.def Info: new_unrolling2.png  used on input line 865.
+Package pdftex.def Info: new_unrolling2.png  used on input line 824.
 (pdftex.def)             Requested size: 113.81102pt x 113.78818pt.
 
-Underfull \hbox (badness 4752) in paragraph at lines 870--879
-[]\OT1/ptm/m/n/10 After re-ar-range-ment, we get ma-trix $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; W[]\OT1/cmr/m/n/10 ) =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 954--958
+Underfull \hbox (badness 10000) in paragraph at lines 889--893
 []\OT1/ptm/m/n/10 2PC-maximum pool-ing layer can be com-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 954--958
+Underfull \hbox (badness 10000) in paragraph at lines 889--893
 \OT1/ptm/m/n/10 puted via $[]$ pro-to-col for $\OML/cmm/m/it/10 y[] \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 6842) in paragraph at lines 954--958
+Underfull \hbox (badness 6842) in paragraph at lines 889--893
 \OML/cmm/m/it/10 max\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 X[]; X[]; X[]; X[]\OT1/cmr/m/n/10 )$\OT1/ptm/m/n/10 . The ap-proach to com-pute
  []
 
 
-Underfull \hbox (badness 5607) in paragraph at lines 974--979
+Underfull \hbox (badness 5607) in paragraph at lines 909--914
 $\OML/cmm/m/it/10 ReLU$ \OT1/ptm/m/n/10 func-tion has three di-vid-ing points: $\OML/cmm/m/it/10 dp[] \OT1/cmr/m/n/10 =
  []
 
 [5 <./new_unrolling.png> <./new_unrolling2.png>]
-Underfull \hbox (badness 4181) in paragraph at lines 988--990
+Underfull \hbox (badness 4181) in paragraph at lines 923--925
 []\OT1/ptm/m/n/10 Servers can fol-low $[]$ pro-to-col and
  []
 
 <operation_mul.pdf, id=40, 289.08pt x 215.65369pt>
 File: operation_mul.pdf Graphic file (type pdf)
 <use operation_mul.pdf>
-Package pdftex.def Info: operation_mul.pdf  used on input line 1042.
+Package pdftex.def Info: operation_mul.pdf  used on input line 977.
 (pdftex.def)             Requested size: 113.81102pt x 84.90091pt.
 
-Overfull \hbox (6.08429pt too wide) in paragraph at lines 1042--1042
+Overfull \hbox (6.08429pt too wide) in paragraph at lines 977--977
  [][] 
  []
 
 <operation_matrix_mul.pdf, id=41, 289.08pt x 216.81pt>
 File: operation_matrix_mul.pdf Graphic file (type pdf)
 <use operation_matrix_mul.pdf>
-Package pdftex.def Info: operation_matrix_mul.pdf  used on input line 1051.
+Package pdftex.def Info: operation_matrix_mul.pdf  used on input line 986.
 (pdftex.def)             Requested size: 113.81102pt x 85.35614pt.
 
-Overfull \hbox (6.08429pt too wide) in paragraph at lines 1051--1051
+Overfull \hbox (6.08429pt too wide) in paragraph at lines 986--986
  [][] 
  []
 
 <operation_compare.pdf, id=42, 289.08pt x 216.81pt>
 File: operation_compare.pdf Graphic file (type pdf)
 <use operation_compare.pdf>
-Package pdftex.def Info: operation_compare.pdf  used on input line 1060.
+Package pdftex.def Info: operation_compare.pdf  used on input line 995.
 (pdftex.def)             Requested size: 142.26378pt x 106.69766pt.
 [6 <./operation_mul.pdf> <./operation_matrix_mul.pdf> <./operation_compare.pdf>]
-Overfull \hbox (13.55219pt too wide) in paragraph at lines 1217--1267
- [] 
+Overfull \hbox (13.55219pt too wide) in paragraph at lines 1148--1196
+[][] 
  []
 
 
-Overfull \hbox (13.55276pt too wide) in paragraph at lines 1273--1331
+Overfull \hbox (13.55276pt too wide) in paragraph at lines 1201--1258
  [][] 
  []
 
 
-Overfull \hbox (13.55695pt too wide) in paragraph at lines 1341--1383
+Overfull \hbox (13.55695pt too wide) in paragraph at lines 1262--1304
  [][] 
  []
 
 
-Overfull \hbox (13.55705pt too wide) in paragraph at lines 1390--1438
+Overfull \hbox (13.55705pt too wide) in paragraph at lines 1308--1354
  [][] 
  []
 
-(./2PC-NNP.bbl
-Underfull \vbox (badness 3323) has occurred while \output is active []
+(./2PC-NNP.bbl [7]) [8
 
- [7]) [8] (./2PC-NNP.aux) ) 
+] (./2PC-NNP.aux) ) 
 Here is how much of TeX's memory you used:
  7615 strings out of 478994
  110990 string characters out of 5862207
- 452333 words of memory out of 5000000
+ 455333 words of memory out of 5000000
  24961 multiletter control sequences out of 15000+600000
  433167 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,24n,74p,374b,329s stack positions out of 5000i,500n,10000p,200000b,80000s
 {d:/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}<d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/stmaryrd/stmary7.pfb><d:/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><d:/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on 2PC-NNP.pdf (8 pages, 498526 bytes).
+Output written on 2PC-NNP.pdf (8 pages, 497174 bytes).
 PDF statistics:
  226 PDF objects out of 1000 (max. 8388607)
  88 compressed objects within 1 object stream
