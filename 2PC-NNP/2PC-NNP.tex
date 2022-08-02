@@ -1,8 +1,6 @@
-\def\year{2022}\relax
-%File: formatting-instructions-latex-2022.tex
-%release 2022.1
+%File: anonymous-submission-latex-2023.tex
 \documentclass[letterpaper]{article} % DO NOT CHANGE THIS
-\usepackage{aaai22}  % DO NOT CHANGE THIS
+\usepackage[submission]{aaai23}  % DO NOT CHANGE THIS
 \usepackage{times}  % DO NOT CHANGE THIS
 \usepackage{helvet}  % DO NOT CHANGE THIS
 \usepackage{courier}  % DO NOT CHANGE THIS
@@ -12,15 +10,13 @@
 \def\UrlFont{\rm}  % DO NOT CHANGE THIS
 \usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
 \usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
-\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
 \frenchspacing  % DO NOT CHANGE THIS
-\setlength{\pdfpagewidth}{8.5in}  % DO NOT CHANGE THIS
-\setlength{\pdfpageheight}{11in}  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
 %
 % These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
 \usepackage{algorithm}
 \usepackage{algorithmic}
-
 
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
@@ -36,10 +32,13 @@
 \usepackage{arydshln}
 \usepackage{subfigure} % 子图包
 
+
+
 %
 % These are are recommended to typeset listings but not required. See the subsubsection on listing. Remove this block if you don't have listings in your paper.
 \usepackage{newfloat}
 \usepackage{listings}
+\DeclareCaptionStyle{ruled}{labelfont=normalfont,labelsep=colon,strut=off} % DO NOT CHANGE THIS
 \lstset{%
 	basicstyle={\footnotesize\ttfamily},% footnotesize acceptable for monospace
 	numbers=left,numberstyle=\footnotesize,xleftmargin=2em,% show line numbers, remove this entire line if you don't want the numbers.
@@ -49,17 +48,11 @@
 \newfloat{listing}{tb}{lst}{}
 \floatname{listing}{Listing}
 %
-%\nocopyright
-%
-% PDF Info Is REQUIRED.
-% For /Title, write your title in Mixed Case.
-% Don't use accents or commands. Retain the parentheses.
-% For /Author, add all authors within the parentheses,
-% separated by commas. No accents, special characters
-% or commands are allowed.
-% Keep the /TemplateVersion tag as is
-
-
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2023.1)
+}
 
 % DISALLOWED PACKAGES
 % \usepackage{authblk} -- This package is specifically forbidden
@@ -103,7 +96,7 @@
 
 \setcounter{secnumdepth}{0} %May be changed to 1 or 2 if section numbers are desired.
 
-% The file aaai22.sty is the style file for AAAI Press
+% The file aaai23.sty is the style file for AAAI Press
 % proceedings, working notes, and technical reports.
 %
 
@@ -130,7 +123,7 @@
 \affiliations{
     %Afiliations
     \textsuperscript{\rm 1}Association for the Advancement of Artificial Intelligence\\
-    % If you have multiply authors and multiply affiliations
+    % If you have multiple authors and multiple affiliations
     % use superscripts in text and roman font to identify them.
     % For example,
 
@@ -140,10 +133,10 @@
     % Hans Guesgen, \textsuperscript{\rm 5}.
     % Note that the comma should be placed BEFORE the superscript for optimum readability
 
-    2275 East Bayshore Road, Suite 160\\
-    Palo Alto, California 94303\\
+    1900 Embarcadero Road, Suite 101\\
+    Palo Alto, California 94303-3310 USA\\
     % email address must be in roman text type, not monospace or sans serif
-    publications22@aaai.org
+    publications23@aaai.org
 %
 % See more examples next
 }
@@ -1309,7 +1302,7 @@
 
 
 % Use \bibliography{yourbibfile} instead or the References section will not appear in your paper
-\bibliography{aaai22}
+\bibliography{aaai23}
 
 
 \bibentry{ABY3}
@@ -1334,423 +1327,3 @@
 
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        % For example, when $n=2$ and $\langle A\rangle $ is a $2\times 2$ matrix.
-
-        % $$A=\begin{bmatrix}
-        %     A_{00}& A_{01} \\
-        %     A_{10}& A_{11}
-        %    \end{bmatrix}
-        %    \langle A\rangle ^{0}= \begin{bmatrix}
-        %     \langle A_{00}\rangle ^{0}& \langle A_{01}\rangle ^{0} \\
-        %     \langle A_{10}\rangle ^{0}& \langle A_{11}\rangle ^{0}
-        %    \end{bmatrix}
-        %    $$
-
-        % $$\langle A\rangle ^{1}=\begin{bmatrix}
-        %     \langle A_{00}\rangle ^{1}& \langle A_{01}\rangle ^{1} \\
-        %     \langle A_{10}\rangle ^{1}& \langle A_{11}\rangle ^{1}
-        %    \end{bmatrix}$$
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    % \begin{table}[ht]
-
-    %     \center
-    %     \resizebox{0.5\textwidth}{!}{
-    %     \begin{tabular}{|c|c|c|c|c|}\hline
-
-    %     \multirow{2}{*}{feature size}& \multicolumn{3}{c|}{time(s)}&communication   \\
-
-    %     \cline{2-4}
-    %     \multirow{2}{*}{ }&computation&communication&all&size(Mb)\\ \hline
-    %     (256,14,14) & 0.088  & 0.26 & 0.35 &2.6	\\ \hline
-    %     (256,28,28) & 0.107 & 1.05 & 1.16 & 10.5 \\ \hline
-    %     (256,56,56) & 0.240  & 4.23 & 4.47 &42.3	\\ \hline
-    %     (256,112,112) & 0.746 & 16.93 & 17.68 & 169.3 \\ \hline
-    %     \end{tabular}}
-    %     \caption{pooling consumption}
-    %     \label{pooling}
-    % \end{table}
-
-
-    % \begin{table}[!ht]
-
-    %     \center
-    %     \resizebox{0.5\textwidth}{!}{
-    %     \begin{tabular}{|c|c|c|c|c|}\hline
-
-    %     \multirow{2}{*}{feature size}& \multicolumn{3}{c|}{time(s)}&communication   \\
-
-    %     \cline{2-4}
-    %     \multirow{2}{*}{ }&computation&communication&all&size(Mb)\\ \hline
-    %     (256,14,14) & 0.025  & 0.27 & 0.29 &2.6	\\ \hline
-    %     (256,28,28) & 0.054 & 1.09 & 1.15 & 10.5 \\ \hline
-    %     (256,56,56) & 0.160  & 4.39 & 4.55 &42.3	\\ \hline
-    %     (256,112,112) & 0.631 & 17.56 & 18.19 & 169.3 \\ \hline
-    %     \end{tabular}}
-    %     \caption{ReLU consumption}
-    %     \label{relu}
-    % \end{table}
-
-
-
-
-
-
-
-
-
-
-
-
-    % \subsection{Our contributions and Overview}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % We summarize our contributions in the following:
-    % \begin{itemize}
-    %     \item We propose a novel and efficient 2PC $\mathtt{comparison}$ protocol,
-    %     which does not require the asymmetric cryptography operations or the bit-level operations
-    %     and only needs three rounds of interactions
-    %     to calculate the sign of the secret input.
-    %     Based on this, we design schemes for more complicated functions
-    %     like maximum function and piecewise functions.
-
-    %     \item Based on the novel 2PC $\mathtt{comparison}$ protocol, we design the method to each layer of neural network.
-    %     \item
-
-
-
-    %     \item Based on the novel 2PC $\mathtt{comparison}$ protocol,
-    %     we present 2PC-NNP, a two-party computation framework
-    %     for evaluating neural network predictions by two servers efficiently and secretly.
-    %     Each layer in the neural network
-    %     can be evaluated within our schemes.
-
-    %     \item Furthermore, we propose an optimization of 2PC-convolution, which
-    %     greatly reduces communication overhead by using less elements to blind the matrix.
-
-    % \end{itemize}
-
-    % \subsection{Overview of techniques}
-    % Here we expound our idea on a very high level.
-    % For the sake of illustration, we briefly introduce the additive secret sharing in two parties computation.
-    % We define $\langle x \rangle$ as the sharing of a secret value $x$
-
-    % \begin{itemize}
-    %     \item \textbf{2PC $\mathtt{comparison}$ protocol}.
-    %     We begin with the building block of our work, a brand new 2PC $\mathtt{comparison}$ protocol.
-    %     Our core idea is that, to compute the sign of a shared value $\langle x \rangle$,
-
-    %     \item \textbf{2PC protocols for neural network layers}.
-    %     Based on the novel 2PC $\mathtt{comparison}$ protocol and the exsiting 2PC $\mathtt{multiplication}$ protocol,
-    %     we design 2PC protocols for convolution layer, pooling layer and activation function.
-    %     \begin{itemize}
-    %         \item \emph{Convolution layer}.
-    %         Convolution is a complicated operation performed
-    %         on the input image and the filter.
-    %         However, via rearrangement \cite{HighPerformanceConvolutional},
-    %         it can be converted into a matrix multiplication.
-    %         The 2PC convolution can be implemented by
-    %         2PC matrix multiplication.
-
-    %         \item \emph{Pooling layer}.
-    %         Pooling layer includes average pooling and max pooling,
-    %         which outputs the average or the maximum of each submatrix
-    %         in the input matrix.
-    %         2PC average pooling can be conducted locally by direct division,
-    %         while 2PC max pooling involves 2PC maximum protocol.
-
-
-    %         \item \emph{Activation function}.
-    %         Activation function such as $ReLU$ function
-    %         can be evaluated via 2PC piecewise function protocol.
-
-
-
-
-    %     \end{itemize}
-
-    %     \item \textbf{Optimization of 2PC-convolution}.
-
-    %     \item \textbf{2PC-NNP}.
-    % \end{itemize}
-
-
-        %    Our system setting is a modified version of
-    %    classical client-server ($\mathcal{C}$-$\mathcal{S}$) setting, where
-    %    the data owner takes the role as the client and the model provider as the server
-    %    and interact directly to evaluate the prediction.
-    %    However, in practice, few data owners are able to deploy neural network settings
-    %    and have the computational resource to complete all the operations.
-    %    For instance, most of the IOT equipments and
-    %    some small companies who know nothing about neural networks are not able to
-    %    or do not know how to conduct complicated 2PC-protocol.
-
-
-    % \begin{figure}[htbp]
-    %     \centering
-    %     \includegraphics[width=8cm]{framework.png}
-    %     \caption{system framework}
-    %     \label{system framework}
-    % \end{figure}
-    %    Our work considers this more common situation and extend ($\mathcal{C}-\mathcal{S}$) setting to
-    %    server-server ($\mathcal{S}-\mathcal{S}$) setting,
-    %    where data owner -$\mathcal{DO}$ and the model provider-$\mathcal{MP}$ outsource the prediction task
-    %    to two isolate cloud servers $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$.
-    %    Two servers perform 2PC protocols to evaluate the prediction securely.
-    %    After all, two servers knows nothing about the input image or the classification result.
-    %    Each entity involved including the data owner, model provider,
-    %    the first server and the second server belongs to different company and is semi-honest.
-    %    In terms of techniques,
-    %    the ($\mathcal{S}-\mathcal{S}$) setting has little difference compared to the ($\mathcal{C}-\mathcal{S}$) setting.
-    %    If needed, the ($\mathcal{S}-\mathcal{S}$) setting can degenerate into the ($\mathcal{C}-\mathcal{S}$) setting
-    %    by the data owner and the model provider taking roles as two servers directly.
-
-
-
-    %     So we propose a more general setting, where the data owner-$\mathcal{DO}$ and the model provider-$\mathcal{MP}$
-    %    outsource their prediction task to other two independent servers: cloud server\_0 $\mathcal{P}_{0}$, cloud server\_1-$\mathcal{P}_{1}$.
-    %    , as shown in Fig \ref{system framework}.
-
-
-    %    Our system involves five entities:
-    %    data owner-$\mathcal{DO}$, model provider-$\mathcal{MP}$,
-    %    cloud server\_0 $\mathcal{P}_{0}$, cloud server\_1-$\mathcal{P}_{1}$ and a trusted setup-$\mathcal{TTP}$.
-    %    Each entity is semi-honest and tasks of which are as follow.
-
-        %    in practice, most of data owners such as the IOT equipments and
-    %    some small companies are unable to deploy neural network settings
-    %    or have the computational resource to complete all the operations.
-    %    To address this issue, we propose server-server ($\mathcal{S}-\mathcal{S}$) setting,
-    %    where data owner -$\mathcal{DO}$ and the model provider-$\mathcal{MP}$ outsource the prediction task
-    %    to two isolate cloud servers $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$.
-    %    Two servers perform 2PC protocols to evaluate the prediction securely and
-    %    finally return the share of classification label to $\mathcal{DO}$ and $\mathcal{MP}$.
-    %    After all, two servers knows nothing about the input image or the classification result.
-    %    Each entity involved belongs to different company and is semi-honest.
-
-
-    % \textbf{Data owner}-$\mathcal{DO}$: send the additively shares of the input image to with two cloud servers.
-
-    % \textbf{Model provider}-$\mathcal{MP}$: send the additively shares of the input image to with two cloud servers.
-
-    % provides neural network model
-    % by additively sharing the model parameters $Para$ with the cloud server $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$.
-
-    % \textbf{Cloud server}-$\mathcal{P}_{0}$ and $\mathcal{P}_{1}$: run neural network model via two-party secure computation
-    % and return the prediction result to $\mathcal{MP}$.
-
-    % \textbf{Trusted setup}-$\mathcal{TTP}$: generates and distributes multiplication triples and comparison two-tuples
-    % to $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$.
-    % This task can be conducted at the very beginning, even long before the protocol running.
-
-
-        % \begin{align*}
-    %     max(X_{00}, X_{01}, X_{10}, X_{11}) &= max(X_{00},max(X_{01}, X_{10}, X_{11})) \\
-    %   &= max(X_{00},max(X_{01},max(X_{10}, X_{11})))
-    % \end{align*}
-
-
-
-
-
-    % Servers first compute $$\langle s_{00-01}\rangle=\langle sign(\langle X_{00}\rangle- \langle X_{01}\rangle)\rangle$$
-    % Then servers compute
-
-
-
-
-
-
-
-
-    % \begin{equation*}%加*表示不对公式编号
-    %     \begin{split}
-    %     \langle max_{00-01}\rangle& =\frac{1}{2}\times (\langle s_{00-01}\rangle+1)\otimes \langle X_{00}\rangle\\
-    %              &+ \frac{1}{2}\times (-\langle s_{00-01}\rangle+1)\otimes \langle X_{01}\rangle
-    %     \end{split}
-    % \end{equation*}
-
-    % % $$\langle max_{00-01}\rangle = \frac{(\langle s_{00-01}\rangle+1)\otimes \langle X_{00}\rangle+ (-\langle s_{00-01}\rangle+1)\otimes \langle X_{01}\rangle}{2}$$
-    % Similarly, by running $\mathtt{multiplication}$ protocol and $\mathtt{comparison}$ protocol, servers computes in order:
-
-    % $$\langle s_{00-10}\rangle=\langle sign(\langle max_{00-01}\rangle- \langle X_{10}\rangle)\rangle $$
-
-    % \begin{equation*}%加*表示不对公式编号
-    %     \begin{split}
-    %     \langle max_{00-10}\rangle& =\frac{1}{2}\times (\langle s_{00-10}\rangle+1)\otimes \langle max_{00-01}\rangle\\
-    %              &+ \frac{1}{2}\times (-\langle s_{00-10}\rangle+1)\otimes \langle X_{10}\rangle
-    %     \end{split}
-    % \end{equation*}
-
-
-    % % $$\langle max_{00-10}\rangle = \frac{(\langle s_{00-10}\rangle+1)\otimes \langle max_{00-01}\rangle+ (-\langle s_{00-10}\rangle+1)\otimes \langle X_{10}\rangle}{2}$$
-
-    % $$\langle s_{00-11}\rangle=\langle sign(\langle max_{00-10}\rangle- \langle X_{11}\rangle)\rangle $$
-
-    % \begin{equation*}%加*表示不对公式编号
-    %     \begin{split}
-    %     \langle max_{00-11}\rangle& =\frac{1}{2}\times (\langle s_{00-11}\rangle+1)\otimes \langle max_{00-10}\rangle\\
-    %              &+ \frac{1}{2}\times (-\langle s_{00-11}\rangle+1)\otimes \langle X_{11}\rangle
-    %     \end{split}
-    % \end{equation*}
-
-
-    % $$\langle y_{max}\rangle = \langle max_{00-11}\rangle = \frac{(\langle s_{00-11}\rangle+1)\otimes \langle max_{00-10}\rangle+ (-\langle s_{00-11}\rangle+1)\otimes \langle X_{11}\rangle}{2}$$
-
-    % \section{Optimization of 2PC convolution}
-    % In this section, we focus on the communication consumption between servers
-    % during evaluating convolution and how to reduce it.
-
-
-    % When convolution is operated in practice,
-    % the input image $X$ and weight tensor $W$
-    % are rearranged into 2-dimension matrix $X'$ and $W'$.
-    % We denote this unrolling processing by
-    % $$(X',W')=Unroll(X,W)$$
-    % Since bias vector does not change much during processing, we ignore it in this section by setting $\overrightarrow{b}=\overrightarrow{0}$.
-    % The output of convolution can be evaluated by $Y=X'\cdot W'$.
-    % We presents a simple example to roughly show how this works.
-
-
-    % \begin{figure}[htbp]
-    %     \centering
-    %     \includegraphics[width=4cm]{new_unrolling.png}
-    %     \caption{input image and weight}
-    %     \label{input image and weight}
-    % \end{figure}
-
-    % Fig \ref{input image and weight} shows a toy convolution,
-    % where exists a $1\times 4\times 4$ input image $X$  and a $1\times 2\times 2$ weight tensor $W$.
-    % For the sake of observation, each element of image is marked with different color and number.
-
-
-    % \begin{figure}[htbp]
-    %     \centering
-    %     \includegraphics[width=4cm]{new_unrolling2.png}
-    %     \caption{rearrangement of image and weight}
-    %     \label{rearrangement of image and weight}
-    % \end{figure}
-
-    % After rearrangement, we get matrix $(X',W')=Unroll(X,W)$.
-    % As shown in Fig \ref{rearrangement of image and weight},
-    % Elements that are not at the edge of the matrix repeated four times
-    % and some other elements were also duplicated.
-    % Obliviously, if the size of the input image gets larger, elements repeating four times will be more.
-
-    % In the previous section, to multiply $\langle X'\rangle$ of size $9\times 4$ and $\langle W'\rangle$ of size $4\times 1$,
-    % $TTP$ generates matrix multiplication triple $(A',B',C')$ and distribute shares to servers.
-    % When running $\mathtt{multiplication}$ protocol, each server totally needs to send $9\times 4+4\times 1=40$ elements.
-    % However, we actually do not need so many elements to blind $\langle X'\rangle$ and $\langle W'\rangle$
-    % since there exist lots of duplicated elements in them.
-    % Using two or more elements to blind the same one secret element is meaningless.
-
-    % We design a more efficient method to address this problem.
-    % instead of generating matrix multiplication triple directly,
-    % $TTP$ randomly generates $(A,B)$ of the same size of the original feature $X$ and weight $W$.
-    % Then, $TTP$ evaluates
-    % $( A',B')=Unroll(A,B)$ and
-    % $C' =A'\cdot B' $.
-    % Finally, $TTP$ sends shares of $(A,B,C')$ to servers.
-
-    % When servers needs to evaluate convolution, they can use the modified matrix $\mathtt{multiplication}$ protocol:
-
-    % \textbf{Protocol procedures}:
-    % \begin{itemize}
-    %     \item \textbf{1.} $\mathcal{P}_{i}$ gets multiplication triple
-    %     $(\langle A\rangle ^{i},\langle B\rangle ^{i},\langle C'\rangle ^{i})$ from trusted third party.
-    %     \item \textbf{2.} $\mathcal{P}_{i}$ sets $\langle E\rangle ^{i}=\langle X\rangle ^{i}-\langle A\rangle ^{i}$ and $\langle F\rangle ^{i}=\langle W\rangle ^{i}-\langle B\rangle ^{i}$
-    %     and transmits $(\langle E\rangle ^{i},\langle F\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
-    %     \item \textbf{3.} $\mathcal{P}_{i}$ reconstruct $E = \langle E\rangle ^{0}+\langle E\rangle ^{1}$ and $F = \langle F\rangle ^{0}+\langle F\rangle ^{1}$
-    %     and evaluates $(E',F')=Unroll(E,F)$ and $(A',B')=Unroll(A,B)$.
-    %     \item \textbf{4.} $\mathcal{P}_{i}$ sets $\langle Z\rangle^{i}=i\cdot E' \cdot F' + \langle A'\rangle^{i} \cdot F' + E' \cdot \langle B'\rangle^{i} + \langle C'\rangle^{i}$.
-
-    % \end{itemize}
-
-    % By this way, communication overhead can be observably reduced to almost $ \frac{1}{width^{2}} $ of the original,
-    % where $width$ is the width of filter.
-    % % \section{Theoretical analysis}
-
-
-
-
-
-    % So instead of blinding $X'$ and $Y'$,
-    % two parties can blind $X$ and $Y$ and
-    % construct the blinded $X'$ and $Y'$ locally.
-    % In the original multiplication protocol, to multiply $\langle X'\rangle$ of size $9\times 4$
-    % and $\langle W'\rangle$ of size $4\times 1$,
-    % each server totally needs to send $9\times 4+4\times 1=40$ elements.
-    % However, we actually do not need so many elements to blind $\langle X'\rangle$ and $\langle W'\rangle$
-    % since there exist lots of duplicated elements in them.
-    % We can use the same random number to blind the duplicated element
-    % and each server only needs to send $4\times 4+2\times 2=20$ elements.
-
-        % In allusion to 2PC-convolution, we propose a modified matrix $\mathtt{multiplication}$ protocol:
-
-
-
-
-
-
-
-
-
