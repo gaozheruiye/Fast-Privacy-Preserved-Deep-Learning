@@ -257,7 +257,7 @@
     leading to prohibitive computation cost.
 
 
-    \subsection{Our contributions and overview}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \subsection{Our contributions}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     Here we summarize our contributions on a very high level.
 
 
@@ -349,31 +349,35 @@
         \caption{Notations}
         \label{Notations}
     \end{table}
-    Notations frequently used in this paper is shown in Table \ref{Notations}.
-    Moreover, we use capital letter like $A$ to denote matrix and $\overrightarrow{\mathbf{v}}$ to denote
-    vector $\overrightarrow{\mathbf{v}}=(v_{0},v_{1},...,v_{n-1})$.
+    Notations used in this paper is listed in Table \ref{Notations}.
+    In addition, we denote a matrix using capital letters (e.g. $A$) and denote
+    a vector as $\overrightarrow{\mathbf{v}}=(v_{0},v_{1},...,v_{n-1})$.
 
     Function $sign(x)$ is defined to represent the sign of value $x$.
-    Notably, $sign(x\cdot y)=sign(x)\cdot sign(y)$.
+    Note that $sign(x\cdot y)=sign(x)\cdot sign(y)$.
     $$sign(x)=\begin{cases}
         1 & \text{ if } x>0 \\
         0 & \text{ if } x=0\\
         -1 & \text{ if } x<0
     \end{cases}$$
 
-    \subsection{Secure two parties computation}
+    \subsection{Multi-Party Computation and Two-Party Computation}
     % A secure two party computation protocol for function $F()$ is that
     % with confidential input $x_{i}$ of player $i \in \{0,1\} $,
     % it provides the value $F(x_{0},x_{1})$ to each player
     % without disclosing more information than what can be inferred from the result.
-    A secure two parties computation protocol enables players to evaluate a public function
-    with two private confidential inputs from two players
-    without disclosing more information than what can be inferred from the result.
-    We use `2PC' to stand for `secure two parties computation'.
-    The two parties running 2PC protocols are denoted as $\mathcal{P}_{0} $ and $\mathcal{P}_{1}$.
-    In this work, we consider each party as a semi-honest party
-    who will not deviate the protocol but keeps tring to get more information about
-    the secret input of another party from information arise from execution of protocol.
+
+		MPC enables multiple participants to jointly compute a function over their private inputs without leaking
+		their individual input. It has broad applications where privacy is important, e.g. voting, auction,
+		data mining etc. Two-party computation (2PC) is a special case of MPC.
+    % A secure two-party computation protocol enables players to evaluate a public function
+    % with two private confidential inputs from two players
+    % without disclosing more information than what can be inferred from the result.
+    % We use `2PC' to stand for `secure two parties computation'.
+    % Two parties running 2PC protocols are denoted as $\mathcal{P}_{0} $ and $\mathcal{P}_{1}$.
+    In this work, we consider semi-honest 2PC participants
+    who will not deviate the protocol but may try to gain private information of another party
+		during the protocol execution.
 
 
     \subsection{2PC secret sharing}
