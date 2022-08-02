@@ -219,7 +219,7 @@
 
 
     \noindent Deep learning, a popular research direction in the field of machine learning,
-    has demonstrated its advantages in multimedia concept retrieval, image classification, video recommendation, text mining etc.
+    has been widely used in image, voice and text recognition scenes.
     The application of neural network consists of two stages:
     (1) training stage: the model is trained with training data,
     (2) prediction stage: the pre-trained model is used to classify the input data.
@@ -288,9 +288,9 @@
 
 
     Many ideas have been proposed to achieve privacy preserving neural network predictions.
-    The most common idea is to utilize homomorphic encryption.
-    The data owner sends the encrypted image to the model provider for applying a pre-trained model for classification
-    \cite{Homomorphic1} \cite{Homomorphic2}.
+    The most common idea is to utilize fully homomorphic encryption which supports multiplication and addition on ciphertext.
+    The data owner sends the encrypted image to the model provider for applying a pre-trained model for classification \cite{SEAL}.
+    Furthermore, some proposals that only using additive homomorphic encryption are presented \cite{Homomorphic1} \cite{Homomorphic2}.
     However, the overhead of homomorphic encryption is so huge that though
     the associated technology evolves over many years\cite{ObliviousNeuralNetwork}, the cost of it seems still unacceptable.
 
@@ -365,7 +365,7 @@
     A secure two parties computation protocol enables players to evaluate a public function
     with two private confidential inputs from two players
     without disclosing more information than what can be inferred from the result.
-    We use '2PC' to stand for 'secure two parties computation'.
+    We use `2PC' to stand for `secure two parties computation'.
     The two parties running 2PC protocols are denoted as $\mathcal{P}_{0} $ and $\mathcal{P}_{1}$.
     In this work, we consider each party as a semi-honest party
     who will not deviate the protocol but keeps tring to get more information about
@@ -994,9 +994,6 @@
         (256,28,28)& (512,256,1,1) & 0.48 & 0.26 & 0.74 & 0.16 \\ \hline
         (256,14,14)& (256,256,3,3) & 0.20 & 0.50 & 0.70 & 0.096\\ \hline
         (1024,7,7)& (2048,1024,1,1) & 0.21 & 1.68 & 1.89 & 0.086 \\ \hline \hline
-
-
-
 
         \multicolumn{6}{|c|}{Pooling Layer}\\ \hline
         \multicolumn{2}{|c|}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
