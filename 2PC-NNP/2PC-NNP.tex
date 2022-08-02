@@ -222,38 +222,38 @@
     has brought major breakthroughs to computer vision, speech recognition, natural language process, machine translation, etc. Recently, deep learning also made significant progress in bioinformatics, drug discovery and material sciences. A deep neural network model is obtained by training on
 		a given training data set, which requires a large amount of training data and sufficient compute power.
 		After the training step, the resultant deep neural network model is used to predict
-		outcomes for a given data point. It is important to protect both the training phase and the predicting phase, while this work mainly focus on the prediction phase.
+		outcomes for a given data point. It is important to protect both the training phase and the predicting phase, while this work mainly focuses on the prediction phase.
 
     % The application of neural network consists of two stages:
     % (1) training stage: the model is trained with training data,
     % (2) prediction stage: the pre-trained model is used to classify the input data.
     % This work mainly focus on the prediction stage.
 
-    Machine learning as a service (MLaaS) is a range of machine learning tools offered by cloud service providers \cite{ChironCloud}.
-    Some tasks that cannot be easily accomplished by data owner can be outsourced to
-    the companies who provide cloud-based pre-trained deep learning model.
-    For example, the CT images of lungs taken by hospitals
-    can be transferred to the cloud computing center
-    supported by major technical companies for medical diagnosis.
-    However, during this period, the data owner inevitably reveals his input images,
-    leading to a privacy leakage.
+    Deep learning models can be servced on cloud by the model owner as a cloud-based service,
+		i.e. Machine Learning as a Service (MLaaS),
+		which consists of a series of machine learning tools offered by cloud service providers \cite{ChironCloud}.
+    Computationally intensive tasks that cannot be accomplished by data owners can be outsourced to
+    the MLaaS cloud hosting the pre-trained deep learning model.
+    For example, the computed tomography (CT) images of a patient taken by hospitals
+    can be sent to the MLaaS cloud for medical diagnosis.
+		However, MLaaS faces two types of privacy leakage problems, namely the model privacy leakage and the
+		input data privacy leakage. That is, the model owner has to send all the model parameters to the hosting cloud,
+		while the patient has to surrender his/her CT images during this process.
 
-    To address this issue, privacy preserving machine learning based on secure multi-party
-    computation (MPC) is proposed.
-    MPC computation protocol enables players to evaluate a public function
-    with multiple private secret inputs from different players.
-    It provides the value of the public function or the shares of the value with each player
-    without disclosing more information than what can be inferred from the result.
-    Via performing MPC protocols,
-    multiple parties can evaluate the prediction without disclosing the input image.
-    The two parties computation (2PC) setting which only involves two parties is a particular case of MPC
-    and the 2PC setting is used throughout the paper.
+    To address this issue, secure multi-party computation (MPC) can be employed to preserve the model privacy
+		and the input data privacy in deep learning prediction. Generally, MPC enables multiple participants
+		to compute outputs from their private inputs without leaking privacy.
+    % It provides the value of the public function or the shares of the value with each player
+    % without disclosing more information than what can be inferred from the result.
+    % Via performing MPC protocols,
+    % multiple parties can evaluate the prediction without disclosing the input image.
+    The two parties computation (2PC) setting which only involves two parties is a particular case of MPC,
+		which is used throughout the paper.
 
-    The biggest difficulty of 2PC framework is that it costs too much to
+    The biggest challenge of the 2PC framework is that it costs too much to
     evaluate the comparison operation.
-    The previous works usually utilize the asymmetric encryption
-    operations like the  OT protocol and the garbled circuit,
-    leading to large time cost.
+    Existing works usually utilize asymmetric cryptography like oblivious transfer and garbled circuits,
+    leading to prohibitive computation cost.
 
 
     \subsection{Our contributions and overview}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
