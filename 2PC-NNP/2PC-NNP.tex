@@ -198,9 +198,9 @@
     We propose 2PC-NNP, a two-party computation (2PC) framework for efficient neural network predictions.
     2PC-NNP is highly efficient because it does not use any asymmetric cryptography to simultaneously preserve model privacy and input data privacy.
     The core of 2PC-NNP is a novel and efficient two-party comparison protocol,
-    which consits of three rounds of interactions without any oblivious transfer.
+    which consists of three rounds of interactions without any oblivious transfer.
     From this building block, we construct the complete scheme for evaluating layers of the neural network, including the convolution layer, the pooling layer and the ReLu function.
-		We formally prove that 2PC-NNP is {\bf secure} and also fully implement it with Python.
+	We formally prove that 2PC-NNP is {\bf secure} and also fully implement it with Python.
     Comprehensive experiments show that 2PC-NNP on resnet50
     costs only 23.86 seconds in computation and 100.13 seconds in communication.
 
@@ -220,9 +220,10 @@
 
     \noindent Deep learning, a popular research direction in the field of machine learning,
     has brought major breakthroughs to computer vision, speech recognition, natural language process, machine translation, etc. Recently, deep learning also made significant progress in bioinformatics, drug discovery and material sciences. A deep neural network model is obtained by training on
-		a given training data set, which requires a large amount of training data and sufficient compute power.
-		After the training step, the resultant deep neural network model is used to predict
-		outcomes for a given data point. It is important to protect both the training phase and the predicting phase, while this work mainly focus on the prediction phase.
+	a given training data set, which requires a large amount of training data and sufficient compute power.
+	After the training step, the resultant deep neural network model is used to predict
+	outcomes for a given data point. It is important to protect both the training phase and the predicting phase,
+    while this work mainly focus on the prediction phase.
 
     % The application of neural network consists of two stages:
     % (1) training stage: the model is trained with training data,
@@ -322,7 +323,6 @@
     \subsection{Notations}
 
     \begin{table}
-        % \centering{\bf Notations}
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{l||l}
             \hline
@@ -338,7 +338,7 @@
             $\llbracket x \rrbracket^{i}$ & Multiplicative share of value $x$ held by $\mathcal{P}_{i}$\\
             $\otimes $ & Multiplication operation performed on shares\\
             $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$ & Multiplication triple\\
-            $(\langle A\rangle,\langle B\rangle,\langle C\rangle)$ & Matrix multiplication triple\\
+            $(\langle \mathbf{A}\rangle,\langle \mathbf{B}\rangle,\langle \mathbf{C}\rangle)$ & Matrix multiplication triple\\
             $(\langle u\rangle,\llbracket u \rrbracket)$ & Comparison two-tuple \\
 
             \hline
@@ -350,8 +350,8 @@
         \label{Notations}
     \end{table}
     Notations frequently used in this paper is shown in Table \ref{Notations}.
-    Moreover, we use capital letter like $A$ to denote matrix and $\overrightarrow{v}$ to denote
-    vector $\overrightarrow{v}=(v_{0},v_{1},...,v_{n-1})$.
+    Moreover, we use capital letter like $A$ to denote matrix and $\overrightarrow{\mathbf{v}}$ to denote
+    vector $\overrightarrow{\mathbf{v}}=(v_{0},v_{1},...,v_{n-1})$.
 
     Function $sign(x)$ is defined to represent the sign of value $x$.
     Notably, $sign(x\cdot y)=sign(x)\cdot sign(y)$.
@@ -389,8 +389,8 @@
         each party $\mathcal{P}_{i}$ holds the secret share as $\langle x\rangle ^{i}$, s.t.
         $x=\langle x\rangle ^{0}+\langle x\rangle ^{1}$.
 
-        Similarly, we use $\langle A\rangle $ to indicate an additively shared secret matrix
-        and $A =\langle A\rangle ^{0}+\langle A\rangle ^{1}$.
+        Similarly, we use $\langle \mathbf{A}\rangle $ to indicate an additively shared secret matrix
+        and $A =\langle \mathbf{A}\rangle ^{0}+\langle \mathbf{A}\rangle ^{1}$.
 
         \item We denote a multiplicatively shared secret value $x$ by $\llbracket x \rrbracket$.
         When parties multiplicatively share the secret value $x$,
@@ -418,7 +418,7 @@
     assit computation for multiplication and comparison.
     \begin{itemize}
         \item Multiplication triple: $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$, where $c=a\cdot b$.
-        \item Matrix multiplication triple: $(\langle A\rangle,\langle B\rangle,\langle C\rangle)$, where $C=A\cdot B$.
+        \item Matrix multiplication triple: $(\langle \mathbf{A}\rangle,\langle \mathbf{B}\rangle,\langle \mathbf{C}\rangle)$, where $\mathbf{C}=\mathbf{A}\cdot \mathbf{B}$.
         \item Comparison two-tuple: $(\langle u\rangle,\llbracket u \rrbracket)$,
         this tuple constructs of the additive share and multiplicative share of the same value $u$ ($u\neq 0 $).
     \end{itemize}
@@ -443,7 +443,7 @@
         \begin{align*}
         % &\text{Rectified\enspace Linear\enspace Units} (ReLU):\\
         % &ReLU(x) = max(0,x)\\
-        &Maxout (n\enspace pieces): f(x) = max( \overrightarrow{x})\\
+        &Maxout (n\enspace pieces): f(x) = max( \overrightarrow{\mathbf{x}})\\
         &Sigmoid: \sigma(x) =\frac{1}{1+e^{-x}}\\
         &ReLU(x)=\begin{cases}
             x & \text{ if } x > 0 \\
@@ -453,8 +453,6 @@
 
         In the paper, we mainly introduce method to compute $ReLU$ function.
         Other functions can be computed by similar approach.
-        % Some more complicated function like $Sigmoid$ function
-        % can be converted into approximate polynomial function
 
         \item \textbf{Pooling layer:}
         Pooling layer is calculated by $n\times n$ size matrix sliding window.
@@ -516,17 +514,17 @@
     by running $\mathtt{multiplication}$ protocol with special input of
     $\mathcal{P}_{0}:(x,0),\mathcal{P}_{1}:(0,y)$.
 
-    \emph{Computing} $ \langle Z\rangle  = \langle X\rangle  \otimes \langle Y\rangle$.
+    \emph{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
     Similarly, there is a protocol for the 2PC-matrix multiplication.
 
     \textbf{Protocol procedure}:
     \begin{itemize}
         \item \textbf{1.} $\mathcal{P}_{i}$ gets a multiplication triple
-        $(\langle A\rangle ^{i},\langle B\rangle ^{i},\langle C\rangle ^{i})$ from the trusted third party.
-        \item \textbf{2.} $\mathcal{P}_{i}$ sets $\langle E\rangle ^{i}=\langle X\rangle ^{i}-\langle A\rangle ^{i}$ and $\langle F\rangle ^{i}=\langle Y\rangle ^{i}-\langle B\rangle ^{i}$
-        and transmits $(\langle E\rangle ^{i},\langle F\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
-        \item \textbf{3.} $\mathcal{P}_{i}$ reconstructs $E = \langle E\rangle ^{0}+\langle E\rangle ^{1}$ and $F = \langle F\rangle ^{0}+\langle F\rangle ^{1}$.
-        Then, $\mathcal{P}_{i}$ sets $\langle Z\rangle^{i}=i\cdot E \cdot F + \langle A\rangle^{i} \cdot F + E \cdot \langle B\rangle^{i} + \langle C\rangle^{i}$.
+        $(\langle \mathbf{A}\rangle ^{i},\langle \mathbf{B}\rangle ^{i},\langle \mathbf{C}\rangle ^{i})$ from the trusted third party.
+        \item \textbf{2.} $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-\langle \mathbf{A}\rangle ^{i}$ and $\langle \mathbf{F}\rangle ^{i}=\langle \mathbf{Y}\rangle ^{i}-\langle \mathbf{B}\rangle ^{i}$
+        and transmits $(\langle \mathbf{E}\rangle ^{i},\langle \mathbf{F}\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
+        \item \textbf{3.} $\mathcal{P}_{i}$ reconstructs $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$ and $\mathbf{F} = \langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$.
+        Then, $\mathcal{P}_{i}$ sets $\langle \mathbf{Z}\rangle^{i}=i\cdot \mathbf{E} \cdot \mathbf{F} + \langle \mathbf{A}\rangle^{i} \cdot \mathbf{F} + \mathbf{E} \cdot \langle \mathbf{B}\rangle^{i} + \langle \mathbf{C}\rangle^{i}$.
 
     \end{itemize}
 
@@ -658,7 +656,7 @@
        \end{itemize}
 
        Furthermore, we explore variations of $max(x,y)$.
-       Firstly, we talk about $max(\overrightarrow{x})=max(x_{0},x_{1},...x_{n})$. Observing that
+       Firstly, we talk about $max(\overrightarrow{\mathbf{x}})=max(x_{0},x_{1},...x_{n})$. Observing that
 
        \begin{align*}
            max(x_{0},x_{1},...x_{n}) &= max(x_{0},max(x_{1},x_{2},...x_{n})) \\
@@ -749,23 +747,23 @@
 
 
     When convolution is operated in practice,
-    the input image $X$ and weight tensor $W$
-    are rearranged into 2-dimension matrix $X'$ and $W'$.
+    the input image $\mathbf{X}$ and weight tensor $\mathbf{W}$
+    are rearranged into 2-dimension matrix $\mathbf{X}'$ and $\mathbf{W}'$.
     We denote this unrolling processing by
-    $$(X',W')=Unroll(X,W)$$
+    $$(\mathbf{X}',\mathbf{W}')=Unroll(\mathbf{X},W)$$
     Convolution can be converted into matrix multiplication and addition:
-    $Y=X'\cdot W'+B'$, where $B'$ is a matrix rearranged from the bias vector $\overrightarrow{b}$ and
-    $Y$ is the output of convolution.
-    Since the addition is easy to implement, we ignore the bias vector in this section by setting $\overrightarrow{b}=\overrightarrow{0}$.
-    So the convolution can be simplified to $Y=X'\cdot W'$.
+    $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'+\mathbf{B}'$, where $\mathbf{B}'$ is a matrix rearranged from the bias vector $\overrightarrow{\mathbf{b}}$ and
+    $\mathbf{Y}$ is the output of convolution.
+    Since the addition is easy to implement, we ignore the bias vector in this section by setting $\overrightarrow{\mathbf{b}}=\overrightarrow{0}$.
+    So the convolution can be simplified to $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'$.
     % In order to elaborate better, we presents a mini-convolution to roughly show how this works.
 
     When it comes to two-party secure computation,
     $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ can locally
-    rearrange the shares of $\langle X\rangle$ and $\langle W\rangle$ to get
-    $(\langle X'\rangle,\langle W'\rangle)=Unroll(\langle X\rangle,\langle W\rangle)$.
+    rearrange the shares of $\langle \mathbf{X}\rangle$ and $\langle \mathbf{W}\rangle$ to get
+    $(\langle \mathbf{X'}\rangle,\langle \mathbf{W'}\rangle)=Unroll(\langle \mathbf{X}\rangle,\langle \mathbf{W}\rangle)$.
     Then, using $\mathtt{multiplication}$ protocol,
-    two parties calculate $\langle Y\rangle=\langle X'\rangle\otimes \langle W'\rangle$.
+    two parties calculate $\langle \mathbf{Y}\rangle=\langle \mathbf{X'}\rangle\otimes \langle \mathbf{W'}\rangle$.
     This is the intuition idea but not the best.
 
     \begin{figure}[htbp]
@@ -776,7 +774,7 @@
     \end{figure}
 
     Figure \ref{input image and weight} shows a mini-convolution,
-    where exists a $1\times 4\times 4$ input image $X$  and a $1\times 2\times 2$ weight tensor $W$.
+    where exists a $1\times 4\times 4$ input image $\mathbf{X}$  and a $1\times 2\times 2$ weight tensor $\mathbf{W}$.
     For the sake of observation, each element of image is marked with different color and number.
 
     \begin{figure}[htbp]
@@ -786,13 +784,13 @@
         \label{rearrangement of image and weight}
     \end{figure}
 
-    After rearrangement, matrix $(X',W')=Unroll(X,W)$
+    After rearrangement, matrix $(\mathbf{X}',\mathbf{W}')=Unroll(\mathbf{X},\mathbf{W})$
     is shown in Figure \ref{rearrangement of image and weight}.
-    Elements that are not at the edge of the matrix repeated four times (such as NO.6)
+    Elements that are not at the edge of the matrix repeated four times (such as No.6)
     and some other elements were also duplicated.
     Since using the same random number to blind the duplicated element
-    is more efficient so two parties can blind $(X,W)$ and
-    construct the blinded $(X',W')$ locally instead of blinding $(X',W')$ directly.
+    is more efficient so two parties can blind $(\mathbf{X},\mathbf{W})$ and
+    construct the blinded $(\mathbf{X}',\mathbf{W}')$ locally instead of blinding $(\mathbf{X}',\mathbf{W}')$ directly.
 
 
     We propose an optimization of 2PC-convolution,
@@ -801,15 +799,18 @@
 
     \textbf{Protocol procedure}:
     \begin{itemize}
-        \item \textbf{1.} $TTP$ randomly chooses matrix $(A,B)$ of the same size of the original feature $X$ and filter weight $W$.
-        \item \textbf{2.} $TTP$ evaluates $( A',B')=Unroll(A,B)$ and $C' =A'\cdot B' $.
-        Then, $TTP$ sends $(\langle A\rangle ^{i},\langle B\rangle ^{i},\langle C'\rangle ^{i})$ to $\mathcal{P}_{i}$.
-        \item \textbf{3.} $\mathcal{P}_{i}$ sets $\langle E\rangle ^{i}=\langle X\rangle ^{i}-\langle A\rangle ^{i}$
-        and $\langle F\rangle ^{i}=\langle W\rangle ^{i}-\langle B\rangle ^{i}$
-        and transmits $(\langle E\rangle ^{i},\langle F\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
-        \item \textbf{4.} $\mathcal{P}_{i}$ reconstruct $E = \langle E\rangle ^{0}+\langle E\rangle ^{1}$ and $F = \langle F\rangle ^{0}+\langle F\rangle ^{1}$
-        and evaluates $(E',F')=Unroll(E,F)$ and $(A',B')=Unroll(A,B)$.
-        \item \textbf{5.} $\mathcal{P}_{i}$ sets $\langle Z\rangle^{i}=i\cdot E' \cdot F' + \langle A'\rangle^{i} \cdot F' + E' \cdot \langle B'\rangle^{i} + \langle C'\rangle^{i}$.
+        \item \textbf{1.} $TTP$ randomly chooses matrix $(\mathbf{A},\mathbf{B})$ of the same size of the original feature $\mathbf{X}$ and filter weight $\mathbf{W}$.
+        \item \textbf{2.} $TTP$ evaluates $( \mathbf{A}',\mathbf{B}')=Unroll(\mathbf{A},\mathbf{B})$ and $\mathbf{C}' =\mathbf{A}'\cdot \mathbf{B}' $.
+        Then, $TTP$ sends $(\langle \mathbf{A}\rangle ^{i},\langle \mathbf{B}\rangle ^{i},\langle \mathbf{C}'\rangle ^{i})$ to $\mathcal{P}_{i}$.
+        \item \textbf{3.} $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-\langle \mathbf{A}\rangle ^{i}$
+        and $\langle \mathbf{F}\rangle ^{i}=\langle \mathbf{W}\rangle ^{i}-\langle \mathbf{B}\rangle ^{i}$
+        and transmits $(\langle \mathbf{E}\rangle ^{i},\langle \mathbf{F}\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
+        \item \textbf{4.} $\mathcal{P}_{i}$ reconstruct $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
+        $\mathbf{F} = \langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$
+        and evaluates $(\mathbf{E}',\mathbf{F}')=Unroll(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=Unroll(\mathbf{A},\mathbf{B})$.
+        \item \textbf{5.} $\mathcal{P}_{i}$ sets
+        $\langle \mathbf{Z}\rangle^{i}=i\cdot \mathbf{E}' \cdot \mathbf{F}' +
+        \langle \mathbf{A}'\rangle^{i} \cdot \mathbf{F}' + \mathbf{E}' \cdot \langle \mathbf{B}'\rangle^{i} + \langle \mathbf{C}'\rangle^{i}$.
 
     \end{itemize}
 
@@ -826,12 +827,12 @@
     which output the average or the maximum of $n\times n$ size submatrices respectively
     to construct the input image of next layer.
     We take $2\times 2$ window as an example to show how $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ compute the output of a submatrix.
-    For each $2\times 2$ submatrix $X$, average pooling outputs $y_{avg}=\frac{X_{00}+ X_{01}+ X_{10}+  X_{11}}{4}$
+    For each $2\times 2$ submatrix $\mathbf{X}$, average pooling outputs $y_{avg}=\frac{X_{00}+ X_{01}+ X_{10}+  X_{11}}{4}$
     and max pooling outputs $y_{max}=max(X_{00}, X_{01}, X_{10},  X_{11})$
-    $$  \langle X\rangle ^{0}= \begin{bmatrix}
+    $$  \langle \mathbf{X}\rangle ^{0}= \begin{bmatrix}
         \langle X_{00}\rangle ^{0}& \langle X_{01}\rangle ^{0} \\
         \langle X_{10}\rangle ^{0}& \langle X_{11}\rangle ^{0}
-       \end{bmatrix}\langle X\rangle ^{1}=\begin{bmatrix}
+       \end{bmatrix}\langle \mathbf{X}\rangle ^{1}=\begin{bmatrix}
         \langle X_{00}\rangle ^{1}& \langle X_{01}\rangle ^{1} \\
         \langle X_{10}\rangle ^{1}& \langle X_{11}\rangle ^{1}
        \end{bmatrix}$$
@@ -846,12 +847,11 @@
     $\mathcal{P}_{1}$ sets $\langle y_{avg}\rangle^{1} = \frac{\langle X_{00}\rangle ^{1}+ \langle X_{01}\rangle ^{1}+
     \langle X_{10}\rangle ^{1}+ \langle X_{11}\rangle ^{1}}{4}$. This process can be done without interaction.
 
-    2PC-maximum pooling layer can be computed via $\mathtt{comparison}$ protocol for
-    $y_{max}=max(X_{00}, X_{01}, X_{10}, X_{11})$.
+    2PC-maximum pooling layer can be computed by recursively running $\mathtt{comparison}$ protocol.
     The approach to compute this has been briefly discussed before and now we give it in detail.
     Consider that
     \begin{align*}
-        &\enspace \enspace \enspace  max(X_{00}, X_{01}, X_{10}, X_{11}) \\
+        y_{max} &= max(X_{00}, X_{01}, X_{10}, X_{11}) \\
         &= max(X_{00},max(X_{01}, X_{10}, X_{11})) \\
       &= max(X_{00},max(X_{01},max(X_{10}, X_{11})))
     \end{align*}
@@ -1172,7 +1172,7 @@
 
             \hdashline
             % & $\underrightarrow{~~~~~~~\langle z\rangle ^{0}~~~~~~~}$~~~~~~ &\\
-            & $\underleftarrow{~~~~~~~\langle z\rangle ^{1}~~~~~~~}$~~~~~~ &\\
+            & $\underleftarrow{~~~~~\langle z\rangle ^{1}~~~~~}$~~~~~ &\\
             $z\leftarrow\langle z\rangle ^{0}+\langle z\rangle ^{1}$& &\\
             % if $z = 0$:& &if $z = 0$:\\
             % ~~~$\langle s\rangle ^{0}\leftarrow 0$& &~~~$\langle s\rangle ^{1}\leftarrow 0$\\
@@ -1306,19 +1306,19 @@
 \bibliography{aaai23}
 
 
-\bibentry{ABY3}
-\bibentry{ABY}
-\bibentry{EfficientMultipartyProtocols}
-\bibentry{ChironCloud}
-\bibentry{HighPerformanceConvolutional}
-\bibentry{ObliviousNeuralNetwork}
-\bibentry{DeepResidualLearning}
-\bibentry{MaliciouslySecureMatrixMultiplication}
-\bibentry{CryptoNets}
-\bibentry{Sharemind}
-\bibentry{Homomorphic1}
-\bibentry{Homomorphic2}
-\bibentry{Lenet5}
+% \bibentry{ABY3}
+% \bibentry{ABY}
+% \bibentry{EfficientMultipartyProtocols}
+% \bibentry{ChironCloud}
+% \bibentry{HighPerformanceConvolutional}
+% \bibentry{ObliviousNeuralNetwork}
+% \bibentry{DeepResidualLearning}
+% \bibentry{MaliciouslySecureMatrixMultiplication}
+% \bibentry{CryptoNets}
+% \bibentry{Sharemind}
+% \bibentry{Homomorphic1}
+% \bibentry{Homomorphic2}
+% \bibentry{Lenet5}
 % \bibentry{}
 % \bibentry{}
 % \bibentry{}
