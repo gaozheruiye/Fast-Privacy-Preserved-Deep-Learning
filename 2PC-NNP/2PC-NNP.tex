@@ -264,26 +264,23 @@
     \begin{itemize}
         \item \textbf{2PC-NNP}.
         We present 2PC-NNP, a two-party computation framework
-        for evaluating neural network predictions efficiently and secretly.
-        Based on the novel 2PC-$\mathtt{comparison}$ protocol and the exsiting 2PC-$\mathtt{multiplication}$ protocol,
-        we design 2PC protocols for convolution layer, pooling layer and activation function.
+        for evaluating neural network predictions efficiently.
 
         The building block of our work is a brand new 2PC-$\mathtt{comparison}$ protocol,
-        which does not require the asymmetric cryptographic operations or the bit-level operations
-        and only needs three rounds of interactions to calculate the sign of the secret input.
-        The speed of it is 40$\times$ faster than the sharemind \cite{Sharemind}.
-        Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
-        like maximum function and piecewise functions.
+        which does not utilize the asymmetric cryptographic operations or the bit-level operations
+        and only consists of three rounds of interactions to calculate the sign of the secret input.
+        The speed of it is 40$\times$ faster than the Sharemind \cite{Sharemind}.
+        % Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
+        % like maximum function and piecewise functions.
         \item \textbf{Security analysis}.
-        We theoretically prove that our system satisfy the definition of the
+        We theoretically prove that our system satisfy the
+        security definition of the two-party computation.
 
         \item \textbf{Experiment}.
         To demonstrate the outstanding performance of our work,
         we conduct 2PC-NNP on the classical neural network model Resnet50 and
         it costs 23s for computation and 100s for communication.
 
-
-        \item \textbf{2PC-NNP}.
    \end{itemize}
 
 
@@ -295,15 +292,15 @@
 
 
     Many ideas have been proposed to achieve privacy preserving neural network predictions.
-    The most common idea is to utilize fully homomorphic encryption which supports multiplication and addition on ciphertext.
+    The most common idea is to utilize fully homomorphic encryption  \cite{Homomorphic1} which supports multiplication and addition on ciphertext.
     The data owner sends the encrypted image to the model provider for applying a pre-trained model for classification \cite{SEAL}.
-    Furthermore, some proposals that only using additive homomorphic encryption are presented \cite{Homomorphic1} \cite{Homomorphic2}.
+    Furthermore, some proposals that only using additive homomorphic encryption are presented \cite{Homomorphic2}.
     However, the overhead of homomorphic encryption is so huge that though
     the associated technology evolves over many years\cite{ObliviousNeuralNetwork}, the cost of it seems still unacceptable.
 
     To reduce the overhead of complicated homomorphic encryption operations,
     some more efficient schemes for MPC operations are presented.
-    On a very high level, MPC multiplication is easy to implement by the Beaver triple \cite{EfficientMultipartyProtocols}
+    On a very high level, MPC multiplication is easy to be implemented by the Beaver triple \cite{EfficientMultipartyProtocols}
     but MPC comparison is very hard to realize.
     To avoid the expensive cost of comparison,
     a modified deep learning model \cite{CryptoNets} using square activation function and the mean pooling so that
@@ -314,10 +311,13 @@
     and then be extended to ABY3 \cite{ABY3} which can be performed among 3 parties.
     Both ABY and ABY3 involve the asymmetric cryptographic operations
     including the oblivious transfer protocol and the garbled circuit.
-    Sharemind provides a new idea that converts a comparison operation to
-    multi-rounds bit-level multiplication.
+    Up to this day, most of the systems \cite{2022GarbledCircuit} still keep tring to optimizing
+    the garbled circuit process to lower the communication and computation complexity.
+    Sharemind \cite{Sharemind} provides a new idea that converts a comparison operation to
+    multi-round bit-level multiplication.
     Though it lowers the computational difficulty, it costs too much rounds for
     communication.
+
 
 
 
@@ -510,7 +510,7 @@
     In this situation, the value $x$ and $y$ can be
     seen as a special share state, where
     $\langle x\rangle ^{0}=x,\langle x\rangle ^{1}=0$ and
-    $\langle y\rangle ^{0}=0,\langle x\rangle ^{1}=y$.
+    $\langle y\rangle ^{0}=0,\langle y\rangle ^{1}=y$.
 
     They can compute $\langle z\rangle=x\otimes y$ secretly
     by running $\mathtt{multiplication}$ protocol with special input of
