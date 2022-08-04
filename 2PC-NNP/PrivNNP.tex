@@ -31,7 +31,7 @@
 \usepackage{multirow}
 \usepackage{arydshln}
 \usepackage{subfigure} % 子图包
-
+% \usepackage{makecell}
 
 
 %
@@ -220,7 +220,7 @@
 	outcomes for a given data point. It is important to protect both the training phase and the predicting phase,
     while this work mainly focuses on the prediction phase.
 
-    Deep learning models can be servced on cloud by the model owner as a cloud-based service,
+    Deep learning models can be serviced on cloud by the model owner as a cloud-based service,
     i.e. Machine Learning as a Service (MLaaS),
     which consists of a series of machine learning tools offered by cloud service providers \cite{ChironCloud}.
     Computationally intensive tasks that cannot be accomplished by data owners can be outsourced to
@@ -250,53 +250,50 @@
 
     \begin{itemize}
         \item \textbf{PrivNNP}.
-        We present PrivNNP, a two-party computation framework
-        for evaluating neural network predictions efficiently.
+        We present PrivNNP, an efficient two-party computation framework
+        for evaluating neural network predictions.
 
         The building block of our work is a brand new 2PC-$\mathtt{comparison}$ protocol,
-        which does not utilize the asymmetric cryptographic operations or the bit-level operations
-        and only consists of three rounds of interactions to calculate the sign of the secret input.
-        The speed of it is 40$\times$ faster than the Sharemind \cite{Sharemind}.
+        which does not utilize the asymmetric cryptography or the bit-level operations
+        and only consists of three rounds of interactions to calculate the sign of the secret input value.
+        The computation is $l\times$ faster than the Sharemind \cite{Sharemind}
+        when the the secret input is a $l-$bit value.
         % Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
         % like maximum function and piecewise functions.
         \item \textbf{Security analysis}.
-        We theoretically prove that our system satisfy the
+        We theoretically prove that our system satisfies the
         security definition of the two-party computation.
 
         \item \textbf{Experiment}.
-        To demonstrate the outstanding performance of our work,
-        we conduct PrivNNP on the classical neural network model Resnet50 and
+        To demonstrate the performance of our work,
+        we implement PrivNNP and conduct experiment on the classical
+        neural network model Resnet50 and
         it costs 23s for computation and 100s for communication.
 
    \end{itemize}
 
-
-
-
-
-
 \section{Related Work}
-
-
-    Many ideas have been proposed to achieve privacy preserving neural network predictions.
-    The most common idea is to utilize fully homomorphic encryption  \cite{SEAL} \cite{Homomorphic1} which supports multiplication and addition on ciphertext.
+    Many ideas have been proposed to achieve privacy-preserving neural network predictions.
+    The most common idea is to utilize fully homomorphic encryption  \cite{SEAL} \cite{Homomorphic1}
+    which supports multiplication and addition on ciphertexts.
     The data owner sends the encrypted image to the model provider for applying a pre-trained model for classification \cite{FullyHomomorphic}.
-    Furthermore, some proposals that only using additive homomorphic encryption are presented \cite{Homomorphic2}.
-    However, the overhead of homomorphic encryption is so huge that though
-    the associated technology evolves over many years\cite{ObliviousNeuralNetwork}, the cost of it seems still unacceptable.
+    Furthermore, some proposals that only use additive homomorphic encryption are presented \cite{Homomorphic2}.
+    However, the overhead of homomorphic encryption is so large that
+    the cost of it seems still unacceptable
+    though the associated technology evolves over many years\cite{ObliviousNeuralNetwork}, .
 
-    To reduce the overhead of complicated homomorphic encryption operations,
+    To reduce the overhead of homomorphic encryption operations,
     some more efficient schemes for MPC operations are presented.
-    On a very high level, MPC multiplication is easy to be implemented by the Beaver triple \cite{EfficientMultipartyProtocols}
-    but MPC comparison is very hard to realize.
+    On a very high level, the MPC multiplication is easy to be implemented by the Beaver triple \cite{EfficientMultipartyProtocols}
+    but the MPC comparison is very hard to realize.
     To avoid the expensive cost of comparison,
     a modified deep learning model \cite{CryptoNets} using square activation function and the mean pooling so that
     no comparison operation is needed in MPC neural network.
-    Obviously, this architecture has a narrow scope of application.
+    Obviously, this architecture has a narrow application scope.
 
     In order to realize practical comparison protocol, ABY framework \cite{ABY} is proposed
     and then be extended to ABY3 \cite{ABY3} which can be performed among 3 parties.
-    Both ABY and ABY3 involve the asymmetric cryptographic operations
+    Both ABY and ABY3 involve the asymmetric cryptography
     including the oblivious transfer protocol and the garbled circuit.
     Up to this day, most of the systems \cite{2022GarbledCircuit} still keep tring to optimizing
     the garbled circuit process to lower the communication and computation complexity.
@@ -304,9 +301,6 @@
     multi-round bit-level multiplication.
     Though it lowers the computational difficulty, it costs too much rounds for
     communication.
-
-
-
 
 \section{Preliminaries}
     \subsection{Notations}
@@ -325,7 +319,7 @@
             $\langle x\rangle^{i}$ & Additive share of value $x$ held by $\mathcal{P}_{i},i\in \{0,1\}$ \\
             $\llbracket x \rrbracket$ & Multiplicatively shared value $x$\\
             $\llbracket x \rrbracket^{i}$ & Multiplicative share of value $x$ held by $\mathcal{P}_{i},i\in \{0,1\}$\\
-            $\otimes $ & Multiplication operation performed on shares\\
+            $\otimes $ & 2PC-multiplication operation performed on shares\\
             $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$ & Multiplication triple\\
             $(\langle \mathbf{A}\rangle,\langle \mathbf{B}\rangle,\langle \mathbf{C}\rangle)$ & Matrix multiplication triple\\
             $(\langle u\rangle,\llbracket u \rrbracket)$ & Comparison bigram \\
@@ -336,8 +330,8 @@
         \label{Notations}
     \end{table}
     Notations used in this paper is listed in Table \ref{Notations}.
-    In addition, we denote a matrix using capital letters (e.g. $A$) and denote
-    a vector as $\overrightarrow{\mathbf{v}}=(v_{0},v_{1},...,v_{n-1})$.
+    In addition, a matrix is denoted by bold capital letters (e.g. $\mathbf{A}$) and
+    a vector is denoted as $\overrightarrow{\mathbf{v}}=(v_{0},v_{1},...,v_{n-1})$ .
 
     Function $\mathsf{sign}(x)$ is defined to represent the sign of value $x$.
     Note that, $\mathsf{sign}(x\cdot y)=\mathsf{sign}(x)\cdot \mathsf{sign}(y)$.
@@ -352,26 +346,25 @@
 	their individual input. It has broad applications where privacy is important, e.g. voting, auction,
 	data mining etc. Two-party computation (2PC) is a special case of MPC.
     In this work, we consider semi-honest 2PC participants
-    who will not deviate the protocol but may try to gain private information of another party
+    who will not deviate from the protocol but may try to gain private information of another party
 		during the protocol execution.
 
     \subsection{2PC secret sharing}
-    Secret sharing is a method that a secret is split in some ways and each share is held by each participant
-    and 2PC secret sharing means the secret value is shared between two parties.
+    % Secret sharing is a method that a secret is split in some ways and each share is held by each participant    and
+    2PC secret sharing means a secret value is shared between two parties.
     Our framework involves two types of 2PC secret sharing methods:
     additive sharing and multiplicative sharing.
-
     \begin{itemize}
         \item
-        We denote an additively shared secret value $x$ by $\langle x\rangle $.
+        The additively shared secret value $x$ is denoted as $\langle x\rangle $.
         When two parties additively share value $x$,
         each party $\mathcal{P}_{i}$ holds the secret share as $\langle x\rangle ^{i}$, s.t.
         $x=\langle x\rangle ^{0}+\langle x\rangle ^{1}$.
 
-        Similarly, we use $\langle \mathbf{A}\rangle $ to indicate an additively shared secret matrix
+        Similarly, $\langle \mathbf{A}\rangle $ is used to indicate an additively shared secret matrix
         and $\mathbf{A} =\langle \mathbf{A}\rangle ^{0}+\langle \mathbf{A}\rangle ^{1}$.
 
-        \item We denote a multiplicatively shared secret value $x$ by $\llbracket x \rrbracket$.
+        \item The multiplicatively shared secret value $x$ is denoted as $\llbracket x \rrbracket$.
         When parties multiplicatively share the secret value $x$,
         each party $\mathcal{P}_{i}$ holds the secret share as $\llbracket x \rrbracket ^{i}$, s.t.
         $x=\llbracket x \rrbracket ^{0}\times \llbracket x \rrbracket ^{1}$.
@@ -380,30 +373,31 @@
 
 
     All protocols we present operate on shares, which means
-    the input and the output of protocols is hidden for all parties.
+    the input and the output of these protocols are hidden for all parties.
     For instance, we use $\otimes$ to represent the multiplication between two additively shared value.
     When performing multiplication operations on shares,
     we write $\langle z\rangle=\langle x\rangle\otimes  \langle y\rangle $,
-    which means computing the product of two additively shared value $\langle x\rangle, \langle y\rangle$ and returning the
+    which means that the two parties compute the product of two additively shared value
+    $\langle x\rangle, \langle y\rangle$ and obtaining the
     the additive share of the product.
-    % $\sum_{i=0}^{n-1}\langle z\rangle ^{i} = \sum_{i=0}^{n-1}\langle x\rangle ^{i} \otimes \sum_{i=0}^{n-1}\langle y\rangle ^{i}$
-    $\mathcal{P}_{i}$ can only get the value of $\langle x\rangle ^{i}$, $\langle y\rangle ^{i}$ and $\langle z\rangle ^{i}$.
-    This enable two parties to run multiple rounds of different protocols
-    while keeping secret state input.
+    $\mathcal{P}_{i}$ can only get the value of $\langle x\rangle ^{i}$, $\langle y\rangle ^{i}$ and $\langle z\rangle ^{i}$ ($i \in \{0,1\}$).
+    This enable two parties to run multiple rounds of different protocols while keeping secret state input.
 
     \subsection{Auxiliary tuples}
-    Here we introduce some auxiliary tuples of specific structures.
-    Shares of these tuples will be distributed to each party to
-    assit computation for multiplication and comparison.
+    Some auxiliary tuples of specific structures are used to
+    assit in running $\mathtt{multiplication}$ and $\mathtt{comparison}$ protocols.
+    These tuples will be generated by the trusted setup and be distributed to each party.
     \begin{itemize}
         \item Multiplication triple: $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$, where $c=a\cdot b$.
         \item Matrix multiplication triple: $(\langle \mathbf{A}\rangle,\langle \mathbf{B}\rangle,\langle \mathbf{C}\rangle)$, where $\mathbf{C}=\mathbf{A}\cdot \mathbf{B}$.
         \item Comparison bigram: $(\langle u\rangle,\llbracket u \rrbracket)$,
-        this tuple constructs of the additive share and multiplicative share of the same value $u$ ($u\neq 0 $).
+        this bigram consists of the additive share and the multiplicative share of the same value $u$ ($u\neq 0 $).
     \end{itemize}
 
 
-    \subsection{Layers of neural network}
+    \subsection{Layers of neural networks}
+    A neural network consists of a pipeline of layers which can be mainly divided into three categories:
+    convolution layer, pooling layer and activation function layer.
     % Here we briefly introduce the layers of neural network.
     \begin{itemize}
         \item \textbf{Convolution layer:}
@@ -412,13 +406,15 @@
         This step is repeated by sliding the filter to get the output matrix.
         To improve the efficiency, convolution is usually converted to matrix multiplication and addition.
 
+        \item \textbf{Pooling layer:}
+        Pooling layer is calculated by $n\times n$ size matrix sliding window.
+        There are two types of pooling layer: average pooling and maximum pooling,
+        which outputs the average or the maximum of $n\times n$ size matrices to construct the input matrix of the next layer.
 
-
-        \item \textbf{Activation function:}
+        \item \textbf{Activation function layer:}
         Activation function is a function acting on the neuron of the artificial neural network,
         mapping the input of the neuron to the output.
         Common used activation functions are listed as follow:
-
         \begin{align*}
         \text{Maxout:} \mathsf{f}(x) &= \mathsf{max}( \overrightarrow{\mathbf{x}})\\
         \text{Sigmoid:} \sigma(x) &=\frac{1}{1+e^{-x}}\\
@@ -427,43 +423,66 @@
             0 & \text{ if } x \leqslant 0 \\
             \end{cases}
         \end{align*}
-
         In the paper, we mainly introduce method to compute $\mathsf{ReLU}$ function.
         Other functions can be computed by similar approach.
-
-        \item \textbf{Pooling layer:}
-        Pooling layer is calculated by $n\times n$ size matrix sliding window.
-        There are two types of pooling layer: average pooling and maximum pooling,
-        which outputs the average or the maximum of $n\times n$ size matrices to construct the input image of the next layer.
-
     \end{itemize}
+    The PrivNNP will include 2PC-algorithms for evaluating each layer.
 
-
-
-    \section{Two-party Secure Computation for Basic Operations}
+\section{Two-party Secure Computation for Basic Operations}
 
     In this section we introduce 2PC protocols for basic operations,
     including addition, comparison, maximum and piecewise function.
     Our protocols all operate on shares, which means
-    the input and the output is in the form of additive share.
-    This enable two parties to run multiple rounds of different
-    protocols while keeping secret state input
+    the input and the output is in the form of additive shares.
+    This enables two parties to run multiple rounds of different
+    protocols while keeping the input secret
     and facilitate further processing to implement a complex system.
 
     % Formalized protocols are presented in the appendix.
 
     \subsection{Addition}
 
-    \emph{Computing} $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This work can be done locally because
-    $\mathcal{P}_{i}$ only needs to add his share of $x$ and $y$ together by setting $\langle z\rangle^{i}  = \langle x\rangle^{i}  + \langle y\rangle^{i} $.
+    \emph{Computing} $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
+    $\mathcal{P}_{i}$ setting $\langle z\rangle^{i}  = \langle x\rangle^{i}  + \langle y\rangle^{i} $.
+
+    \begin{figure}[ht]
+        % \centering{\bf Two-party secure computation protocol for operations}
+        \resizebox{0.48\textwidth}{!}{
+        \begin{tabular}{lcl}
+            \hline
+            \multicolumn{3}{c}{\underline{$\mathtt{Addition }$}:}\\
+            \multicolumn{3}{l}{\textbf{Target}: compute $\langle z\rangle  = \langle x\rangle  + \langle y\rangle $}\\
+            \textbf{Input}:\\
+            $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+            $\{(\langle x\rangle ^{0} , \langle y\rangle ^{0})\}$,
+            &~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            &
+            $\{(\langle x\rangle ^{1} , \langle y\rangle ^{1})\}$,
+
+            \\
+
+            \textbf{Procedure}:\\
+            $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+            $\langle z\rangle ^{0}\leftarrow\langle x\rangle ^{0}+\langle y\rangle ^{0}$
+            &
+            &
+            $\langle z\rangle ^{1}\leftarrow\langle x\rangle ^{1}+\langle y\rangle ^{1}$
+            \\
+            \hline
+
+        \end{tabular}}
+        \caption{2PC-addition}
+        \label{2PC-addition}
+    \end{figure}
+    The 2PC-addition protocol is shown in Figure \ref{2PC-addition}.
 
     \subsection{Multiplication}
     \emph{Computing} $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
-    $\mathtt{Multiplication}$ protocol is used to compute the product of two shared values and is performed
-    using a prepared multiplication triple $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$,
-    which can be distributed from the trusted third party or
-    generated by using the OT protocol.
-    \begin{figure}
+    $\mathtt{Multiplication}$ protocol is used to compute the product of two shared values
+    and is performed using a auxiliary multiplication triple
+    $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$,
+    which can be distributed from the trusted third party.
+    \begin{figure}[ht]
         % \centering{\bf Two-party secure computation protocol for operations}
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
@@ -517,7 +536,7 @@
     \end{figure}
     The 2PC-multiplication protocol is shown in Figure \ref{2PC-multiplication}.
 
-    Moreover, if the secret input data is not in the share state,
+    Moreover, if the private input data is not in the share state,
     such as $\mathcal{P}_{0}$ holding the secret value $x$
     and $\mathcal{P}_{1}$ holding the secret value $y$.
     In this situation, the value $x$ and $y$ can be
@@ -526,17 +545,17 @@
     $\langle y\rangle ^{0}=0,\langle y\rangle ^{1}=y$.
 
     They can compute $\langle z\rangle=x\otimes y$ secretly
-    by running $\mathtt{multiplication}$ protocol with special input of
+    by running $\mathtt{multiplication}$ protocol with the special input of
     $\mathcal{P}_{0}:(x,0),\mathcal{P}_{1}:(0,y)$.
 
 
 
-    \begin{figure}
+    \begin{figure}[ht]
         % \centering{\bf Two-party secure computation protocol for operations}
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
             \hline
-            \multicolumn{3}{c}{\underline{$\mathtt{Multiplication}$}:}\\
+            \multicolumn{3}{c}{\underline{$\mathtt{Matrix \enspace multiplication}$}:}\\
             \multicolumn{3}{l}{\textbf{Target}: compute $\langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle $}\\
             \textbf{Input}:\\
             % & \hfil\underline{$\mathtt{Multiplication}$}:\hfil\\
@@ -552,7 +571,7 @@
             (\langle \mathbf{A}\rangle ^{0},\langle \mathbf{B}\rangle ^{0},\langle \mathbf{C}\rangle ^{0})\}$
             &
             &
-            mul-triple:$ (\langle \mathbf{A}\rangle ^{1},\langle b\rangle ^{1},\langle c\rangle ^{1})\}$
+            mul-triple:$ (\langle \mathbf{A}\rangle ^{1},\langle \mathbf{B}\rangle ^{1},\langle \mathbf{C}\rangle ^{1})\}$
             \\
             \textbf{Procedure}:\\
             $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
@@ -587,14 +606,15 @@
 
     \subsection{Comparison}
     The 2PC-$\mathtt{comparison}$ protocol is the most important building block of our work.
-    This section is divided into two parts and we will introduce solutions to these problems respectively:
+    Two questions will be discussed in this subsection:
     how to compute $\mathsf{sign}(x)$ and $\mathsf{max}(x,y)$ via 2PC protocols.
 
 
     \emph{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
     The $\mathtt{comparison}$ protocol for computing the sign of the shared value utilizes the comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
 
-    In our scheme, firstly, the two parties compute $ \langle z\rangle = \langle x\rangle\otimes \langle u\rangle$ via $\mathtt{multiplication}$ protocol
+    In our scheme, the two parties first compute $ \langle z\rangle = \langle x\rangle\otimes \langle u\rangle$
+    via $\mathtt{multiplication}$ protocol
     to blind the value of $x$.
     Then, $\mathcal{P}_{1}$ sends  $ \langle z\rangle^{1}$ to $\mathcal{P}_{0}$ and
     $\mathcal{P}_{0}$ reconstructs the true value of $z$.
@@ -610,9 +630,7 @@
     =\mathsf{sign}(\frac{z}{\llbracket u \rrbracket^{0}})
     \cdot \mathsf{sign}(\frac{1}{\llbracket u \rrbracket^{1}})$$
 
-
-
-    Because the $\llbracket u \rrbracket^{0}$ and $\llbracket u \rrbracket^{1}$
+    Because the $(\llbracket u \rrbracket^{0},z)$ and $\llbracket u \rrbracket^{1}$
     is held by $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ respectively.
     Therefore, the multiplicative share of $\mathsf{sign}(x)$ can be obtained by
     $\mathcal{P}_{0}$ setting $\llbracket s \rrbracket^{0}
@@ -621,18 +639,16 @@
     =\mathsf{sign}(\frac{1}{\llbracket u \rrbracket^{1}})$ locally
     so that $\mathsf{sign}(x)=\llbracket s \rrbracket^{0}\cdot \llbracket s \rrbracket^{1}$.
 
-    Since the additive share is more general to use,
+    In order to compute more complicated functions,
     the multiplicative share $\llbracket s \rrbracket$ should be converted into the additive share $\langle s\rangle$
     by calculating $\langle s\rangle = \llbracket s \rrbracket ^{0}\otimes \llbracket s \rrbracket ^{1}$.
     More precisely, two parties run $\mathtt{multiplication}$ protocol with the input of
     $\mathcal{P}_{0}:(\llbracket s \rrbracket ^{0},0),\mathcal{P}_{1}:(0,\llbracket s \rrbracket ^{1})$, and
     \begin{align*}
         \langle s\rangle^{0} +\langle s\rangle^{1}&=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})\\
-        &=\llbracket s \rrbracket ^{0}\cdot \llbracket s \rrbracket ^{1}\\
-        &=\mathsf{sign}(x)
+        &=\llbracket s \rrbracket ^{0}\cdot \llbracket s \rrbracket ^{1}=\mathsf{sign}(x)
     \end{align*}
-    The complete protocol is run as follow.
-       \begin{figure}
+    \begin{figure}[ht]
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
             \hline
@@ -648,11 +664,11 @@
 
             \\
 
-            comp-triple:$
+            comp-bigram:$
             (\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})\}$
             &
             &
-            comp-triple:$ (\langle u\rangle ^{1},\llbracket u \rrbracket ^{1})\}$\\
+            comp-bigram:$ (\langle u\rangle ^{1},\llbracket u \rrbracket ^{1})\}$\\
             \textbf{Procedure}:\\
             $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
             \hdashline
@@ -709,8 +725,8 @@
            \end{matrix}\right.$$
        We can combine two expressions into one:
        $$\mathsf{max}(x,y) = \frac{(s+1)\cdot x+ (-s+1)\cdot y}{2}$$
-       Following this idea, the whole process of computing $\langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle$ is given below.
-       \begin{figure}
+
+       \begin{figure}[ht]
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
             \hline
@@ -743,143 +759,145 @@
             \hline
         \end{tabular}}
 
-        \caption{2PC-$\mathsf{max}$}
-        \label{2PC-max$}
+        \caption{2PC-maximum}
+        \label{2PC-max}
     \end{figure}
-    2PC-comparison protocol is shown in Figure \ref{2PC-comparison}.
+    Following this idea, the whole process of 2PC-comparison protocol is shown in Figure \ref{2PC-max}.
 
-       Furthermore, we explore variations of $\mathsf{max}(x,y)$.
-       Firstly, we talk about $\mathsf{max}(\overrightarrow{\mathbf{x}})=\mathsf{max}(x_{0},x_{1},...x_{n})$. Observing that
-       \begin{align*}
-           \mathsf{max}(x_{0},x_{1},...x_{n}) &= \mathsf{max}(x_{0},\mathsf{max}(x_{1},x_{2},...x_{n})) \\
-         &= \mathsf{max}(x_{0},\mathsf{max}(x_{1},...\mathsf{max}(x_{n-1},x_{n})))
-       \end{align*}
-       So the maximum of vector $\overrightarrow{\mathbf{x}}$ can be computed by recursively running $\mathtt{comparison}$ protocol.
+    Furthermore, we explore variations of $\mathsf{max}(x,y)$.
+    Firstly, maximum of a vector $\mathsf{max}(\overrightarrow{\mathbf{x}})=\mathsf{max}(x_{0},x_{1},...x_{n})$
+    can be computed by recursively running $\mathtt{comparison}$ protocol.
+    % Observing that
+    % \begin{align*}
+    %     \mathsf{max}(x_{0},x_{1},...x_{n}) &= \mathsf{max}(x_{0},\mathsf{max}(x_{1},x_{2},...x_{n})) \\
+    %     &= \mathsf{max}(x_{0},\mathsf{max}(x_{1},...\mathsf{max}(x_{n-1},x_{n})))
+    % \end{align*}
+    % So the maximum of vector $\overrightarrow{\mathbf{x}}$
 
-       Secondly, because of $\mathsf{min}(x,y)=-\mathsf{max}(-x,-y)$,  $min(x,y)$ can also be computed.
-       Combined with the above methods,
-       any composite function constructed of $\mathsf{max}()$ and $min()$ can be computed following rules metioned above.
-
-
-       \subsection{Continuous piecewise function}
-       \emph{Computing} $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $.
-       $\mathsf{F}()$ is a public continuous piecewise function constructed by a series of sub-functions $\mathsf{f}_{j}(x)$
-       with dividing point $-\infty =d_{0}<d_{1}<...<d_{j}<...<d_{n}=+\infty$.
-       When $d_{j-1}< x\leq d_{j}$, $\mathsf{F}(x) =\mathsf{f}_{j}(x)$.
-       Since $\mathsf{F}()$ is a continuous function, $\mathsf{F}(d_{j}) =\mathsf{f}_{j}(d_{j})=\mathsf{f}_{j+1}(d_{j})=\frac{\mathsf{f}_{j}(d_{j})+\mathsf{f}_{j+1}(d_{j})}{2}$.
+    Secondly, because of $\mathsf{min}(x,y)=-\mathsf{max}(-x,-y)$,  $min(x,y)$ can also be computed.
+    Combined with the above methods,
+    any composite function constructed of $\mathsf{max}()$ and $min()$ can be computed following rules metioned above.
 
 
-       To solve this problem, we need to compute a vector of
-       $\overrightarrow{v}=(v_{0},v_{1},...,v_{n-1})$ to represent which span is $x$ in.
-       Let $v_{j} = \frac{1-\mathsf{sign}(d_{j-1}-x)\cdot \mathsf{sign}(d_{j}-x)}{2}$.
-       In view of $-\infty =d_{0}$ and $d_{n}=+\infty$,
-       we set $\mathsf{sign}(d_{0}-x)=-1$ and $\mathsf{sign}(d_{n}-x)=1$.
-       It is easy to find that
-       $$v_{j}=\begin{cases}
-           0 & \text{ if } x\notin (d_{j-1},d_{j}] \\
-           \frac{1}{2} & \text{ if } x = d_{j-1} \text{ or } d_{j}\\
-           1 & \text{ if } x\in (d_{j-1},d_{j}]
-          \end{cases}$$
+    \subsection{Continuous piecewise function}
+    \emph{Computing} $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $.
+    $\mathsf{F}()$ is a public continuous piecewise function constructed by a series of sub-functions $\mathsf{f}_{j}(x)$
+    with dividing points $-\infty =d_{0}<d_{1}<...<d_{j}<...<d_{n}=+\infty$.
+    When $d_{j-1}< x\leq d_{j}$, $\mathsf{F}(x) =\mathsf{f}_{j}(x)$.
+    Since $\mathsf{F}()$ is a continuous function, $\mathsf{F}(d_{j}) =\mathsf{f}_{j}(d_{j})=\mathsf{f}_{j+1}(d_{j})=\frac{\mathsf{f}_{j}(d_{j})+\mathsf{f}_{j+1}(d_{j})}{2}$.
 
-       If $x\in (d_{j-1},d_{j})$, then, $v_{j}=1$ and $v_{k}=0 (k\neq j)$, $\mathsf{F}(x)=v_{j}\cdot \mathsf{f}_{j}(x)=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
-       If $x=d_{j} $, $ d_{j}\in {d_{1},...,d_{n-1}}$,
-       then, $v_{j}=v_{j+1}=\frac{1}{2}$ while $v_{k}=0$, if $ k\notin \{j,j+1\}$,
-       Since $\mathsf{F}(x)$ is a continuous function,
-       $\mathsf{F}(x)=\mathsf{f}_{j}(x)=\mathsf{f}_{j+1}(x)=\frac{\mathsf{f}_{j}(x)}{2}+\frac{\mathsf{f}_{j+1}(x)}{2}=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
+    To solve this problem, we need to compute a vector of
+    $\overrightarrow{v}=(v_{0},v_{1},...,v_{n-1})$ to represent which span is $x$ in.
+    Let $v_{j} = \frac{1-\mathsf{sign}(d_{j-1}-x)\cdot \mathsf{sign}(d_{j}-x)}{2}$.
+    In view of $-\infty =d_{0}$ and $d_{n}=+\infty$,
+    we set $\mathsf{sign}(d_{0}-x)=-1$ and $\mathsf{sign}(d_{n}-x)=1$.
+    It is easy to see that
+    $$v_{j}=\begin{cases}
+        0 & \text{ if } x\notin (d_{j-1},d_{j}) \\
+        \frac{1}{2} & \text{ if } x = d_{j-1} \text{ or } d_{j}\\
+        1 & \text{ if } x\in (d_{j-1},d_{j})
+        \end{cases}$$
 
-       So we can conclude two circumstances as $\mathsf{F}(x)=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
+    If $x\in (d_{j-1},d_{j})$, then, $v_{j}=1$ and $v_{k}=0 (k\neq j)$, $\mathsf{F}(x)=v_{j}\cdot \mathsf{f}_{j}(x)=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
-       With $\mathtt{multiplication}$ protocol and $\mathtt{comparison}$ protocol, we give the whole process as follow.
-       \begin{figure}
-        \resizebox{0.48\textwidth}{!}{
-        \begin{tabular}{lcl}
-            \hline
-            \multicolumn{3}{l}{\textbf{Computation for piecewise function $\mathsf{F}(x)$}:}\\
-            \multicolumn{3}{l}{\textbf{Target}: compute $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $}\\
-            \textbf{Input}:\\
-            % & \hfil\underline{$\mathtt{Multiplication}$}:\hfil\\
-            $\mathcal{P}_{0}$ &~~~~~~~~~~~~~~~~~~~~~~~~~~~ &  $\mathcal{P}_{1}$ \\
-            $\{\langle x\rangle ^{0} , \mathsf{F}(),(d_{0},...,d_{n}),$
-            &
-            &
-            $\{\langle x\rangle ^{1} ,  \mathsf{F}(),(d_{0},...,d_{n}),$
-            \\
-            $(\mathsf{f}_{0}(),...,\mathsf{f}_{n}())\}$
-            &
-            &
-            $(\mathsf{f}_{0}(),...,\mathsf{f}_{n}())\}$
-            \\
+    If $x=d_{j} $, $ d_{j}\in {d_{1},...,d_{n-1}}$,
+    then, $v_{j}=v_{j+1}=\frac{1}{2}$ while $v_{k}=0$, if $ k\notin \{j,j+1\}$,
+    Since $\mathsf{F}(x)$ is a continuous function,
+    $\mathsf{F}(x)=\mathsf{f}_{j}(x)=\mathsf{f}_{j+1}(x)=\frac{\mathsf{f}_{j}(x)}{2}+\frac{\mathsf{f}_{j+1}(x)}{2}=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
-            \textbf{Procedure}:\\
-            $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
-            \hdashline
-            \multicolumn{3}{l}{\textbf{For} each $d_{j},j\in\{1,2,...,n-1\}$:}\\
-            \multicolumn{3}{c}{run $\mathtt{comparison}$ protocol to}\\
-            \multicolumn{3}{c}{compute
-            $\langle s_{j}\rangle=\langle \mathsf{sign}(d_{j}-\langle x\rangle)\rangle$}\\
-            ~~~~~~~gets $\langle s_{j}\rangle ^{0}$& &~~~~~~~gets $\langle s_{j}\rangle ^{1}$\\
-            \hdashline
-            \hdashline
-            \multicolumn{3}{l}{\textbf{For} each $v_{j},j\in\{1,2,...,n-1\}$:}\\
+    So the two circumstances can be concluded as $\mathsf{F}(x)=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
-            \multicolumn{3}{c}{run $\mathtt{multiplication}$ protocol to}\\
-            \multicolumn{3}{c}{compute
-            $\langle v_{j} \rangle= \frac{1-\langle s_{j}\rangle\otimes \langle s_{j-1}\rangle}{2}$}\\
-            ~~~~~~~gets $\langle v_{j}\rangle ^{0}$& &~~~~~~~gets $\langle v_{j}\rangle ^{1}$\\
-            \hdashline
-            \hdashline
-            \multicolumn{3}{c}{run $\mathtt{multiplication}$ protocol to}\\
-            \multicolumn{3}{c}{compute
-            $\langle value\rangle=\langle \mathsf{F}(\langle x\rangle)\rangle=\sum_{j=1}^{n}\langle v_{j}\rangle\otimes \langle \mathsf{f}_{j}(\langle x\rangle)\rangle$}\\
-            gets $\langle value\rangle ^{0}$& &gets $\langle value\rangle ^{1}$\\
-            \hdashline
-           \hline
 
-        \end{tabular}}
-        \caption{2PC-piecewise function}
-        \label{2PC-piecewise}
+    \begin{figure}[ht]
+        % \begin{figure}[h]
+    \resizebox{0.48\textwidth}{!}{
+    \begin{tabular}{lcl}
+        \hline
+        \multicolumn{3}{l}{\textbf{Computation for piecewise function $\mathsf{F}(x)$}:}\\
+        \multicolumn{3}{l}{\textbf{Target}: compute $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $}\\
+        \textbf{Input}:\\
+        % & \hfil\underline{$\mathtt{Multiplication}$}:\hfil\\
+        $\mathcal{P}_{0}$ &~~~~~~~~~~~~~~~~~~~~~~~~~~~ &  $\mathcal{P}_{1}$ \\
+        $\{\langle x\rangle ^{0} , \mathsf{F}(),(d_{0},...,d_{n}),$
+        &
+        &
+        $\{\langle x\rangle ^{1} ,  \mathsf{F}(),(d_{0},...,d_{n}),$
+        \\
+        $(\mathsf{f}_{0}(),...,\mathsf{f}_{n}())\}$
+        &
+        &
+        $(\mathsf{f}_{0}(),...,\mathsf{f}_{n}())\}$
+        \\
+
+        \textbf{Procedure}:\\
+        $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+        \hdashline
+        \multicolumn{3}{l}{\textbf{For} each $d_{j},j\in\{1,2,...,n-1\}$:}\\
+        \multicolumn{3}{c}{run $\mathtt{comparison}$ protocol to}\\
+        \multicolumn{3}{c}{compute
+        $\langle s_{j}\rangle=\langle \mathsf{sign}(d_{j}-\langle x\rangle)\rangle$}\\
+        ~~~~~~~gets $\langle s_{j}\rangle ^{0}$& &~~~~~~~gets $\langle s_{j}\rangle ^{1}$\\
+        \hdashline
+        \hdashline
+        \multicolumn{3}{l}{\textbf{For} each $v_{j},j\in\{1,2,...,n-1\}$:}\\
+
+        \multicolumn{3}{c}{run $\mathtt{multiplication}$ protocol to}\\
+        \multicolumn{3}{c}{compute
+        $\langle v_{j} \rangle= \frac{1-\langle s_{j}\rangle\otimes \langle s_{j-1}\rangle}{2}$}\\
+        ~~~~~~~gets $\langle v_{j}\rangle ^{0}$& &~~~~~~~gets $\langle v_{j}\rangle ^{1}$\\
+        \hdashline
+        \hdashline
+        \multicolumn{3}{c}{run $\mathtt{multiplication}$ protocol to}\\
+        \multicolumn{3}{c}{compute
+        $\langle value\rangle=\langle \mathsf{F}(\langle x\rangle)\rangle=\sum_{j=1}^{n}\langle v_{j}\rangle\otimes \langle \mathsf{f}_{j}(\langle x\rangle)\rangle$}\\
+        gets $\langle value\rangle ^{0}$& &gets $\langle value\rangle ^{1}$\\
+        \hdashline
+        \hline
+
+    \end{tabular}}
+    \caption{2PC-piecewise function}
+    \label{2PC-piecewise}
 
 
     \end{figure}
-    The 2PC-piecewise function protocol is shown in Figure \ref{2PC-piecewise}.
-
-
-
-    \section{2PC Neural Network Prediction}
-       In this section, we will introduce the system framework and concrete implementation of our
-       schemes for 2PC neural network prediction.
+    With $\mathtt{multiplication}$ protocol and $\mathtt{comparison}$ protocol,
+    the whole process is given as shown in Figure \ref{2PC-piecewise}.
+\section{2PC for Neural Network Prediction}
+    %    In this section, we will introduce the system framework and concrete implementation of our
+    %    schemes for 2PC neural network prediction.
 
     \subsection{System framework}
-       The basic setting we used is the classical data owner to model provider ($\mathcal{DO}-\mathcal{MP}$) setting,
-       where the data owner ($\mathcal{DO}$) and the model provider ($\mathcal{MP}$)
-       directly take the role of $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ to run PrivNNP.
-
-       This section introduces schemes
-       of 2PC protocols for each layer in neural network.
-
-
-    \subsection{2PC neural network layers}
-    \begin{figure*}[htbp]
+    \begin{figure}[ht]
+        % \begin{figure}[h]
 
         \centering
-        \includegraphics[width=10cm]{new_framework.png}
+        \includegraphics[width=8cm]{screenshot3.png}
         \caption{PrivNNP framework}
         \label{framework}
-    \end{figure*}
-    neural network has various architectures and
+    \end{figure}
+    As shown in Figure \ref{framework}, in our framework,
+    the data owner ($\mathcal{DO}$) provides the input data
+    and the model provider ($\mathcal{MP}$) provides the model parameters.
+    $\mathcal{DO}$ and $\mathcal{MP}$ take the role of
+    $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ to run 2PC protocols.
+    After running the whole process of PrivNNP, they gather two shares of the prediction result and
+    get the true value of the classification label.
+
+\subsection{2PC neural network layers}
+    Neural network has various architectures and
     most of these architectures are constructed of convolution layer,
     pooling layer, activation function layer and other variant layers.
-    We design the 2PC schemes for these basic layers.
+    We design the 2PC algorithms for these basic layers.
 
     \subsubsection{Convolution layer}
 
 
     When convolution is operated in practice,
-    the input image $\mathbf{X}$ and weight tensor $\mathbf{W}$
+    the input matrix $\mathbf{X}$ and weight tensor $\mathbf{W}$
     are rearranged into 2-dimension matrix $\mathbf{X}'$ and $\mathbf{W}'$.
     We denote this unrolling processing by
-    $$(\mathbf{X}',\mathbf{W}')=Unroll(\mathbf{X},W)$$
+    $$(\mathbf{X}',\mathbf{W}')=\mathsf{Unroll} (\mathbf{X},W)$$
     Convolution can be converted into matrix multiplication and addition:
     $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'+\mathbf{B}'$, where $\mathbf{B}'$ is a matrix rearranged from the bias vector $\overrightarrow{\mathbf{b}}$ and
     $\mathbf{Y}$ is the output of convolution.
@@ -887,66 +905,113 @@
     So the convolution can be simplified to $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'$.
     % In order to elaborate better, we presents a mini-convolution to roughly show how this works.
 
-    When it comes to two-party secure computation,
-    $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ can locally
-    rearrange the shares of $\langle \mathbf{X}\rangle$ and $\langle \mathbf{W}\rangle$ to get
-    $(\langle \mathbf{X'}\rangle,\langle \mathbf{W'}\rangle)=Unroll(\langle \mathbf{X}\rangle,\langle \mathbf{W}\rangle)$.
-    Then, using $\mathtt{multiplication}$ protocol,
+    % When it comes to two-party secure computation,
+    % $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ can locally
+    % rearrange the shares of $\langle \mathbf{X}\rangle$ and $\langle \mathbf{W}\rangle$ to get
+    % $(\langle \mathbf{X'}\rangle,\langle \mathbf{W'}\rangle)=\mathsf{Unroll}(\langle \mathbf{X}\rangle,\langle \mathbf{W}\rangle)$.
+    Using $\mathtt{multiplication}$ protocol,
     two parties calculate $\langle \mathbf{Y}\rangle=\langle \mathbf{X'}\rangle\otimes \langle \mathbf{W'}\rangle$.
-    This is the intuition idea but not the best.
-
+    This intuititive idea is not the best.
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=4cm]{new_unrolling.png}
-        \caption{Input image and weight}
-        \label{input image and weight}
+        \caption{Input matrix and weight}
+        \label{input matrix and weight}
     \end{figure}
 
-    Figure \ref{input image and weight} shows a mini-convolution,
-    where exists a $1\times 4\times 4$ input image $\mathbf{X}$  and a $1\times 2\times 2$ weight tensor $\mathbf{W}$.
-    For the sake of observation, each element of image is marked with different color and number.
-
+    Figure \ref{input matrix and weight} shows a mini-convolution,
+    consisting of a $1\times 4\times 4$ input matrix $\mathbf{X}$  and a $1\times 2\times 2$ weight tensor $\mathbf{W}$.
+    Each element of matrix is marked with different color and number.
     \begin{figure}[htbp]
         \centering
         \includegraphics[width=4cm]{new_unrolling2.png}
-        \caption{Rearranged image and weight}
-        \label{rearrangement of image and weight}
+        \caption{Rearranged matrix and weight}
+        \label{rearrangement of matrix and weight}
     \end{figure}
 
-    After rearrangement, matrix $(\mathbf{X}',\mathbf{W}')=Unroll(\mathbf{X},\mathbf{W})$
-    is shown in Figure \ref{rearrangement of image and weight}.
-    Elements that are not at the edge of the matrix repeated four times (such as No.6)
-    and some other elements were also duplicated.
-    Since using the same random number to blind the duplicated element
-    is more efficient so two parties can blind $(\mathbf{X},\mathbf{W})$ and
+    After rearrangement, matrix $(\mathbf{X}',\mathbf{W}')=\mathsf{Unroll}(\mathbf{X},\mathbf{W})$
+    is shown in Figure \ref{rearrangement of matrix and weight}.
+    Elements with blue font repeated four times
+    and elements with red font were also duplicated two times.
+
+    The duplicated element can be blinded by only one random number
+    and two parties can  blind $(\mathbf{X},\mathbf{W})$ and
     construct the blinded $(\mathbf{X}',\mathbf{W}')$ locally instead of blinding $(\mathbf{X}',\mathbf{W}')$ directly.
+    The optimization of 2PC-convolution is given below.
 
 
-    We propose an optimization of 2PC-convolution,
-    that the communication consumption is reduced by
-    not transmitting the duplicated elements.
+    % \begin{figure}
+    %     \resizebox{0.48\textwidth}{!}{
+    %     \begin{tabular}{lcl}
+    %         \hline
+    %         \multicolumn{3}{c}{\underline{$\mathtt{Matrix \enspace multiplication}$}:}\\
+    %         \multicolumn{3}{l}{\textbf{Target}: compute $\langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle $}\\
+    %         \textbf{Input}:\\
+    %         % & \hfil\underline{$\mathtt{Multiplication}$}:\hfil\\
+    %         $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+    %         $\{(\langle \mathbf{X}\rangle ^{0} , \langle \mathbf{Y}\rangle ^{0})\}$,
+    %         &
+    %         &
+    %         $\{(\langle \mathbf{X}\rangle ^{1} , \langle \mathbf{Y}\rangle ^{1})\}$,
+    %         \\
+    %         % mul-triple:$
+    %         % (\langle \mathbf{A}\rangle ^{0},\langle \mathbf{B}\rangle ^{0},\langle \mathbf{C}\rangle ^{0})\}$
+    %         % &
+    %         % &
+    %         % mul-triple:$ (\langle \mathbf{A}\rangle ^{1},\langle \mathbf{B}\rangle ^{1},\langle \mathbf{C}\rangle ^{1})\}$
+    %         \\
+    %         \textbf{Procedure}:\\
+
+    %         $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+    %         $\langle \mathbf{E}\rangle ^{0}\leftarrow\langle \mathbf{X}\rangle ^{0}-\langle \mathbf{A}\rangle ^{0}$
+    %         &
+    %         &
+    %         $\langle \mathbf{E}\rangle ^{1}\leftarrow\langle \mathbf{X}\rangle ^{1}-\langle \mathbf{A}\rangle ^{1}$
+    %         \\
+    %         $\langle \mathbf{F}\rangle ^{0}\leftarrow\langle \mathbf{Y}\rangle ^{0}-\langle \mathbf{B}\rangle ^{0}$
+    %         &
+    %         &
+    %         $\langle \mathbf{F}\rangle ^{1}\leftarrow\langle \mathbf{Y}\rangle ^{1}-\langle \mathbf{B}\rangle ^{1}$
+    %         \\
+    %         & $\underrightarrow{~~~~~~(\langle \mathbf{E}\rangle ^{0},\langle \mathbf{F}\rangle ^{0})~~~~~~}$ &\\
+    %         & $\underleftarrow{~~~~~~(\langle \mathbf{E}\rangle ^{1},\langle \mathbf{F}\rangle ^{1})~~~~~~}$ &\\
+    %         $e\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$& &$\mathbf{E}\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$\\
+    %         $f\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$& &$\mathbf{F}\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$\\
+    %         $\langle \mathbf{Z}\rangle^{0}\leftarrow \mathbf{F}\cdot \langle \mathbf{A}\rangle^{0}$
+    %         & &
+    %         $\langle \mathbf{Z}\rangle^{1}\leftarrow \mathbf{E} \cdot \mathbf{F} + \mathbf{F}\cdot \langle \mathbf{A}\rangle^{1}$\\
+    %         $+\mathbf{E} \cdot \langle \mathbf{B}\rangle^{0} + \langle \mathbf{C}\rangle^{0}$& &$+\mathbf{E} \cdot \langle \mathbf{B}\rangle^{1} + \langle \mathbf{C}\rangle^{1}$\\
+    %         \hline
+
+    %     \end{tabular}}
+    %     \caption{2PC-convolution}
+    %     \label{2PC-convolution}
+
+
+    % \end{figure}
 
     \textbf{Protocol procedure}:
     \begin{itemize}
-        \item \textbf{1.} $TTP$ randomly chooses matrix $(\mathbf{A},\mathbf{B})$ of the same size of the original feature $\mathbf{X}$ and filter weight $\mathbf{W}$.
-        \item \textbf{2.} $TTP$ evaluates $( \mathbf{A}',\mathbf{B}')=Unroll(\mathbf{A},\mathbf{B})$ and $\mathbf{C}' =\mathbf{A}'\cdot \mathbf{B}' $.
-        Then, $TTP$ sends $(\langle \mathbf{A}\rangle ^{i},\langle \mathbf{B}\rangle ^{i},\langle \mathbf{C}'\rangle ^{i})$ to $\mathcal{P}_{i}$.
-        \item \textbf{3.} $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-\langle \mathbf{A}\rangle ^{i}$
+        \item \textbf{1.} $TTP$ randomly chooses the matrix $(\mathbf{A},\mathbf{B})$ of the same size
+        as the original feature $\mathbf{X}$ and the filter weight $\mathbf{W}$.
+        \item \textbf{2.} $TTP$ evaluates $( \mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$
+        and $\mathbf{C}' =\mathbf{A}'\cdot \mathbf{B}' $.
+        Then, $TTP$ sends $(\langle \mathbf{A}\rangle ^{i},\langle \mathbf{B}\rangle ^{i},\langle \mathbf{C}'\rangle ^{i})$
+        to $\mathcal{P}_{i}$.
+        \item \textbf{3.} $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-
+        \langle \mathbf{A}\rangle ^{i}$
         and $\langle \mathbf{F}\rangle ^{i}=\langle \mathbf{W}\rangle ^{i}-\langle \mathbf{B}\rangle ^{i}$
         and transmits $(\langle \mathbf{E}\rangle ^{i},\langle \mathbf{F}\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
-        \item \textbf{4.} $\mathcal{P}_{i}$ reconstruct $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
+        \item \textbf{4.} $\mathcal{P}_{i}$ reconstructs $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
         $\mathbf{F} = \langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$
-        and evaluates $(\mathbf{E}',\mathbf{F}')=Unroll(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=Unroll(\mathbf{A},\mathbf{B})$.
+        and evaluates $(\mathbf{E}',\mathbf{F}')=\mathsf{Unroll}(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$.
         \item \textbf{5.} $\mathcal{P}_{i}$ sets
         $\langle \mathbf{Z}\rangle^{i}=i\cdot \mathbf{E}' \cdot \mathbf{F}' +
         \langle \mathbf{A}'\rangle^{i} \cdot \mathbf{F}' + \mathbf{E}' \cdot \langle \mathbf{B}'\rangle^{i} + \langle \mathbf{C}'\rangle^{i}$.
 
     \end{itemize}
-
-    % Essentially,
-    By this way, communication overhead can be observably reduced to almost $ \frac{1}{width^{2}} $ of the original,
-    where $width$ is the width of filter.
-    % \section{Theoretical analysis}
+    By this way, communication overhead can be reduced to almost $ \frac{1}{width^{2}} $ of the original,
+    where $width$ is the width of the filter.
 
 
     \subsubsection{Pooling layer}
@@ -954,7 +1019,7 @@
 
     There are two types of pooling layer: average pooling and maximum pooling,
     which output the average or the maximum of $n\times n$ size submatrices respectively
-    to construct the input image of next layer.
+    to construct the input matrix of next layer.
     We take $2\times 2$ window as an example to show how $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ compute the output of a submatrix.
     For each $2\times 2$ submatrix $\mathbf{X}$, average pooling outputs $y_{avg}=\frac{X_{00}+ X_{01}+ X_{10}+  X_{11}}{4}$
     and maximum pooling outputs $y_{max}=\mathsf{max}(X_{00}, X_{01}, X_{10},  X_{11})$
@@ -978,16 +1043,17 @@
     Consider that
     \begin{align*}
         y_{max} &= \mathsf{max}(X_{00}, X_{01}, X_{10}, X_{11}) \\
-        &= \mathsf{max}(X_{00},\mathsf{max}(X_{01}, X_{10}, X_{11})) \\
-      &= \mathsf{max}(X_{00},\mathsf{max}(X_{01},\mathsf{max}(X_{10}, X_{11})))
+        &= \mathsf{max}(\mathsf{max}(X_{00},X_{01}),\mathsf{max}( X_{10}, X_{11}))
+    %     &= \mathsf{max}(X_{00},\mathsf{max}(X_{01}, X_{10}, X_{11})) \\
+    %   &= \mathsf{max}(X_{00},\mathsf{max}(X_{01},\mathsf{max}(X_{10}, X_{11})))
     \end{align*}
     So the maximum of each submatrix can be obtained by running
     maximum protocol for three times.
     After repeating this process to each submatrix, parties can get the output matrix of the pooling layer.
 
 
-    \subsubsection{Activation function}
-    Here we explore one  activation functions: $\mathsf{ReLU}()$, a typical continuous piecewise function.
+    \subsubsection{Activation function layer}
+    Here we explore one  activation function: $\mathsf{ReLU}()$, a typical continuous piecewise function.
     % which can be calculated referring to piecewise function protocol in 3.4.
     $$\mathsf{ReLU}(x)=\begin{cases}
         0 & \text{ if } x \leqslant 0  \\
@@ -1000,7 +1066,6 @@
     \begin{align*}
         \mathsf{ReLU}(x)&=\sum_{j=1}^{2}v_{j}\cdot \mathsf{f}_{j}(x)=v_{1}\cdot \mathsf{f}_{1}(x)+v_{2}\cdot \mathsf{f}_{2}(x)\\
         &=v_{1}\cdot 0 +v_{2}\cdot x\\
-        &=v_{2}\cdot x\\
         &=\frac{(1-\mathsf{sign}(d_{1}-x)\cdot \mathsf{sign}(d_{2}-x))\cdot x}{2} \\
         &=\frac{(1-\mathsf{sign}(0-x)\cdot \mathsf{sign}(+\infty -x))\cdot x}{2} \\
         &=\frac{(1+\mathsf{sign}(x))\cdot x}{2}
@@ -1014,42 +1079,52 @@
     \section{Theoretical Analysis}
     \begin{table}[!ht]
 
-        \center
+        % \center
         \resizebox{0.45\textwidth}{!}{
-        \begin{tabular}{|c|c|c|c|}\hline
+        \begin{tabular}{|c|c|c|c|c|}\hline
 
-           &computation(asymmetric)& communication(bits) & rounds     \\ \hline
-        ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2$ &6\\\hline
-        Sharemind&               0&     3$l$               &$l$\\\hline
-        PrivNNP&                   0&   3                  &3 \\\hline
+        \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
+        &   &    computation       &     (floating-points)      &            \\ \hline
+        \multirow{3}{*}{comparison}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2$ &6\\\cline{2-5}
+        &Sharemind&               0&     6$l$               &$l$\\\cline{2-5}
+        &PrivNNP&                   0&   5                  &3 \\\hline
+
+        &ABY&                   54$l$& $21l\cdot \kappa+(l^{2}+l)3/2+12$ &16\\\cline{2-5}
+        pooling&Sharemind&               0&     18$l$ +12              &$2l+4$\\\cline{2-5}
+        &PrivNNP&                   0&   27                  &10 \\\hline
+
+        \multirow{3}{*}{ReLU}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2+2$ &7\\\cline{2-5}
+        &Sharemind&               0&     $6l+2$             &$l+1$\\\cline{2-5}
+        &PrivNNP&                   0&   7                  &4 \\\hline
+
+
         \end{tabular}}
         \caption{Overhead of different 2PC-comparison schemes for a $l$-bits value }
         \label{Overhead of methods}
     \end{table}
+    Here we list the
     The biggest advantage of PrivNNP is that we design a novel $\mathtt{comparison}$ protocol which has
     a huge improvement over the previous work.
     We list the state-of-art 2PC-$\mathtt{comparison}$ protocol:
     ABY and Sharemind, and compare them to our work.
     As shown in Table \ref{Overhead of methods}, asymmetric cryptographic computation, communication bits and
     interaction rounds are listed.
-    Obliviously, our scheme shows the best performance.4
+    Obliviously, our scheme shows the best performance.
 
 
-    \section{Experiment}
-    To evaluate the performance of our work, we conduct simulation experiment on a desktop (CPU: AMD Ryzen 7 5800H with 3.20GHz).
-    We use two independent folders placed on different physical hard drives to simulate the two servers belonging to the
-    data owner and the model provider for measuring the time cost of computation
-    and we calculate the communication consumption by counting all of floating point numbers needed to be passed.
-    We use Python 3.9.7 to implement our system and use some functions in the SPDZ library.
-    All operations involved in the experiments are floating point operations.
-    Files are written in form of npy format supported by Python, where a floating point number occupies about 0.0078Kb.
+    \section{Experimental result}
+    To evaluate the performance of our work, we conduct simulation experiments on a desktop (CPU: AMD Ryzen 7 5800H with 3.20GHz).
+    We use two independent folders placed on different physical hard drives to simulate two servers belonging to the
+    data owner and the model provider for measuring the time cost of computation.
+    % and we calculate the communication consumption by counting all of floating-point numbers needed to be passed.
+    We use Python 3.9.7 to implement our system and use functions in the SPDZ library \cite{SPDZ}.
+    All operations involved in the experiments are floating-point operations.
+    Files are written in form of npy format supported by Python, where a floating-point number occupies about 0.0078Kb.
     For accurate and stable measurement, file transfer rate between servers is fixed at 10M/s.
     Each experiment was repeated 10 times.
 
-    The experiments is divided into three parts: 1.basic operations 2.neural network layers 3.neural network implementation.
+    The experiments are divided into three parts basic operations neural network layers and neural network implementation.
     \subsection{Operations}
-
-
     \begin{figure}[htbp]
         \subfigure[multiplication] %第一张子图
         {
@@ -1083,28 +1158,25 @@
     \end{figure}
     In Experiment I, time consumption of basic operations including multiplication, comparison and matrix multiplication are measured.
     % Experiment results of multiplication and matrix multiplication are shown in \ref{operation_mul}
-    In addition, we give the time consumption of one server operating directly as a reference.
+    For benchmark test, we give the time consumption of one server operating directly as a reference.
     The data obtained is shown in Figure \ref{multiplication and matrix multiplication} and Figure \ref{operation_compare}.
 
     The time cost of secure two-party calculation is divided into two parts:
     local calculation and online communication.
     the time consumption of online communication increases linearly with the increase of the number of elements,
     while local computation time is more complicated.
-    Due to the large number of writing and reading operations involved,
-    there will be a lot of fixed time consumption for calling system file functions.
+    There will be a lot of fixed time consumption of calling system file functions
+    for file writing and reading operations.
 
     The three operations show the same trend that
-    When the number of elements achieves 10k and more,
-    the communication time becomes longer than the calculation time
-    which accounts for a substantial part of total time.
+    when the number of elements achieves 10k and more,
+    the communication time becomes longer than the calculation time.
     Take matrix multiplication as an example,
     when the width is $1000$, the communication costs $3.12$s, accounting for $96\%$ of total time.
 
     \subsection{Neural network layers}
     In Experiment II, overhead of neural network layers including
     convolution layer, pooling layer and $\mathsf{ReLU}$ function are measured.
-
-
 
     \begin{table}[!ht]
 
@@ -1150,20 +1222,20 @@
 
 
     For different neural network layers,
-    we select several representative shapes of features and filters
-    to test the time cost.
-    The result is shown in Table \ref{Layers_consumption}.
+    % we select several representative shapes of features and filters
+    % to test the time cost.
+    the result is shown in Table \ref{Layers_consumption}.
     In general, the computational overhead of neural network layers has been reduced to an acceptable range
     and the communication cost still account for the vast majority.
 
 
 
 
-    \subsection{Neural Networks}
-    To demonstrate the performance of our method in practice, we conduct
+    \subsection{Neural networks}
+    In Experiment III, we conduct
     time-consuming tests on a small network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
-    The MNIST dataset, consisting of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
-    for handwriting recognition is used for training neural network models.
+    The MNIST dataset is used for training neural network models, which consists of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
+    for handwriting recognition.
     Since the size of input image of Resnet50 is $3\times 224 \times 224$,
     we resize each image of MNIST dataset to $3\times 224 \times 224$ for training the Resnet50 model.
     Notably, we remove the batch normalization layers of Resnet50 because PrivNNP
@@ -1171,12 +1243,10 @@
 
 
     \begin{table}[!ht]
-
         \center
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{|c|c|c|c|c|}\hline
         \multirow{2}{*}{model}& \multicolumn{3}{c|}{time(s)}&communication  \\
-
         \cline{2-4}
         \multirow{2}{*}{ }&computation&communication&all&size(Mb) \\ \hline
         Lenet-5 & 0.375  & 0.32 & 0.69 &3.2	\\ \hline
@@ -1187,19 +1257,17 @@
     \end{table}
 
     As shown in Table \ref{neural networks consumption}, PrivNNP shows an excellent performance
-    both in medium and large neural networks. To evaluate the Resnet50,
-    it costs 23.85s for computation and 100.13s for communication.
+    both in medium and large neural networks.
+    A prediction of Resnet50 costs 23.85s for computation and 100.13s for communication.
 
     \section{Conclusion and Future Work}
     In this work, we presented PrivNNP, a two-party computation framework for neural network predictions.
     This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol which does not involve asymmetric cryptographic operations.
     The 2PC-$\mathtt{comparison}$ protocol enables us to build a efficient framework neural network predictions.
-    Furthermore, we design methods to evaluate each layer in neural network and implement an experiment on Resnet50 \cite{DeepResidualLearning}.
+    Furthermore, we design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
     This framework has great potential since we only consider the serial implementation of protocols.
     However, some computation can be excuted in parallel to reduce the rounds of interaction.
     This task can be considered in future work.
-
-
 \bibliography{aaai23}
 
 
