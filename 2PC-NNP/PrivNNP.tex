@@ -887,8 +887,10 @@
 \subsection{2PC neural network layers}
     Neural network has various architectures and
     most of these architectures are constructed of convolution layer,
-    pooling layer, activation function layer and other variant layers.
+    pooling layer, activation function layer, and other variant layers.
     We design the 2PC algorithms for these basic layers.
+
+
 
     \subsubsection{Convolution layer}
 
@@ -1004,7 +1006,7 @@
         and transmits $(\langle \mathbf{E}\rangle ^{i},\langle \mathbf{F}\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
         \item \textbf{4.} $\mathcal{P}_{i}$ reconstructs $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
         $\mathbf{F} = \langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$
-        and evaluates $(\mathbf{E}',\mathbf{F}')=\mathsf{Unroll}(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$.
+        and rearranges $(\mathbf{E}',\mathbf{F}')=\mathsf{Unroll}(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$.
         \item \textbf{5.} $\mathcal{P}_{i}$ sets
         $\langle \mathbf{Z}\rangle^{i}=i\cdot \mathbf{E}' \cdot \mathbf{F}' +
         \langle \mathbf{A}'\rangle^{i} \cdot \mathbf{F}' + \mathbf{E}' \cdot \langle \mathbf{B}'\rangle^{i} + \langle \mathbf{C}'\rangle^{i}$.
@@ -1039,7 +1041,7 @@
     \langle X_{10}\rangle ^{1}+ \langle X_{11}\rangle ^{1}}{4}$. This process can be done without interaction.
 
     2PC-maximum pooling layer can be computed by recursively running $\mathtt{comparison}$ protocol.
-    The approach to compute this has been briefly discussed before and now we give it in detail.
+    % The approach has been briefly discussed before and now we give it in detail.
     Consider that
     \begin{align*}
         y_{max} &= \mathsf{max}(X_{00}, X_{01}, X_{10}, X_{11}) \\
@@ -1073,7 +1075,8 @@
 
     Parties can follow $\mathtt{multiplication}$ protocol and $\mathtt{comparison}$ protocol to compute
     $\langle y\rangle=\langle \mathsf{ReLU}(\langle x\rangle)\rangle=\frac{(1+\langle \mathsf{sign}(\langle x\rangle)\rangle)\otimes \langle x\rangle}{2}$.
-
+    Other activation functions like $\mathsf{Sigmoid}$ can be evaluated by
+    approximate piecewise functions.
 
 
     \section{Theoretical Analysis}
@@ -1099,17 +1102,23 @@
 
 
         \end{tabular}}
-        \caption{Overhead of different 2PC-comparison schemes for a $l$-bits value }
+        \caption{Overhead of different 2PC schemes with $l$-bits value inputs }
         \label{Overhead of methods}
     \end{table}
-    Here we list the
-    The biggest advantage of PrivNNP is that we design a novel $\mathtt{comparison}$ protocol which has
-    a huge improvement over the previous work.
-    We list the state-of-art 2PC-$\mathtt{comparison}$ protocol:
-    ABY and Sharemind, and compare them to our work.
-    As shown in Table \ref{Overhead of methods}, asymmetric cryptographic computation, communication bits and
-    interaction rounds are listed.
-    Obliviously, our scheme shows the best performance.
+    Overhead of 2PC algorithms including
+    ABY, Sharemind and PrivNNP
+    for comparison, maximum pooling
+    and ReLU function is shown in Table \ref{Overhead of methods}.
+    PrivNNP performs best in all respects.
+
+
+    % The biggest advantage of PrivNNP is that we design a novel $\mathtt{comparison}$ protocol which has
+    % a huge improvement over the previous work.
+    % We list the state-of-art 2PC-$\mathtt{comparison}$ protocol:
+    % ABY and Sharemind, and compare them to our work.
+    % As shown in Table \ref{Overhead of methods}, asymmetric cryptographic computation, communication bits and
+    % interaction rounds are listed.
+    % Obliviously, our scheme shows the best performance.
 
 
     \section{Experimental result}
@@ -1262,12 +1271,11 @@
 
     \section{Conclusion and Future Work}
     In this work, we presented PrivNNP, a two-party computation framework for neural network predictions.
-    This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol which does not involve asymmetric cryptographic operations.
-    The 2PC-$\mathtt{comparison}$ protocol enables us to build a efficient framework neural network predictions.
-    Furthermore, we design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
-    This framework has great potential since we only consider the serial implementation of protocols.
-    However, some computation can be excuted in parallel to reduce the rounds of interaction.
-    This task can be considered in future work.
+    This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol which does not involve asymmetric cryptographic operations
+    and we design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
+    This framework has great potential
+    since we only consider the WAN setting where the communication speed is limited.
+    Future work can utilize the LAN to reduce the communication time cost.
 \bibliography{aaai23}
 
 
