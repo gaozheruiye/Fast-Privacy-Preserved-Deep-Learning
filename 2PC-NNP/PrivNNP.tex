@@ -525,7 +525,8 @@
             $\langle z\rangle^{0}\leftarrow f\cdot \langle a\rangle^{0}$
             & &
             $\langle z\rangle^{1}\leftarrow e \cdot f + f\cdot \langle a\rangle^{1}$\\
-            $+e \cdot \langle b\rangle^{0} + \langle c\rangle^{0}$& &$+e \cdot \langle b\rangle^{1} + \langle c\rangle^{1}$\\
+            $+e \cdot \langle b\rangle^{0} + \langle c\rangle^{0}$&
+            &$+e \cdot \langle b\rangle^{1} + \langle c\rangle^{1}$\\
             \hline
 
         \end{tabular}}
@@ -700,16 +701,16 @@
 
     \textbf{Security proof}:
     Our security proof follows the ideal-world/real-world paradigm.
-
-    Honest party $\mathcal{H}$.
+    In real-world, parties interact following the protocol,
+    while in ideal world, parties have access to an
+    honest party $\mathcal{H}$ that implements $\mathtt{comparison}$ protocol.
     Environment $\varepsilon $  chooses the
     inputs to the parties.
     We aim at showing that the view of adversary
     in real-wold is indistinguishable to that in ideal-world.
-    Since $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocol,
+    Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocol,
     intermediate parameters are marked with different subscripts: $1$ and $2$.
-    % $(\langle a\rangle_{1},\langle b\rangle_{1},\langle c\rangle)_{1}$
-    % and $(\langle a\rangle_{2},\langle b\rangle_{2},\langle c\rangle)_{2}$
+
 
     \emph{Security against $\mathcal{P}_{0}$:}
     An ideal world simulator $\mathcal{S}im$ performs as follow.
@@ -737,14 +738,32 @@
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$
         and recieves $(\langle e\rangle_{2}^{0},\langle f\rangle_{2}^{0})$.
 
-        \item 6. randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
+        \item 7. randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
 
-        \item 7. randomly chooses $\langle s\rangle^{1}$ s.t. $\langle s\rangle ^{0}+\langle s\rangle ^{1}=s$
-        \item 8. outputs whatever $\mathcal{P}_{0}$ outputs.
+        \item 8. randomly chooses $\langle s\rangle^{1}$ s.t. $\langle s\rangle ^{0}+\langle s\rangle ^{1}=s$
+        \item 9. outputs whatever $\mathcal{P}_{0}$ outputs.
     \end{itemize}
 
-    Next, we show that the view Sim simulates for $\mathcal{P}_{0}$ is indistinguishable
+    The view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
     from the view of $\mathcal{P}_{0}$ interacting in the real execution.
+    The view of $\mathcal{P}_{0}$ in the real execution is
+    $(\langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1},
+    \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1}),
+    \langle z\rangle_{1}^{1} = e_{1} \cdot f_{1} + f_{1}\cdot \langle a\rangle_{1}^{1}
+    +e_{1} \cdot \langle b\rangle^{1}_{1} + \langle c\rangle^{1}_{1},
+    (\langle e\rangle_{2}^{1}=0-\langle a\rangle_{2}^{1},
+    \langle f\rangle_{2}^{1}=\llbracket s \rrbracket^{0}-\langle b\rangle_{2}^{1}),
+    $ while its view in the ideal
+    execution is
+    $(\langle e\rangle_{1}^{1}:random,
+    \langle f\rangle_{1}^{1}:random,)
+    \langle z\rangle_{1}^{1}: $ a random number s.t. $sign(\langle z\rangle ^{0}+\langle z\rangle ^{1})=s$
+    $(\langle e\rangle_{2}^{1}:random,
+    \langle f\rangle_{2}^{1}:random),
+    $
+    So we only need to show that any
+    element is indistinguishable from a random
+    number. This is clearly true since any element in the ideal world is randomly chosen.
 
     \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
