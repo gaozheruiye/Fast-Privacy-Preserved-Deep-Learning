@@ -532,7 +532,6 @@
         \caption{2PC-multiplication}
         \label{2PC-multiplication}
 
-
     \end{figure}
     The 2PC-multiplication protocol is shown in Figure \ref{2PC-multiplication}.
 
@@ -699,17 +698,55 @@
     \end{figure}
     2PC-comparison protocol is shown in Figure \ref{2PC-comparison}.
 
-    \textbf{Security analysis}:
-       Throughout our $\mathtt{comparison}$ protocol,
-       it uses two $\mathtt{multiplication}$ protocol and disclose one blinded value.
-       Since $\mathtt{multiplication}$ protocol is proposed by previous work
-       and the security of it has been proved, our $\mathtt{comparison}$ protocol is secure
-       and satisfy the definition of
-       For space limitation, more details can be seen in supplementary material.
+    \textbf{Security proof}:
+    Our security proof follows the ideal-world/real-world paradigm.
 
+    Honest party $\mathcal{H}$.
+    Environment $\varepsilon $  chooses the
+    inputs to the parties.
+    We aim at showing that the view of adversary
+    in real-wold is indistinguishable to that in ideal-world.
+    Since $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocol,
+    intermediate parameters are marked with different subscripts: $1$ and $2$.
+    % $(\langle a\rangle_{1},\langle b\rangle_{1},\langle c\rangle)_{1}$
+    % and $(\langle a\rangle_{2},\langle b\rangle_{2},\langle c\rangle)_{2}$
 
+    \emph{Security against $\mathcal{P}_{0}$:}
+    An ideal world simulator $\mathcal{S}im$ performs as follow.
+    \begin{itemize}
+        \item 1. recieves $\langle x\rangle ^{0}$,
+        $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$,
+        $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$,
+        and $(\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})$
+        from $\varepsilon $.
+        $\mathcal{S}im$ sends $\langle x\rangle ^{0}$ to $\mathcal{H}$ and gets the result $s$.
 
-       \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
+        \item 2. starts running $\mathcal{P}_{0}$ on input $\langle x\rangle ^{0},\langle u\rangle ^{0}$
+        and $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
+        and recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
+
+        \item 3. randomly chooses $(\langle e\rangle_{1}^{1},\langle f\rangle_{1}^{1})$ and sends them to $\mathcal{P}_{0}$.
+
+        \item 4. randomly chooses $\langle z\rangle ^{1}$ s.t. $sign(\langle z\rangle ^{0}+\langle z\rangle ^{1})=s$.
+        and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
+
+        \item 5. running $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\llbracket u \rrbracket ^{0})$ and
+        recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
+
+        \item 6. running $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
+        $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$
+        and recieves $(\langle e\rangle_{2}^{0},\langle f\rangle_{2}^{0})$.
+
+        \item 6. randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
+
+        \item 7. randomly chooses $\langle s\rangle^{1}$ s.t. $\langle s\rangle ^{0}+\langle s\rangle ^{1}=s$
+        \item 8. outputs whatever $\mathcal{P}_{0}$ outputs.
+    \end{itemize}
+
+    Next, we show that the view Sim simulates for $\mathcal{P}_{0}$ is indistinguishable
+    from the view of $\mathcal{P}_{0}$ interacting in the real execution.
+
+    \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
        It is easy to see that
        $$\mathsf{max}(x,y) = \left\{\begin{matrix}
@@ -907,10 +944,6 @@
     So the convolution can be simplified to $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'$.
     % In order to elaborate better, we presents a mini-convolution to roughly show how this works.
 
-    % When it comes to two-party secure computation,
-    % $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ can locally
-    % rearrange the shares of $\langle \mathbf{X}\rangle$ and $\langle \mathbf{W}\rangle$ to get
-    % $(\langle \mathbf{X'}\rangle,\langle \mathbf{W'}\rangle)=\mathsf{Unroll}(\langle \mathbf{X}\rangle,\langle \mathbf{W}\rangle)$.
     Using $\mathtt{multiplication}$ protocol,
     two parties calculate $\langle \mathbf{Y}\rangle=\langle \mathbf{X'}\rangle\otimes \langle \mathbf{W'}\rangle$.
     This intuititive idea is not the best.
@@ -941,56 +974,6 @@
     construct the blinded $(\mathbf{X}',\mathbf{W}')$ locally instead of blinding $(\mathbf{X}',\mathbf{W}')$ directly.
     The optimization of 2PC-convolution is given below.
 
-
-    % \begin{figure}
-    %     \resizebox{0.48\textwidth}{!}{
-    %     \begin{tabular}{lcl}
-    %         \hline
-    %         \multicolumn{3}{c}{\underline{$\mathtt{Matrix \enspace multiplication}$}:}\\
-    %         \multicolumn{3}{l}{\textbf{Target}: compute $\langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle $}\\
-    %         \textbf{Input}:\\
-    %         % & \hfil\underline{$\mathtt{Multiplication}$}:\hfil\\
-    %         $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
-    %         $\{(\langle \mathbf{X}\rangle ^{0} , \langle \mathbf{Y}\rangle ^{0})\}$,
-    %         &
-    %         &
-    %         $\{(\langle \mathbf{X}\rangle ^{1} , \langle \mathbf{Y}\rangle ^{1})\}$,
-    %         \\
-    %         % mul-triple:$
-    %         % (\langle \mathbf{A}\rangle ^{0},\langle \mathbf{B}\rangle ^{0},\langle \mathbf{C}\rangle ^{0})\}$
-    %         % &
-    %         % &
-    %         % mul-triple:$ (\langle \mathbf{A}\rangle ^{1},\langle \mathbf{B}\rangle ^{1},\langle \mathbf{C}\rangle ^{1})\}$
-    %         \\
-    %         \textbf{Procedure}:\\
-
-    %         $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
-    %         $\langle \mathbf{E}\rangle ^{0}\leftarrow\langle \mathbf{X}\rangle ^{0}-\langle \mathbf{A}\rangle ^{0}$
-    %         &
-    %         &
-    %         $\langle \mathbf{E}\rangle ^{1}\leftarrow\langle \mathbf{X}\rangle ^{1}-\langle \mathbf{A}\rangle ^{1}$
-    %         \\
-    %         $\langle \mathbf{F}\rangle ^{0}\leftarrow\langle \mathbf{Y}\rangle ^{0}-\langle \mathbf{B}\rangle ^{0}$
-    %         &
-    %         &
-    %         $\langle \mathbf{F}\rangle ^{1}\leftarrow\langle \mathbf{Y}\rangle ^{1}-\langle \mathbf{B}\rangle ^{1}$
-    %         \\
-    %         & $\underrightarrow{~~~~~~(\langle \mathbf{E}\rangle ^{0},\langle \mathbf{F}\rangle ^{0})~~~~~~}$ &\\
-    %         & $\underleftarrow{~~~~~~(\langle \mathbf{E}\rangle ^{1},\langle \mathbf{F}\rangle ^{1})~~~~~~}$ &\\
-    %         $e\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$& &$\mathbf{E}\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$\\
-    %         $f\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$& &$\mathbf{F}\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$\\
-    %         $\langle \mathbf{Z}\rangle^{0}\leftarrow \mathbf{F}\cdot \langle \mathbf{A}\rangle^{0}$
-    %         & &
-    %         $\langle \mathbf{Z}\rangle^{1}\leftarrow \mathbf{E} \cdot \mathbf{F} + \mathbf{F}\cdot \langle \mathbf{A}\rangle^{1}$\\
-    %         $+\mathbf{E} \cdot \langle \mathbf{B}\rangle^{0} + \langle \mathbf{C}\rangle^{0}$& &$+\mathbf{E} \cdot \langle \mathbf{B}\rangle^{1} + \langle \mathbf{C}\rangle^{1}$\\
-    %         \hline
-
-    %     \end{tabular}}
-    %     \caption{2PC-convolution}
-    %     \label{2PC-convolution}
-
-
-    % \end{figure}
 
     \textbf{Protocol procedure}:
     \begin{itemize}
