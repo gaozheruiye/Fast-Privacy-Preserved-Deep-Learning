@@ -213,8 +213,9 @@
 
     \noindent Deep learning, a popular research direction in the field of machine learning,
     has brought major breakthroughs to computer vision \cite{ComputerVision},
-    speech recognition, natural language process \cite{NLP}, machine translation, etc. Recently,
-    deep learning also made significant progress in bioinformatics, drug discovery \cite{DrugDiscovery} and material sciences.
+    speech recognition \cite{SpeechRecognition}, natural language process \cite{NLP}, etc.
+    Recently, deep learning also made significant progress in bioinformatics,
+    drug discovery \cite{DrugDiscovery} and material sciences \cite{material}.
     A deep neural network model is obtained by training on
 	a given training dataset, which requires a large amount of training data and sufficient compute power.
 	After the training step, the resultant deep neural network model is used to predict
@@ -429,7 +430,7 @@
         In the paper, we mainly introduce method to compute $\mathsf{ReLU}$ function.
         Other functions can be computed by similar approach.
     \end{itemize}
-    The PrivNNP will include 2PC-algorithms for evaluating each layer.
+    PrivNNP includes 2PC-algorithms for evaluating each layer.
 
 \section{Two-party Secure Computation for Basic Operations}
 
@@ -757,18 +758,17 @@
     $\langle e\rangle_{1}^{1},
     \langle f\rangle_{1}^{1},
     \langle z\rangle_{1}^{1},
-    \langle e\rangle_{2}^{1}$ and $
-    \langle f\rangle_{2}^{1}$ are all random numbers.
+    \langle e\rangle_{2}^{1}$ and
+    $\langle f\rangle_{2}^{1}$ are all random numbers.
     So we only need to show that any
     element in the real-world
-    is indistinguishable from a random
-    number. This is clearly true since $(\langle x\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},
+    is indistinguishable from a random number.
+    This is clearly true since $(\langle x\rangle^{1},\langle u\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
     \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$ in the real world.
     So the view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
     from the view of $\mathcal{P}_{0}$ interacting in the real execution.
     Since $\mathcal{P}_{1}$ gets less information in the $\mathtt{comparison}$ protocol than $\mathcal{P}_{0}$ gets,
-    this protocol is secure for both party.
-
+    this protocol is secure for both parties.
 
     \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
@@ -862,7 +862,7 @@
     If $x\in (d_{j-1},d_{j})$, then, $v_{j}=1$ and $v_{k}=0 (k\neq j)$, $\mathsf{F}(x)=v_{j}\cdot \mathsf{f}_{j}(x)=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
     If $x=d_{j} $, $ d_{j}\in {d_{1},...,d_{n-1}}$,
-    then, $v_{j}=v_{j+1}=\frac{1}{2}$ while $v_{k}=0$, if $ k\notin \{j,j+1\}$,
+    then, $v_{j}=v_{j+1}=\frac{1}{2}$ and $v_{k}=0$ ($ k\notin \{j,j+1\}$),
     Since $\mathsf{F}(x)$ is a continuous function,
     $\mathsf{F}(x)=\mathsf{f}_{j}(x)=\mathsf{f}_{j+1}(x)=\frac{\mathsf{f}_{j}(x)}{2}+\frac{\mathsf{f}_{j+1}(x)}{2}=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
@@ -990,13 +990,12 @@
     After rearrangement, matrix $(\mathbf{X}',\mathbf{W}')=\mathsf{Unroll}(\mathbf{X},\mathbf{W})$
     is shown in Figure \ref{rearrangement of matrix and weight}.
     Elements with blue font repeated four times
-    and elements with red font were also duplicated two times.
+    and elements with red font were duplicated two times.
 
     The duplicated element can be blinded by only one random number
     and two parties can  blind $(\mathbf{X},\mathbf{W})$ and
     construct the blinded $(\mathbf{X}',\mathbf{W}')$ locally instead of blinding $(\mathbf{X}',\mathbf{W}')$ directly.
     The optimization of 2PC-convolution is given below.
-
 
     \textbf{Protocol procedure}:
     \begin{itemize}
@@ -1027,7 +1026,7 @@
 
     There are two types of pooling layer: average pooling and maximum pooling,
     which output the average or the maximum of $n\times n$ size submatrices respectively
-    to construct the input matrix of next layer.
+    to construct the output matrix.
     We take $2\times 2$ window as an example to show how $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ compute the output of a submatrix.
     For each $2\times 2$ submatrix $\mathbf{X}$, average pooling outputs $y_{avg}=\frac{X_{00}+ X_{01}+ X_{10}+  X_{11}}{4}$
     and maximum pooling outputs $y_{max}=\mathsf{max}(X_{00}, X_{01}, X_{10},  X_{11})$
@@ -1117,14 +1116,6 @@
     and ReLU function is shown in Table \ref{Overhead of methods}.
     PrivNNP performs best in all respects.
 
-
-    % The biggest advantage of PrivNNP is that we design a novel $\mathtt{comparison}$ protocol which has
-    % a huge improvement over the previous work.
-    % We list the state-of-art 2PC-$\mathtt{comparison}$ protocol:
-    % ABY and Sharemind, and compare them to our work.
-    % As shown in Table \ref{Overhead of methods}, asymmetric cryptographic computation, communication bits and
-    % interaction rounds are listed.
-    % Obliviously, our scheme shows the best performance.
 
 
     \section{Experimental result}
@@ -1283,28 +1274,6 @@
     since we only consider the WAN setting where the communication speed is limited.
     Future work can utilize the LAN to reduce the communication time cost.
 \bibliography{aaai23}
-
-
-% \bibentry{ABY3}
-% \bibentry{ABY}
-% \bibentry{EfficientMultipartyProtocols}
-% \bibentry{ChironCloud}
-% \bibentry{HighPerformanceConvolutional}
-% \bibentry{ObliviousNeuralNetwork}
-% \bibentry{DeepResidualLearning}
-% \bibentry{MaliciouslySecureMatrixMultiplication}
-% \bibentry{CryptoNets}
-% \bibentry{Sharemind}
-% \bibentry{Homomorphic1}
-% \bibentry{Homomorphic2}
-% \bibentry{Lenet5}
-% \bibentry{}
-% \bibentry{}
-% \bibentry{}
-% \bibentry{}
-% \bibentry{}
-% \bibentry{}
-
 
 \end{document}
 
