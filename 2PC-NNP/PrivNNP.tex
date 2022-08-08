@@ -446,7 +446,7 @@
 
     \subsection{Addition}
 
-    \emph{Computing} $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
+    \textbf{Computing} $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
     $\mathcal{P}_{i}$ setting $\langle z\rangle^{i}  = \langle x\rangle^{i}  + \langle y\rangle^{i} $.
 
     \begin{figure}[ht]
@@ -481,7 +481,7 @@
     The 2PC-addition protocol is shown in Figure \ref{2PC-addition}.
 
     \subsection{Multiplication}
-    \emph{Computing} $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
+    \textbf{Computing} $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
     $\mathtt{Multiplication}$ protocol is used to compute the product of two shared values
     and is performed using an auxiliary multiplication triple
     $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$,
@@ -605,7 +605,7 @@
 
 
     \end{figure}
-    \emph{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
+    \textbf{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
     Similarly, the protocol for the 2PC-matrix multiplication is shown in Figure \ref{2PC-matrix_multiplication}.
 
     \subsection{Comparison}
@@ -614,7 +614,7 @@
     how to compute $\mathsf{sign}(x)$ and $\mathsf{max}(x,y)$ via 2PC protocols.
 
 
-    \emph{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
+    \textbf{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
     The $\mathtt{comparison}$ protocol for computing the sign of the shared value utilizes the comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
 
     In our scheme, the two parties first compute $ \langle z\rangle = \langle x\rangle\otimes \langle u\rangle$
@@ -770,7 +770,7 @@
     Since $\mathcal{P}_{1}$ gets less information in the $\mathtt{comparison}$ protocol than $\mathcal{P}_{0}$ gets,
     this protocol is secure for both parties.
 
-    \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
+    \textbf{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
        It is easy to see that
        $$\mathsf{max}(x,y) = \left\{\begin{matrix}
@@ -840,7 +840,7 @@
 
 
     \subsection{Continuous piecewise function}
-    \emph{Computing} $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $.
+    \textbf{Computing} $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $.
     $\mathsf{F}()$ is a public continuous piecewise function constructed by a series of sub-functions $\mathsf{f}_{j}(x)$
     with dividing points $-\infty =d_{0}<d_{1}<...<d_{j}<...<d_{n}=+\infty$.
     When $d_{j-1}< x\leq d_{j}$, $\mathsf{F}(x) =\mathsf{f}_{j}(x)$.
