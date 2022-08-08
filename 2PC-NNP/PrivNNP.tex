@@ -183,14 +183,14 @@
 
 \begin{abstract}
 
-    Deep learning has achieved overwhelming successes in many fields, including image classification, speech recognition, machine translation etc.
+    Deep learning has achieved overwhelming successes in many fields, including image classification, speech recognition, machine translation, etc.
     A pre-trained deep neural network model can predict the outcomes
     for a given data point. Such a deep neural network model can be served by
     specialized AI companies to users as a cloud prediction services.
     However, such a service model faces a privacy dilemma: neither AI companies nor
     users want to expose their private information.
     To achieve both model privacy and input data privacy,
-    secure multi-party computation can utilized to evaluate prediction outcomes. However,
+    secure multi-party computation can be utilized to evaluate prediction outcomes. However,
     this strategy is further complicated due to the complex deep learning prediction process.
     Currently, all existing solutions are very inefficient for employing complex asymmetric cryptographic operations.
 
@@ -199,7 +199,7 @@
     The core of PrivNNP is a novel and efficient two-party comparison protocol,
     which consists of three rounds of interactions without any oblivious transfer.
     From this building block, we construct the complete scheme for evaluating layers of the neural network, including the convolution layer, the pooling layer and the activation function.
-	We formally prove that PrivNNP is {\bf secure} and also fully implement it with Python.
+	We formally prove that PrivNNP is secure and also fully implement it with Python.
     Comprehensive experiments show that PrivNNP on resnet50
     costs only 23.86 seconds in computation and 100.13 seconds in communication.
 
@@ -212,16 +212,17 @@
 
 
     \noindent Deep learning, a popular research direction in the field of machine learning,
-    has brought major breakthroughs to computer vision, speech recognition, natural language process, machine translation, etc. Recently,
-    deep learning also made significant progress in bioinformatics, drug discovery and material sciences.
+    has brought major breakthroughs to computer vision \cite{ComputerVision},
+    speech recognition, natural language process \cite{NLP}, machine translation, etc. Recently,
+    deep learning also made significant progress in bioinformatics, drug discovery \cite{DrugDiscovery} and material sciences.
     A deep neural network model is obtained by training on
-	a given training data set, which requires a large amount of training data and sufficient compute power.
+	a given training dataset, which requires a large amount of training data and sufficient compute power.
 	After the training step, the resultant deep neural network model is used to predict
 	outcomes for a given data point. It is important to protect both the training phase and the predicting phase,
     while this work mainly focuses on the prediction phase.
 
-    Deep learning models can be serviced on cloud by the model owner as a cloud-based service,
-    i.e. Machine Learning as a Service (MLaaS),
+    Deep learning models can be served on cloud by the model owner as a cloud-based service,
+    i.e., Machine Learning as a Service (MLaaS),
     which consists of a series of machine learning tools offered by cloud service providers \cite{ChironCloud}.
     Computationally intensive tasks that cannot be accomplished by data owners can be outsourced to
     the MLaaS cloud hosting the pre-trained deep learning model.
@@ -245,7 +246,7 @@
     leading to prohibitive computation cost.
 
 
-    \subsection{Our contributions}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \subsection{Our contributions}%%%%%%%%%%%%%
     Here we summarize our contributions.
 
     \begin{itemize}
@@ -257,11 +258,11 @@
         which does not utilize the asymmetric cryptography or the bit-level operations
         and only consists of three rounds of interactions to calculate the sign of the secret input value.
         The computation is $l\times$ faster than the Sharemind \cite{Sharemind}
-        when the the secret input is a $l-$bit value.
+        when the secret input is a $l-$bit value.
         % Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
         % like maximum function and piecewise functions.
         \item \textbf{Security analysis}.
-        We theoretically prove that our system satisfies the
+        We theoretically prove that our scheme satisfies the
         security definition of the two-party computation.
 
         \item \textbf{Experiment}.
@@ -280,7 +281,7 @@
     Furthermore, some proposals that only use additive homomorphic encryption are presented \cite{Homomorphic2}.
     However, the overhead of homomorphic encryption is so large that
     the cost of it seems still unacceptable
-    though the associated technology evolves over many years\cite{ObliviousNeuralNetwork}, .
+    though the associated technology evolves over many years\cite{ObliviousNeuralNetwork}.
 
     To reduce the overhead of homomorphic encryption operations,
     some more efficient schemes for MPC operations are presented.
@@ -295,7 +296,7 @@
     and then be extended to ABY3 \cite{ABY3} which can be performed among 3 parties.
     Both ABY and ABY3 involve the asymmetric cryptography
     including the oblivious transfer protocol and the garbled circuit.
-    Up to this day, most of the systems \cite{2022GarbledCircuit} still keep tring to optimizing
+    Up to this day, most of the systems \cite{2022GarbledCircuit} still keep tring to optimize
     the garbled circuit process to lower the communication and computation complexity.
     Sharemind \cite{Sharemind} provides a new idea that converts a comparison operation to
     multi-round bit-level multiplication.
@@ -304,7 +305,6 @@
 
 \section{Preliminaries}
     \subsection{Notations}
-
     \begin{table}
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{l||l}
@@ -312,7 +312,7 @@
             \hline
             $\mathcal{DO}$ & Data owner\\
             $\mathcal{MP}$ & Model provider\\
-            $\mathcal{TTP}$ & The trusted setup\\
+            $\mathcal{TTP}$ & The trusted third party\\
             $\mathcal{P}_{0},\mathcal{P}_{1}$ & Two parties who run PrivNNP\\
             $\mathcal{P}_{i}$ & The $i$-th party, $i\in \{0,1\}$\\
             $\langle x\rangle$ & Additively shared value $x$\\
@@ -320,6 +320,9 @@
             $\llbracket x \rrbracket$ & Multiplicatively shared value $x$\\
             $\llbracket x \rrbracket^{i}$ & Multiplicative share of value $x$ held by $\mathcal{P}_{i},i\in \{0,1\}$\\
             $\otimes $ & 2PC-multiplication operation performed on shares\\
+            % $x \overset{\$}{\leftarrow} \mathbb{R} $& $x$ is a random rational number  \\
+            % $x \xleftarrow{\$} \mathbb{R} $& $x$ is a random rational number  \\
+
             $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$ & Multiplication triple\\
             $(\langle \mathbf{A}\rangle,\langle \mathbf{B}\rangle,\langle \mathbf{C}\rangle)$ & Matrix multiplication triple\\
             $(\langle u\rangle,\llbracket u \rrbracket)$ & Comparison bigram \\
@@ -329,7 +332,7 @@
         \caption{Notations}
         \label{Notations}
     \end{table}
-    Notations used in this paper is listed in Table \ref{Notations}.
+    Notations used in this paper are listed in Table \ref{Notations}.
     In addition, a matrix is denoted by bold capital letters (e.g. $\mathbf{A}$) and
     a vector is denoted as $\overrightarrow{\mathbf{v}}=(v_{0},v_{1},...,v_{n-1})$ .
 
@@ -386,7 +389,7 @@
     \subsection{Auxiliary tuples}
     Some auxiliary tuples of specific structures are used to
     assit in running $\mathtt{multiplication}$ and $\mathtt{comparison}$ protocols.
-    These tuples will be generated by the trusted setup and be distributed to each party.
+    These tuples will be generated by the trusted third party and be distributed to each party.
     \begin{itemize}
         \item Multiplication triple: $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$, where $c=a\cdot b$.
         \item Matrix multiplication triple: $(\langle \mathbf{A}\rangle,\langle \mathbf{B}\rangle,\langle \mathbf{C}\rangle)$, where $\mathbf{C}=\mathbf{A}\cdot \mathbf{B}$.
@@ -401,7 +404,7 @@
     % Here we briefly introduce the layers of neural network.
     \begin{itemize}
         \item \textbf{Convolution layer:}
-        Convolution is an operation between the imput image and the filter.
+        Convolution is an operation between the input image and the filter.
         It computes the dot product of the filter and the corresponding submatrix in the input image.
         This step is repeated by sliding the filter to get the output matrix.
         To improve the efficiency, convolution is usually converted to matrix multiplication and addition.
@@ -479,7 +482,7 @@
     \subsection{Multiplication}
     \emph{Computing} $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
     $\mathtt{Multiplication}$ protocol is used to compute the product of two shared values
-    and is performed using a auxiliary multiplication triple
+    and is performed using an auxiliary multiplication triple
     $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$,
     which can be distributed from the trusted third party.
     \begin{figure}[ht]
@@ -644,10 +647,11 @@
     by calculating $\langle s\rangle = \llbracket s \rrbracket ^{0}\otimes \llbracket s \rrbracket ^{1}$.
     More precisely, two parties run $\mathtt{multiplication}$ protocol with the input of
     $\mathcal{P}_{0}:(\llbracket s \rrbracket ^{0},0),\mathcal{P}_{1}:(0,\llbracket s \rrbracket ^{1})$, and
-    \begin{align*}
-        \langle s\rangle^{0} +\langle s\rangle^{1}&=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})\\
-        &=\llbracket s \rrbracket ^{0}\cdot \llbracket s \rrbracket ^{1}=\mathsf{sign}(x)
-    \end{align*}
+    % \begin{align*}
+    %     \langle s\rangle^{0} +\langle s\rangle^{1}&=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})\\
+    %     &=\llbracket s \rrbracket ^{0}\cdot \llbracket s \rrbracket ^{1}=\mathsf{sign}(x)
+    % \end{align*}
+    $$ \langle s\rangle^{0} +\langle s\rangle^{1}=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})\mathsf{sign}(x)$$
     \begin{figure}[ht]
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
@@ -703,13 +707,14 @@
     Our security proof follows the ideal-world/real-world paradigm.
     In real-world, parties interact following the protocol,
     while in ideal world, parties have access to an
-    honest party $\mathcal{H}$ that implements $\mathtt{comparison}$ protocol.
-    Environment $\varepsilon $  chooses the
+    simulator $\mathcal{S}im$ that implements $\mathtt{comparison}$ protocol.
+    Environment $\varepsilon $ chooses the
     inputs to the parties.
     We aim at showing that the view of adversary
     in real-wold is indistinguishable to that in ideal-world.
-    Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocol,
-    intermediate parameters are marked with different subscripts: $1$ and $2$.
+    Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
+    parameters used in the two $\mathtt{multiplication}$ protocols
+    are marked with different subscripts: $1$ and $2$.
 
 
     \emph{Security against $\mathcal{P}_{0}$:}
@@ -720,7 +725,7 @@
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$,
         and $(\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})$
         from $\varepsilon $.
-        $\mathcal{S}im$ sends $\langle x\rangle ^{0}$ to $\mathcal{H}$ and gets the result $s$.
+        % $\mathcal{S}im$ sends $\langle x\rangle ^{0}$ to $\mathcal{H}$ and gets the result $s$.
 
         \item 2. starts running $\mathcal{P}_{0}$ on input $\langle x\rangle ^{0},\langle u\rangle ^{0}$
         and $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
@@ -728,11 +733,9 @@
 
         \item 3. randomly chooses $(\langle e\rangle_{1}^{1},\langle f\rangle_{1}^{1})$ and sends them to $\mathcal{P}_{0}$.
 
-        \item 4. randomly chooses $\langle z\rangle ^{1}$ s.t. $sign(\langle z\rangle ^{0}+\langle z\rangle ^{1})=s$.
-        and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
+        \item 4. randomly chooses $\langle z\rangle ^{1}$ and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
 
-        \item 5. running $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\llbracket u \rrbracket ^{0})$ and
-        recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
+        \item 5. running $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\langle z\rangle ^{1},\llbracket u \rrbracket ^{0})$.
 
         \item 6. running $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$
@@ -740,30 +743,32 @@
 
         \item 7. randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
 
-        \item 8. randomly chooses $\langle s\rangle^{1}$ s.t. $\langle s\rangle ^{0}+\langle s\rangle ^{1}=s$
-        \item 9. outputs whatever $\mathcal{P}_{0}$ outputs.
     \end{itemize}
 
-    The view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
-    from the view of $\mathcal{P}_{0}$ interacting in the real execution.
+
     The view of $\mathcal{P}_{0}$ in the real execution is
-    $(\langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1},
-    \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1}),
+    $\langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1};
+    \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1};
     \langle z\rangle_{1}^{1} = e_{1} \cdot f_{1} + f_{1}\cdot \langle a\rangle_{1}^{1}
-    +e_{1} \cdot \langle b\rangle^{1}_{1} + \langle c\rangle^{1}_{1},
-    (\langle e\rangle_{2}^{1}=0-\langle a\rangle_{2}^{1},
-    \langle f\rangle_{2}^{1}=\llbracket s \rrbracket^{0}-\langle b\rangle_{2}^{1}),
-    $ while its view in the ideal
-    execution is
-    $(\langle e\rangle_{1}^{1}:random,
-    \langle f\rangle_{1}^{1}:random,)
-    \langle z\rangle_{1}^{1}: $ a random number s.t. $sign(\langle z\rangle ^{0}+\langle z\rangle ^{1})=s$
-    $(\langle e\rangle_{2}^{1}:random,
-    \langle f\rangle_{2}^{1}:random),
-    $
+    +e_{1} \cdot \langle b\rangle^{1}_{1} + \langle c\rangle^{1}_{1};
+    \langle e\rangle_{2}^{1}=0-\langle a\rangle_{2}^{1};
+    \langle f\rangle_{2}^{1}=\llbracket s \rrbracket^{0}-\langle b\rangle_{2}^{1}$,
+    while its view in the ideal execution is that
+    $\langle e\rangle_{1}^{1},
+    \langle f\rangle_{1}^{1},
+    \langle z\rangle_{1}^{1},
+    \langle e\rangle_{2}^{1}$ and $
+    \langle f\rangle_{2}^{1}$ are all random numbers.
     So we only need to show that any
-    element is indistinguishable from a random
-    number. This is clearly true since any element in the ideal world is randomly chosen.
+    element in the real-world
+    is indistinguishable from a random
+    number. This is clearly true since $(\langle x\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},
+    \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$ in the real world.
+    So the view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
+    from the view of $\mathcal{P}_{0}$ interacting in the real execution.
+    Since $\mathcal{P}_{1}$ gets less information in the $\mathtt{comparison}$ protocol than $\mathcal{P}_{0}$ gets,
+    this protocol is secure for both party.
+
 
     \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
@@ -781,7 +786,6 @@
            \end{matrix}\right.$$
        We can combine two expressions into one:
        $$\mathsf{max}(x,y) = \frac{(s+1)\cdot x+ (-s+1)\cdot y}{2}$$
-
        \begin{figure}[ht]
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
@@ -1134,7 +1138,7 @@
     For accurate and stable measurement, file transfer rate between servers is fixed at 10M/s.
     Each experiment was repeated 10 times.
 
-    The experiments are divided into three parts basic operations neural network layers and neural network implementation.
+    The experiments are divided into three parts: basic operations, neural network layers and neural network implementation.
     \subsection{Operations}
     \begin{figure}[htbp]
         \subfigure[multiplication] %第一张子图
