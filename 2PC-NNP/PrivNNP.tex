@@ -705,19 +705,38 @@
     \end{figure}
     2PC-comparison protocol is shown in Figure \ref{2PC-comparison}.
 
-    \textbf{Security proof}:
-    Our security proof follows the ideal-world/real-world paradigm \cite{SecurityProof}.
-    In real-world, parties interact following the protocol,
-    while in ideal world, parties have access to a
-    simulator $\mathcal{S}im$ that implements $\mathtt{comparison}$ protocol.
-    Environment $\varepsilon $ chooses the
-    inputs to the parties.
-    We aim at showing that the view of adversary
-    in real-wold is indistinguishable to that in ideal-world.
+
+
+    \textbf{Definition of security in \cite{SecurityProof}}:
+    \begin{itemize}
+        \item The ideal-world/real-world paradigm: in real-world, parties interact following the protocol,
+        while in ideal world, parties have access to a
+        simulator $\mathcal{S}$ that implements the $\mathtt{comparison}$ protocol.
+        Environment $\varepsilon $ chooses the
+        inputs to the parties.
+
+        \item Let $\pi $ be a deterministic two-party protocol for computing
+        $f=(f_{0},f_{1})$,
+        where the $\mathcal{P}_{i}$ inputs $\langle x\rangle ^{i}$
+        and wishs to obtain $f_{i}(x)$. The view of the $\mathcal{P}_{i}$ in the real-world
+        is denoted as $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
+        where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the real-world
+        is denoted as $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
+
+        \item A two-party protocol for $f$ is secure in the presence of semi-honest adversaries
+        if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
+        the view of adversary in real-wold is indistinguishable to that in ideal-world.
+        Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
+        $\mathsf{view}_{i}^{\pi}$.
+        % and $\mathsf{view}_{1}^{\mathcal{S}_{1}}$ is indistinguishable with
+        % $\mathsf{view}_{1}^{\pi}$.
+    \end{itemize}
+
     Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
     data generated during the two $\mathtt{multiplication}$ protocols
     are marked with different subscripts: $1$ and $2$.
 
+    \textbf{Security proof}:
 
     \emph{Security against $\mathcal{P}_{0}$:}
     An ideal world simulator $\mathcal{S}im$ performs as follow.
@@ -748,28 +767,27 @@
     \end{itemize}
 
 
-    The view of $\mathcal{P}_{0}$ in the real execution is
-    $\langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1};
-    \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1};
+    The view of $\mathcal{P}_{0}$ in the real execution is $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{0};m^{0}_{1},...,m^{0}_{t}
+    \langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1},
+    \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1},
     \langle z\rangle_{1}^{1} = e_{1} \cdot f_{1} + f_{1}\cdot \langle a\rangle_{1}^{1}
-    +e_{1} \cdot \langle b\rangle^{1}_{1} + \langle c\rangle^{1}_{1};
-    \langle e\rangle_{2}^{1}=0-\langle a\rangle_{2}^{1};
-    \langle f\rangle_{2}^{1}=\llbracket s \rrbracket^{0}-\langle b\rangle_{2}^{1}$,
+    +e_{1} \cdot \langle b\rangle^{1}_{1} + \langle c\rangle^{1}_{1},
+    \langle e\rangle_{2}^{1}=0-\langle a\rangle_{2}^{1},
+    \langle f\rangle_{2}^{1}=\llbracket s \rrbracket^{0}-\langle b\rangle_{2}^{1})$,
     while its view in the ideal execution is that
-    $\langle e\rangle_{1}^{1},
+    $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle x\rangle ^{0};
+    \langle e\rangle_{1}^{1},
     \langle f\rangle_{1}^{1},
     \langle z\rangle_{1}^{1},
-    \langle e\rangle_{2}^{1}$ and
-    $\langle f\rangle_{2}^{1}$ are all random numbers.
-    So we only need to show that any
-    element in the real-world
-    is indistinguishable from a random number.
-    This is clearly true since $(\langle x\rangle^{1},\langle u\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
-    \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$ in the real world.
+    \langle e\rangle_{2}^{1},
+    \langle f\rangle_{2}^{1})$ are all random numbers.
+    So any element in the real-world
+    is indistinguishable from a random number since $(\langle x\rangle^{1},\langle u\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
+    \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$.
     So the view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
     from the view of $\mathcal{P}_{0}$ interacting in the real execution.
-    Following the same idea, Security against $\mathcal{P}_{0}$ can also be proved.
-    This protocol is secure for both parties.
+    Following the same idea, Security against $\mathcal{P}_{1}$ can also be proved and
+    this protocol is secure for both parties.
 
     \textbf{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
@@ -1153,11 +1171,8 @@
         }
         \caption{Experiment I-Overhead of 2PC-multiplication and matrix multiplication}
         \label{multiplication and matrix multiplication}
-
     \end{figure}
-
     \begin{figure}[htbp]
-
         \centering
         \includegraphics[width=5cm]{operation_compare.pdf}
         \caption{Experiment I-Overhead of 2PC-comparison}
@@ -1182,9 +1197,6 @@
     when the width is $1000$, the communication costs $3.12$s, accounting for $96\%$ of total time.
 
     \subsection{Neural network layers}
-    In Experiment II, overhead of neural network layers including
-    convolution layer, pooling layer and $\mathsf{ReLU}$ function are measured.
-
     \begin{table}[!ht]
 
         \center
@@ -1226,16 +1238,14 @@
         \caption{Experiment II-Layers consumption}
         \label{Layers_consumption}
     \end{table}
-
-
-    For different neural network layers,
+    In Experiment II, overhead of neural network layers including
+    convolution layer, pooling layer and $\mathsf{ReLU}$ function are measured.
+    % For different neural network layers,
     % we select several representative shapes of features and filters
     % to test the time cost.
-    the result is shown in Table \ref{Layers_consumption}.
+    The result is shown in Table \ref{Layers_consumption}.
     In general, the computational overhead of neural network layers has been reduced to an acceptable range
     and the communication cost still account for the vast majority.
-
-
 
 
     \subsection{Neural networks}
@@ -1243,11 +1253,10 @@
     time-consuming tests on a small network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
     The MNIST dataset \cite{MNIST} is used for training neural network models, which consists of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
     for handwriting recognition.
-    Since the size of input image of Resnet50 is $3\times 224 \times 224$,
-    we resize each image of MNIST dataset to $3\times 224 \times 224$ for training the Resnet50 model.
+    % Since the size of input image of Resnet50 is $3\times 224 \times 224$,
+    We resize each image of MNIST dataset to $3\times 224 \times 224$ for training the Resnet50 model.
     Notably, we remove the batch normalization layers of Resnet50 because PrivNNP
     cannot implement the division of which the dividsor is a secret variable.
-
 
     \begin{table}[!ht]
         \center
@@ -1262,7 +1271,6 @@
         \caption{Experiment III-Neural networks consumption}
         \label{neural networks consumption}
     \end{table}
-
     As shown in Table \ref{neural networks consumption}, PrivNNP shows an excellent performance
     both in medium and large neural networks.
     A prediction of Resnet50 costs 23.85s for computation and 100.13s for communication.
