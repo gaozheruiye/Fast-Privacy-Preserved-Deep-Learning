@@ -270,7 +270,7 @@
         To demonstrate the performance of our work,
         we implement PrivNNP and conduct experiment on the classical
         neural network model Resnet50 and
-        it costs 23s for computation and 100s for communication.
+        one prediction process costs 23s for computation and 100s for communication.
 
    \end{itemize}
 
@@ -420,13 +420,15 @@
         mapping the input of the neuron to the output.
         Common used activation functions are listed as follow:
         \begin{align*}
-        \text{Maxout:} \mathsf{f}(x) &= \mathsf{max}( \overrightarrow{\mathbf{x}})\\
-        \text{Sigmoid:} \sigma(x) &=\frac{1}{1+e^{-x}}\\
+        % \text{Maxout:} \mathsf{f}(x) &= \mathsf{max}( \overrightarrow{\mathbf{x}})\\
+        \mathsf{Sigmoid}: \sigma(x) &=\frac{1}{1+e^{-x}}\\
         \mathsf{ReLU}(x)&=\begin{cases}
             x & \text{ if } x > 0 \\
             0 & \text{ if } x \leqslant 0 \\
             \end{cases}
         \end{align*}
+        Most of the activation functions are continuous piecewise function ($\mathsf{ReLU}$)
+        or can be roughly evaluated by approximate piecewise function ($\mathsf{Sigmoid}$)
         In the paper, we mainly introduce method to compute $\mathsf{ReLU}$ function.
         Other functions can be computed by similar approach.
     \end{itemize}
@@ -539,7 +541,7 @@
         \label{2PC-multiplication}
 
     \end{figure}
-    The 2PC-multiplication protocol is shown in Figure \ref{2PC-multiplication}.
+    The 2PC-$\mathtt{multiplication}$ protocol is shown in Figure \ref{2PC-multiplication}.
 
     Moreover, if the private input data is not in the share state,
     such as $\mathcal{P}_{0}$ holding the secret value $x$
@@ -592,8 +594,8 @@
             \\
             & $\underrightarrow{~~~~~~(\langle \mathbf{E}\rangle ^{0},\langle \mathbf{F}\rangle ^{0})~~~~~~}$ &\\
             & $\underleftarrow{~~~~~~(\langle \mathbf{E}\rangle ^{1},\langle \mathbf{F}\rangle ^{1})~~~~~~}$ &\\
-            $e\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$& &$\mathbf{E}\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$\\
-            $f\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$& &$\mathbf{F}\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$\\
+            $\mathbf{E}\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$& &$\mathbf{E}\leftarrow\langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$\\
+            $\mathbf{F}\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$& &$\mathbf{F}\leftarrow\langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$\\
             $\langle \mathbf{Z}\rangle^{0}\leftarrow \mathbf{F}\cdot \langle \mathbf{A}\rangle^{0}$
             & &
             $\langle \mathbf{Z}\rangle^{1}\leftarrow \mathbf{E} \cdot \mathbf{F} + \mathbf{F}\cdot \langle \mathbf{A}\rangle^{1}$\\
@@ -725,7 +727,7 @@
 
         \item A two-party protocol for $f$ is secure in the presence of semi-honest adversaries
         if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
-        the view of adversary in real-wold is indistinguishable to that in ideal-world.
+        the view of adversary in real-world is indistinguishable to that in ideal-world.
         Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
         $\mathsf{view}_{i}^{\pi}$.
         % and $\mathsf{view}_{1}^{\mathcal{S}_{1}}$ is indistinguishable with
@@ -733,7 +735,7 @@
     \end{itemize}
 
     Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
-    data generated during the two $\mathtt{multiplication}$ protocols
+    messages transferred during the two $\mathtt{multiplication}$ protocols
     are marked with different subscripts: $1$ and $2$.
 
     \textbf{Security proof}:
@@ -841,7 +843,8 @@
         \caption{2PC-maximum}
         \label{2PC-max}
     \end{figure}
-    Following this idea, the whole process of 2PC-comparison protocol is shown in Figure \ref{2PC-max}.
+
+    Following this idea, the whole process of 2PC-$\mathtt{comparison}$ protocol is shown in Figure \ref{2PC-max}.
 
     Furthermore, we explore variations of $\mathsf{max}(x,y)$.
     Firstly, maximum of a vector $\mathsf{max}(\overrightarrow{\mathbf{x}})=\mathsf{max}(x_{0},x_{1},...x_{n})$
