@@ -262,7 +262,7 @@
         when the secret input is a $l-$bit value.
         % Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
         % like maximum function and piecewise functions.
-        \item \textbf{Security analysis}.
+        \item \textbf{Security proof}.
         We theoretically prove that our scheme satisfies the
         security definition of the two-party computation.
 
@@ -447,38 +447,39 @@
     \subsection{Addition}
 
     \textbf{Computing} $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
-    $\mathcal{P}_{i}$ setting $\langle z\rangle^{i}  = \langle x\rangle^{i}  + \langle y\rangle^{i} $.
+    $\mathcal{P}_{0}$ setting $\langle z\rangle^{0}  = \langle x\rangle^{0}  + \langle y\rangle^{0} $ and
+    $\mathcal{P}_{1}$ setting $\langle z\rangle^{1}  = \langle x\rangle^{1}  + \langle y\rangle^{1} $.
 
-    \begin{figure}[ht]
-        % \centering{\bf Two-party secure computation protocol for operations}
-        \resizebox{0.48\textwidth}{!}{
-        \begin{tabular}{lcl}
-            \hline
-            \multicolumn{3}{c}{\underline{$\mathtt{Addition }$}:}\\
-            \multicolumn{3}{l}{\textbf{Target}: compute $\langle z\rangle  = \langle x\rangle  + \langle y\rangle $}\\
-            \textbf{Input}:\\
-            $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
-            $\{(\langle x\rangle ^{0} , \langle y\rangle ^{0})\}$,
-            &~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            &
-            $\{(\langle x\rangle ^{1} , \langle y\rangle ^{1})\}$,
+    % \begin{figure}[ht]
+    %     % \centering{\bf Two-party secure computation protocol for operations}
+    %     \resizebox{0.48\textwidth}{!}{
+    %     \begin{tabular}{lcl}
+    %         \hline
+    %         \multicolumn{3}{c}{\underline{$\mathtt{Addition }$}:}\\
+    %         \multicolumn{3}{l}{\textbf{Target}: compute $\langle z\rangle  = \langle x\rangle  + \langle y\rangle $}\\
+    %         \textbf{Input}:\\
+    %         $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+    %         $\{(\langle x\rangle ^{0} , \langle y\rangle ^{0})\}$,
+    %         &~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    %         &
+    %         $\{(\langle x\rangle ^{1} , \langle y\rangle ^{1})\}$,
 
-            \\
+    %         \\
 
-            \textbf{Procedure}:\\
-            $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
-            $\langle z\rangle ^{0}\leftarrow\langle x\rangle ^{0}+\langle y\rangle ^{0}$
-            &
-            &
-            $\langle z\rangle ^{1}\leftarrow\langle x\rangle ^{1}+\langle y\rangle ^{1}$
-            \\
-            \hline
+    %         \textbf{Procedure}:\\
+    %         $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
+    %         $\langle z\rangle ^{0}\leftarrow\langle x\rangle ^{0}+\langle y\rangle ^{0}$
+    %         &
+    %         &
+    %         $\langle z\rangle ^{1}\leftarrow\langle x\rangle ^{1}+\langle y\rangle ^{1}$
+    %         \\
+    %         \hline
 
-        \end{tabular}}
-        \caption{2PC-addition}
-        \label{2PC-addition}
-    \end{figure}
-    The 2PC-addition protocol is shown in Figure \ref{2PC-addition}.
+    %     \end{tabular}}
+    %     \caption{2PC-addition}
+    %     \label{2PC-addition}
+    % \end{figure}
+    % The 2PC-addition protocol is shown in Figure \ref{2PC-addition}.
 
     \subsection{Multiplication}
     \textbf{Computing} $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
@@ -652,7 +653,7 @@
     %     \langle s\rangle^{0} +\langle s\rangle^{1}&=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})\\
     %     &=\llbracket s \rrbracket ^{0}\cdot \llbracket s \rrbracket ^{1}=\mathsf{sign}(x)
     % \end{align*}
-    $$ \langle s\rangle^{0} +\langle s\rangle^{1}=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})\mathsf{sign}(x)$$
+    $$ \langle s\rangle^{0} +\langle s\rangle^{1}=(\llbracket s \rrbracket ^{0}+0)\otimes (0+\llbracket s \rrbracket ^{1})=\mathsf{sign}(x)$$
     \begin{figure}[ht]
         \resizebox{0.48\textwidth}{!}{
         \begin{tabular}{lcl}
@@ -705,16 +706,16 @@
     2PC-comparison protocol is shown in Figure \ref{2PC-comparison}.
 
     \textbf{Security proof}:
-    Our security proof follows the ideal-world/real-world paradigm.
+    Our security proof follows the ideal-world/real-world paradigm \cite{SecurityProof}.
     In real-world, parties interact following the protocol,
-    while in ideal world, parties have access to an
+    while in ideal world, parties have access to a
     simulator $\mathcal{S}im$ that implements $\mathtt{comparison}$ protocol.
     Environment $\varepsilon $ chooses the
     inputs to the parties.
     We aim at showing that the view of adversary
     in real-wold is indistinguishable to that in ideal-world.
     Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
-    parameters used in the two $\mathtt{multiplication}$ protocols
+    data generated during the two $\mathtt{multiplication}$ protocols
     are marked with different subscripts: $1$ and $2$.
 
 
@@ -728,7 +729,7 @@
         from $\varepsilon $.
         % $\mathcal{S}im$ sends $\langle x\rangle ^{0}$ to $\mathcal{H}$ and gets the result $s$.
 
-        \item 2. starts running $\mathcal{P}_{0}$ on input $\langle x\rangle ^{0},\langle u\rangle ^{0}$
+        \item 2. starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$
         and $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
         and recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
 
@@ -736,9 +737,9 @@
 
         \item 4. randomly chooses $\langle z\rangle ^{1}$ and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
 
-        \item 5. running $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\langle z\rangle ^{1},\llbracket u \rrbracket ^{0})$.
+        \item 5. runs $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\langle z\rangle ^{1},\llbracket u \rrbracket ^{0})$.
 
-        \item 6. running $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
+        \item 6. runs $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$
         and recieves $(\langle e\rangle_{2}^{0},\langle f\rangle_{2}^{0})$.
 
@@ -767,8 +768,8 @@
     \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$ in the real world.
     So the view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
     from the view of $\mathcal{P}_{0}$ interacting in the real execution.
-    Since $\mathcal{P}_{1}$ gets less information in the $\mathtt{comparison}$ protocol than $\mathcal{P}_{0}$ gets,
-    this protocol is secure for both parties.
+    Following the same idea, Security against $\mathcal{P}_{0}$ can also be proved.
+    This protocol is secure for both parties.
 
     \textbf{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
