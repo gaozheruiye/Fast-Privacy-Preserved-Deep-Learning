@@ -749,10 +749,9 @@
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$,
         and $(\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})$
         from $\varepsilon $.
-        % $\mathcal{S}im$ sends $\langle x\rangle ^{0}$ to $\mathcal{H}$ and gets the result $s$.
 
-        \item 2. starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$
-        and $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
+        \item 2. starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$,
+        $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
         and recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
 
         \item 3. randomly chooses $(\langle e\rangle_{1}^{1},\langle f\rangle_{1}^{1})$ and sends them to $\mathcal{P}_{0}$.
@@ -785,10 +784,12 @@
     \langle e\rangle_{2}^{1},
     \langle f\rangle_{2}^{1})$
     and messages recieved are all random numbers.
-    So any element in the real-world
-    is indistinguishable from a random number since $(\langle x\rangle^{1},\langle u\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
-    \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$.
-    So the view $\mathcal{S}im$ simulates for $\mathcal{P}_{0}$ is indistinguishable
+    Any element in the real-world
+    is indistinguishable from a random number since
+    $(\langle x\rangle^{1},\langle u\rangle^{1},
+    \langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
+    \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ are unknown to $\mathcal{P}_{0}$.
+    So the view $\mathcal{S}_{0}$ simulates for $\mathcal{P}_{0}$ is indistinguishable
     from the view of $\mathcal{P}_{0}$ interacting in the real execution.
     Following the same idea, Security against $\mathcal{P}_{1}$ can also be proved and
     this protocol is secure for both parties.
