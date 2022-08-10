@@ -251,8 +251,7 @@
     Here we summarize our contributions.
 
     \begin{itemize}
-        \item \textbf{PrivNNP}.
-        We present PrivNNP, an efficient two-party computation framework
+        \item We present \textbf{PrivNNP}, an efficient two-party computation framework
         for evaluating neural network predictions.
 
         The building block of our work is a brand new 2PC-$\mathtt{comparison}$ protocol,
@@ -262,13 +261,13 @@
         when the secret input is a $l-$bit value.
         % Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
         % like maximum function and piecewise functions.
-        \item \textbf{Security proof}.
+        \item
         We theoretically prove that our scheme satisfies the
-        security definition of the two-party computation.
+        \textbf{security} definition of the two-party computation.
 
-        \item \textbf{Experiment}.
+        \item
         To demonstrate the performance of our work,
-        we implement PrivNNP and conduct experiment on the classical
+        we implement PrivNNP and conduct \textbf{experiment} on the classical
         neural network model Resnet50 and
         one prediction process costs 23s for computation and 100s for communication.
 
@@ -305,7 +304,8 @@
     communication.
 
 \section{Preliminaries}
-    \subsection{Notations}
+    % \subsection{Notations}
+    \textbf{Notations}:
     \begin{table}
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{l||l}
@@ -345,7 +345,7 @@
         -1 & \text{ if } x<0
     \end{cases}$$
 
-    \subsection{Multi-Party Computation and Two-Party Computation}
+    \textbf{Multi-Party Computation and Two-Party Computation:}
     MPC enables multiple participants to jointly compute a function over their private inputs without leaking
 	their individual input. It has broad applications where privacy is important, e.g. voting, auction,
 	data mining etc. Two-party computation (2PC) is a special case of MPC.
@@ -356,8 +356,8 @@
 
 
     % \begin{itemize}
-    %     \item The ideal-world/real-world paradigm \cite{SecurityProof}:
-    %     in real-world, parties interact following the protocol,
+    %     \item The ideal world/real world paradigm \cite{SecurityProof}:
+    %     in real world, parties interact following the protocol,
     %     while in ideal world, parties have access to a
     %     simulator $\mathcal{S}$ that implements the 2PC protocol.
     %     Environment $\varepsilon $ chooses the
@@ -366,20 +366,20 @@
     %     \item Let $\pi $ be a deterministic 2PC protocol for computing
     %     $f=(f_{0},f_{1})$,
     %     where the $\mathcal{P}_{i}$ inputs $\langle x\rangle ^{i}$
-    %     and wishs to obtain $f_{i}(x)$. The view of the $\mathcal{P}_{i}$ in the real-world
+    %     and wishs to obtain $f_{i}(x)$. The view of the $\mathcal{P}_{i}$ in the real world
     %     is denoted as $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
-    %     where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the real-world
+    %     where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the real world
     %     is denoted as $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
 
     %     \item A 2PC protocol for $f$ is secure in the presence of semi-honest adversaries
     %     if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
-    %     the view of adversary in real-world is indistinguishable to that in ideal-world.
+    %     the view of adversary in real world is indistinguishable to that in ideal world.
     %     Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
     %     $\mathsf{view}_{i}^{\pi}$.
 
     % \end{itemize}
 
-    \subsection{2PC secret sharing}
+    \textbf{2PC secret sharing:}
     % Secret sharing is a method that a secret is split in some ways and each share is held by each participant    and
     2PC secret sharing means a secret value is shared between two parties.
     Our work involves two types of 2PC secret sharing methods:
@@ -413,30 +413,30 @@
     $\mathcal{P}_{i}$ can only get the value of $\langle x\rangle ^{i}$, $\langle y\rangle ^{i}$ and $\langle z\rangle ^{i}$ ($i \in \{0,1\}$).
     This enable two parties to run multiple rounds of different protocols while keeping secret state input.
 
-    \subsection{Definition of security of 2PC protocols}
-
+    \textbf{Definition of security of 2PC protocols:}
     Let $\pi $ be a deterministic 2PC protocol for computing
     function $\mathsf{f}$,
     where the $\mathcal{P}_{i}$ inputs $\langle \mathbf{x}\rangle ^{i}$
     and wishs to obtain $\langle \mathsf{f}(\mathbf{x}) \rangle ^{i}$.
 
-    The ideal-world/real-world paradigm \cite{SecurityProof} is that
-    in the real-world, parties interact following the protocol,
-    while in the ideal-world, parties have access to a
+    The ideal world/real world paradigm \cite{SecurityProof} is that
+    in the real world, parties interact following the protocol,
+    while in the ideal world, parties have access to a
     simulator $\mathcal{S}$ that implements the 2PC protocol.
     Environment $\varepsilon $ chooses the
     inputs to the parties.
-    The view of the $\mathcal{P}_{i}$ in the real-world
+    The view of the $\mathcal{P}_{i}$ in the real world
     is denoted as $\mathsf{view}_{i}^{\pi}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
-    where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the ideal-world
+    where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the ideal world
     is denoted as $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
 
     A 2PC protocol for $\mathsf{f}$ is secure in the presence of semi-honest adversaries
     if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
-    the view of adversary in the real-world is indistinguishable to that in the ideal-world.
+    the view of adversary in the real world is indistinguishable to that in the ideal world.
     Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
     $\mathsf{view}_{i}^{\pi}$.
-    \subsection{Auxiliary tuples}
+
+    \textbf{Auxiliary tuples:}
     Some auxiliary tuples of specific structures are used to
     assit in running $\mathtt{multiplication}$ and $\mathtt{comparison}$ protocols.
     These tuples will be generated by the trusted third party and be distributed to each party.
@@ -448,7 +448,7 @@
     \end{itemize}
 
 
-    \subsection{Layers of neural networks}
+    \textbf{Layers of neural networks:}
     A neural network consists of a pipeline of layers which can be mainly divided into three categories:
     convolution layer, pooling layer and activation function layer.
     % Here we briefly introduce the layers of neural network.
@@ -495,9 +495,11 @@
 
     % Formalized protocols are presented in the appendix.
 
-    \subsection{Addition}
+    % \subsection{Addition}
 
-    \textbf{Computing} $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
+    \textbf{2PC-Addition:}
+    \emph{computing}
+    $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
     $\mathcal{P}_{0}$ setting $\langle z\rangle^{0}  = \langle x\rangle^{0}  + \langle y\rangle^{0} $ and
     $\mathcal{P}_{1}$ setting $\langle z\rangle^{1}  = \langle x\rangle^{1}  + \langle y\rangle^{1} $.
 
@@ -532,8 +534,11 @@
     % \end{figure}
     % The 2PC-addition protocol is shown in Figure \ref{2PC-addition}.
 
-    \subsection{Multiplication}
-    \textbf{Computing} $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
+    % \subsection{Multiplication}
+    \textbf{2PC-Multiplication:}
+    \emph{computing}
+    % \textbf{2PC-Multiplication: computing}
+    $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
     $\mathtt{Multiplication}$ protocol is used to compute the product of two shared values
     and is performed using an auxiliary multiplication triple
     $(\langle a\rangle,\langle b\rangle,\langle c\rangle)$,
@@ -654,19 +659,21 @@
         \end{tabular}}
         \caption{2PC-matrix multiplication}
         \label{2PC-matrix_multiplication}
-
-
     \end{figure}
-    \textbf{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
+
+    \textbf{2PC-Matrix multiplication:}
+    \emph{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
     Similarly, the protocol for the 2PC-matrix multiplication is shown in Figure \ref{2PC-matrix_multiplication}.
 
-    \subsection{Comparison}
+    % \subsection{Comparison}
+    \textbf{2PC-Comparison:}
+    % \emph{computing}
     The 2PC-$\mathtt{comparison}$ protocol is the most important building block of our work.
     Two questions will be discussed in this subsection:
     how to compute $\mathsf{sign}(x)$ and $\mathsf{max}(x,y)$ via 2PC protocols.
 
 
-    \textbf{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
+    \emph{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
     The $\mathtt{comparison}$ protocol for computing the sign of the shared value utilizes the comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
 
     In our scheme, the two parties first compute $ \langle z\rangle = \langle x\rangle\otimes \langle u\rangle$
@@ -760,8 +767,8 @@
 
     % \textbf{Definition of security for 2PC protocols}:
     % \begin{itemize}
-    %     \item The ideal-world/real-world paradigm \cite{SecurityProof}:
-    %     in real-world, parties interact following the protocol,
+    %     \item The ideal world/real world paradigm \cite{SecurityProof}:
+    %     in real world, parties interact following the protocol,
     %     while in ideal world, parties have access to a
     %     simulator $\mathcal{S}$ that implements the 2PC protocol.
     %     Environment $\varepsilon $ chooses the
@@ -770,14 +777,14 @@
     %     \item Let $\pi $ be a deterministic 2PC protocol for computing
     %     $f=(f_{0},f_{1})$,
     %     where the $\mathcal{P}_{i}$ inputs $\langle x\rangle ^{i}$
-    %     and wishs to obtain $f_{i}(x)$. The view of the $\mathcal{P}_{i}$ in the real-world
+    %     and wishs to obtain $f_{i}(x)$. The view of the $\mathcal{P}_{i}$ in the real world
     %     is denoted as $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
-    %     where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the real-world
+    %     where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the real world
     %     is denoted as $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
 
     %     \item A 2PC protocol for $f$ is secure in the presence of semi-honest adversaries
     %     if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
-    %     the view of adversary in real-world is indistinguishable to that in ideal-world.
+    %     the view of adversary in real world is indistinguishable to that in ideal world.
     %     Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
     %     $\mathsf{view}_{i}^{\pi}$.
     %     % and $\mathsf{view}_{1}^{\mathcal{S}_{1}}$ is indistinguishable with
@@ -790,7 +797,7 @@
     Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
     messages transferred during the two $\mathtt{multiplication}$ protocols
     are marked with different subscripts: $1$ and $2$.
-    An ideal-world simulator $\mathcal{S}_{0}$ performs as follow.
+    An ideal world simulator $\mathcal{S}_{0}$ performs as follow.
     \begin{itemize}
         \item 1. recieves $\langle x\rangle ^{0}$,
         $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$,
@@ -817,7 +824,7 @@
     \end{itemize}
 
 
-    The view of $\mathcal{P}_{0}$ in the real execution is $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{0};
+    The view of $\mathcal{P}_{0}$ in the real execution is $\mathsf{view}_{0}^{\pi}=(\langle x\rangle ^{0};
     \langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1},
     \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1},
     \langle z\rangle_{1}^{1} = e_{1} \cdot f_{1} + f_{1}\cdot \langle a\rangle_{1}^{1}
@@ -832,7 +839,7 @@
     \langle e\rangle_{2}^{1},
     \langle f\rangle_{2}^{1})$
     and messages recieved are all random numbers.
-    Any element in the real-world
+    Any element in the real world
     is indistinguishable from a random number since
     $(\langle x\rangle^{1},\langle u\rangle^{1},
     \langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
@@ -842,7 +849,8 @@
     Following the same idea, Security against $\mathcal{P}_{1}$ can also be proved and
     this protocol is secure for both parties.
 
-    \textbf{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
+    \textbf{2PC-maximum:}
+    \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
        It is easy to see that
        $$\mathsf{max}(x,y) = \left\{\begin{matrix}
@@ -911,9 +919,11 @@
     Combined with the above methods,
     any composite function constructed of $\mathsf{max}()$ and $min()$ can be computed following rules metioned above.
 
-
-    \subsection{Continuous piecewise function}
-    \textbf{Computing} $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $.
+    \textbf{2PC-Continuous piecewise function:}
+    \emph{computing}
+    % \subsection{Continuous piecewise function}
+    % \textbf{Computing}
+    $\langle value\rangle  = \langle \mathsf{F}(\langle x\rangle)\rangle $.
     $\mathsf{F}()$ is a public continuous piecewise function constructed by a series of sub-functions $\mathsf{f}_{j}(x)$
     with dividing points $-\infty =d_{0}<d_{1}<...<d_{j}<...<d_{n}=+\infty$.
     When $d_{j-1}< x\leq d_{j}$, $\mathsf{F}(x) =\mathsf{f}_{j}(x)$.
@@ -996,11 +1006,12 @@
     \end{figure}
     With $\mathtt{multiplication}$ protocol and $\mathtt{comparison}$ protocol,
     the whole process is given as shown in Figure \ref{2PC-piecewise}.
-\section{2PC for Neural Network Prediction}
+
+    \section{2PC for Neural Network Prediction}
     %    In this section, we will introduce the system framework and concrete implementation of our
     %    schemes for 2PC neural network prediction.
 
-    \subsection{System framework}
+
     \begin{figure}[ht]
         % \begin{figure}[h]
 
@@ -1009,7 +1020,9 @@
         \caption{PrivNNP framework}
         \label{framework}
     \end{figure}
-    As shown in Figure \ref{framework}, in our framework,
+
+    \textbf{System framework}~~
+    as shown in Figure \ref{framework}, in our framework,
     the data owner ($\mathcal{DO}$) provides the input data
     and the model provider ($\mathcal{MP}$) provides the model parameters.
     $\mathcal{DO}$ and $\mathcal{MP}$ take the role of
@@ -1017,7 +1030,7 @@
     After running the whole process of PrivNNP, they gather two shares of the prediction result and
     get the true value of the classification label.
 
-\subsection{2PC neural network layers}
+\subsection{2PC protocols for neural network layers}
     Neural network has various architectures and
     most of these architectures are constructed of convolution layer,
     pooling layer, activation function layer, and other variant layers.
@@ -1055,7 +1068,7 @@
     Each element of matrix is marked with different color and number.
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=3cm]{new_unrolling2.png}
+        \includegraphics[width=4cm]{new_unrolling2.png}
         \caption{Rearranged matrix and weight}
         \label{rearrangement of matrix and weight}
     \end{figure}
@@ -1095,7 +1108,6 @@
 
 
     \subsubsection{Pooling layer}
-
 
     There are two types of pooling layer: average pooling and maximum pooling,
     which output the average or the maximum of $n\times n$ size submatrices respectively
@@ -1157,39 +1169,85 @@
     approximate piecewise functions.
 
 
+    % \section{Theoretical Analysis}
+    % \begin{table}[!ht]
+
+    %     % \center
+    %     \resizebox{0.45\textwidth}{!}{
+    %     \begin{tabular}{|c|c|c|c|c|}\hline
+
+    %     \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
+    %     &   &    computation       &     (bits)      &            \\ \hline
+    %     \multirow{3}{*}{comparison}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2$ &6\\\cline{2-5}
+    %     &Sharemind&               0&     6$l^{2}$               &$l$\\\cline{2-5}
+    %     &PrivNNP&                   0&   5$l$                  &3 \\\hline
+
+    %     &ABY&                   54$l$& $21l\cdot \kappa+(l^{2}+l)3/2+12$ &16\\\cline{2-5}
+    %     pooling&Sharemind&               0&     18$l^{2}$ +12$l$              &$2l+4$\\\cline{2-5}
+    %     &PrivNNP&                   0&   27$l$                  &10 \\\hline
+
+    %     \multirow{3}{*}{ReLU}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2+2$ &7\\\cline{2-5}
+    %     &Sharemind&               0&     $6l^{2}+2l$             &$l+1$\\\cline{2-5}
+    %     &PrivNNP&                   0&   7$l$                  &4 \\\hline
+
+
+    %     \end{tabular}}
+    %     \caption{Overhead of different 2PC schemes with $l$-bits value inputs and  $\kappa$ security parameters }
+    %     \label{Overhead of methods}
+    % \end{table}
+
     \section{Theoretical Analysis}
     \begin{table}[!ht]
 
         % \center
         \resizebox{0.45\textwidth}{!}{
-        \begin{tabular}{|c|c|c|c|c|}\hline
+        \begin{tabular}{c|c|c|c|c}\hline
 
         \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
-        &   &    computation       &     (floating-points)      &            \\ \hline
-        \multirow{3}{*}{comparison}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2$ &6\\\cline{2-5}
-        &Sharemind&               0&     6$l$               &$l$\\\cline{2-5}
-        &PrivNNP&                   0&   5                  &3 \\\hline
-
-        &ABY&                   54$l$& $21l\cdot \kappa+(l^{2}+l)3/2+12$ &16\\\cline{2-5}
-        pooling&Sharemind&               0&     18$l$ +12              &$2l+4$\\\cline{2-5}
-        &PrivNNP&                   0&   27                  &10 \\\hline
-
-        \multirow{3}{*}{ReLU}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2+2$ &7\\\cline{2-5}
-        &Sharemind&               0&     $6l+2$             &$l+1$\\\cline{2-5}
-        &PrivNNP&                   0&   7                  &4 \\\hline
-
+        &   &    computation       &     (bits)      &            \\ \hline
+        \multirow{3}{*}{comparison}&ABY&                   $O(l)$& $O(l\cdot \kappa)$ &$O(\mathsf{log} l)$\\\cline{2-5}
+        &Sharemind&               0&     $O(l^{2})$              &$O(l)$\\\cline{2-5}
+        &PrivNNP&                   0&   $O(l)$                  &3 \\\hline
 
         \end{tabular}}
-        \caption{Overhead of different 2PC schemes with $l$-bits value inputs }
-        \label{Overhead of methods}
+        \caption{Asymptotic complexities of different 2PC-comparison schemes with $l$-bits value inputs and  $\kappa$ is the asymmetric security parameters }
+        \label{Time of methods}
     \end{table}
+
+
     Overhead of 2PC algorithms including
     ABY, Sharemind and PrivNNP
     for comparison, maximum pooling
     and ReLU function is shown in Table \ref{Overhead of methods}.
     PrivNNP performs best in all respects.
 
+    \begin{table}[!ht]
 
+        % \center
+        \resizebox{0.45\textwidth}{!}{
+        \begin{tabular}{c|c|c|c|c}\hline
+
+        \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
+        &   &    computation       &     (bits)      &            \\ \hline
+        \multirow{3}{*}{comparison}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2$ &6\\\cline{2-5}
+        &Sharemind&               0&     6$l^{2}$               &$l$\\\cline{2-5}
+        &PrivNNP&                   0&   5$l$                  &3 \\\hline
+
+        &ABY&                   54$l$& $21l\cdot \kappa+(l^{2}+l)3/2+12$ &16\\\cline{2-5}
+        pooling&Sharemind&               0&     18$l^{2}$ +12$l$              &$2l+4$\\\cline{2-5}
+        &PrivNNP&                   0&   27$l$                  &10 \\\hline
+
+        \multirow{3}{*}{ReLU}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2+2$ &7\\\cline{2-5}
+        &Sharemind&               0&     $6l^{2}+2l$             &$l+1$\\\cline{2-5}
+        &PrivNNP&                   0&   7$l$                  &4 \\\hline
+
+
+
+
+        \end{tabular}}
+        \caption{Overhead of different 2PC schemes with $32$-bits value inputs and  $\kappa$ is the asymmetric security parameters }
+        \label{Overhead of methods}
+    \end{table}
 
     \section{Experimental result}
     To evaluate the performance of our work, we conduct simulation experiments on a desktop (CPU: AMD Ryzen 7 5800H with 3.20GHz).
@@ -1203,7 +1261,7 @@
     Each experiment was repeated 10 times.
 
     The experiments are divided into three parts: basic operations, neural network layers and neural network implementation.
-    \subsection{Operations}
+    \subsubsection{Operations}
     \begin{figure}[htbp]
         \subfigure[multiplication] %第一张子图
         {
@@ -1228,7 +1286,7 @@
     \end{figure}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=4cm]{operation_compare.pdf}
+        \includegraphics[width=5cm]{operation_compare.pdf}
         \caption{Experiment I-Overhead of 2PC-comparison}
         \label{operation_compare}
     \end{figure}
@@ -1250,7 +1308,7 @@
     Take matrix multiplication as an example,
     when the width is $1000$, the communication costs $3.12$s, accounting for $96\%$ of total time.
 
-    \subsection{Neural network layers}
+    \subsubsection{Neural network layers}
     \begin{table}[!ht]
 
         \center
@@ -1302,7 +1360,7 @@
     and the communication cost still accounts for the vast majority.
 
 
-    \subsection{Neural networks}
+    \subsubsection{Neural networks}
     In Experiment III, we conduct
     time-consuming tests on a medium network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
     The MNIST dataset \cite{MNIST} is used for training neural network models, which consists of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
