@@ -349,34 +349,12 @@
     MPC enables multiple participants to jointly compute a function over their private inputs without leaking
 	their individual input. It has broad applications where privacy is important, e.g. voting, auction,
 	data mining etc. Two-party computation (2PC) is a special case of MPC.
-    In this work, we consider semi-honest 2PC participants
+    In this work, we consider semi-honest participants
     who will not deviate from the protocol but may try to gain private information of another party
 		during the protocol execution.
 
 
-    \textbf{Definition of security of 2PC protocols}:
 
-    Let $\pi $ be a deterministic 2PC protocol for computing
-    $f=(f_{0},f_{1})$,
-    where the $\mathcal{P}_{i}$ inputs $\langle x\rangle ^{i}$
-    and wishs to obtain $f_{i}(x)$.
-
-    The ideal-world/real-world paradigm \cite{SecurityProof} is that
-    in real-world, parties interact following the protocol,
-    while in ideal world, parties have access to a
-    simulator $\mathcal{S}$ that implements the 2PC protocol.
-    Environment $\varepsilon $ chooses the
-    inputs to the parties.
-    The view of the $\mathcal{P}_{i}$ in the real-world
-    is denoted as $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
-    where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the real-world
-    is denoted as $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle x\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
-
-    A 2PC protocol for $f$ is secure in the presence of semi-honest adversaries
-    if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
-    the view of adversary in real-world is indistinguishable to that in ideal-world.
-    Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
-    $\mathsf{view}_{i}^{\pi}$.
     % \begin{itemize}
     %     \item The ideal-world/real-world paradigm \cite{SecurityProof}:
     %     in real-world, parties interact following the protocol,
@@ -404,7 +382,7 @@
     \subsection{2PC secret sharing}
     % Secret sharing is a method that a secret is split in some ways and each share is held by each participant    and
     2PC secret sharing means a secret value is shared between two parties.
-    Our framework involves two types of 2PC secret sharing methods:
+    Our work involves two types of 2PC secret sharing methods:
     additive sharing and multiplicative sharing.
     \begin{itemize}
         \item
@@ -435,6 +413,29 @@
     $\mathcal{P}_{i}$ can only get the value of $\langle x\rangle ^{i}$, $\langle y\rangle ^{i}$ and $\langle z\rangle ^{i}$ ($i \in \{0,1\}$).
     This enable two parties to run multiple rounds of different protocols while keeping secret state input.
 
+    \subsection{Definition of security of 2PC protocols}
+
+    Let $\pi $ be a deterministic 2PC protocol for computing
+    function $\mathsf{f}$,
+    where the $\mathcal{P}_{i}$ inputs $\langle \mathbf{x}\rangle ^{i}$
+    and wishs to obtain $\langle \mathsf{f}(\mathbf{x}) \rangle ^{i}$.
+
+    The ideal-world/real-world paradigm \cite{SecurityProof} is that
+    in the real-world, parties interact following the protocol,
+    while in the ideal-world, parties have access to a
+    simulator $\mathcal{S}$ that implements the 2PC protocol.
+    Environment $\varepsilon $ chooses the
+    inputs to the parties.
+    The view of the $\mathcal{P}_{i}$ in the real-world
+    is denoted as $\mathsf{view}_{i}^{\pi}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
+    where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the ideal-world
+    is denoted as $\mathsf{view}_{0}^{\mathcal{S}_{0}}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
+
+    A 2PC protocol for $\mathsf{f}$ is secure in the presence of semi-honest adversaries
+    if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
+    the view of adversary in the real-world is indistinguishable to that in the ideal-world.
+    Namely, $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with
+    $\mathsf{view}_{i}^{\pi}$.
     \subsection{Auxiliary tuples}
     Some auxiliary tuples of specific structures are used to
     assit in running $\mathtt{multiplication}$ and $\mathtt{comparison}$ protocols.
@@ -789,7 +790,7 @@
     Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
     messages transferred during the two $\mathtt{multiplication}$ protocols
     are marked with different subscripts: $1$ and $2$.
-    An ideal world simulator $\mathcal{S}im$ performs as follow.
+    An ideal-world simulator $\mathcal{S}_{0}$ performs as follow.
     \begin{itemize}
         \item 1. recieves $\langle x\rangle ^{0}$,
         $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$,
