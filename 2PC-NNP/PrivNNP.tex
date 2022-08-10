@@ -709,9 +709,10 @@
 
 
 
-    \textbf{Definition of security in \cite{SecurityProof}}:
+    \textbf{Definition of security }:
     \begin{itemize}
-        \item The ideal-world/real-world paradigm: in real-world, parties interact following the protocol,
+        \item The ideal-world/real-world paradigm \cite{SecurityProof}:
+        in real-world, parties interact following the protocol,
         while in ideal world, parties have access to a
         simulator $\mathcal{S}$ that implements the $\mathtt{comparison}$ protocol.
         Environment $\varepsilon $ chooses the
@@ -769,7 +770,7 @@
     \end{itemize}
 
 
-    The view of $\mathcal{P}_{0}$ in the real execution is $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{0};m^{0}_{1},...,m^{0}_{t}
+    The view of $\mathcal{P}_{0}$ in the real execution is $\mathsf{view}_{i}^{\pi}=(\langle x\rangle ^{0};
     \langle e\rangle_{1}^{1}=\langle x\rangle^{1}-\langle a\rangle_{1}^{1},
     \langle f\rangle_{1}^{1}=\langle u\rangle^{1}-\langle b\rangle_{1}^{1},
     \langle z\rangle_{1}^{1} = e_{1} \cdot f_{1} + f_{1}\cdot \langle a\rangle_{1}^{1}
@@ -782,7 +783,8 @@
     \langle f\rangle_{1}^{1},
     \langle z\rangle_{1}^{1},
     \langle e\rangle_{2}^{1},
-    \langle f\rangle_{2}^{1})$ are all random numbers.
+    \langle f\rangle_{2}^{1})$
+    and messages recieved are all random numbers.
     So any element in the real-world
     is indistinguishable from a random number since $(\langle x\rangle^{1},\langle u\rangle^{1},\langle a\rangle_{1}^{1},\langle b\rangle_{1}^{1},\langle c\rangle^{1}_{1},
     \langle a\rangle_{2}^{1},\langle b\rangle_{2}^{1})$ is unknown to $\mathcal{P}_{0}$.
@@ -1014,7 +1016,7 @@
     Elements with blue font repeated four times
     and elements with red font were duplicated two times.
 
-    The duplicated element can be blinded by only one random number
+    The duplicated elements can be blinded by only one random number
     and two parties can  blind $(\mathbf{X},\mathbf{W})$ and
     construct the blinded $(\mathbf{X}',\mathbf{W}')$ locally instead of blinding $(\mathbf{X}',\mathbf{W}')$ directly.
     The optimization of 2PC-convolution is given below.
@@ -1050,8 +1052,8 @@
     which output the average or the maximum of $n\times n$ size submatrices respectively
     to construct the output matrix.
     We take $2\times 2$ window as an example to show how $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ compute the output of a submatrix.
-    For each $2\times 2$ submatrix $\mathbf{X}$, average pooling outputs $y_{avg}=\frac{X_{00}+ X_{01}+ X_{10}+  X_{11}}{4}$
-    and maximum pooling outputs $y_{max}=\mathsf{max}(X_{00}, X_{01}, X_{10},  X_{11})$
+    For each $2\times 2$ submatrix $\mathbf{X}$, the average pooling outputs $y_{avg}=\frac{X_{00}+ X_{01}+ X_{10}+  X_{11}}{4}$
+    and the maximum pooling outputs $y_{max}=\mathsf{max}(X_{00}, X_{01}, X_{10},  X_{11})$.
     $$  \langle \mathbf{X}\rangle ^{0}= \begin{bmatrix}
         \langle X_{00}\rangle ^{0}& \langle X_{01}\rangle ^{0} \\
         \langle X_{10}\rangle ^{0}& \langle X_{11}\rangle ^{0}
@@ -1248,12 +1250,12 @@
     % to test the time cost.
     The result is shown in Table \ref{Layers_consumption}.
     In general, the computational overhead of neural network layers has been reduced to an acceptable range
-    and the communication cost still account for the vast majority.
+    and the communication cost still accounts for the vast majority.
 
 
     \subsection{Neural networks}
     In Experiment III, we conduct
-    time-consuming tests on a small network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
+    time-consuming tests on a medium network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
     The MNIST dataset \cite{MNIST} is used for training neural network models, which consists of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
     for handwriting recognition.
     % Since the size of input image of Resnet50 is $3\times 224 \times 224$,
@@ -1280,8 +1282,8 @@
 
     \section{Conclusion and Future Work}
     In this work, we presented PrivNNP, a two-party computation framework for neural network predictions.
-    This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol which does not involve asymmetric cryptographic operations
-    and we design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
+    This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol which does not involve asymmetric cryptographic operations.
+    We design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
     This framework has great potential
     since we only consider the WAN setting where the communication speed is limited.
     Future work can utilize the LAN to reduce the communication time cost.
