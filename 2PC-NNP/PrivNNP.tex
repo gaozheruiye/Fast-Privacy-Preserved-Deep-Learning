@@ -17,7 +17,7 @@
 % These are recommended to typeset algorithms but not required. See the subsubsection on algorithms. Remove them if you don't have algorithms in your paper.
 \usepackage{algorithm}
 \usepackage{algorithmic}
-
+\usepackage{enumerate}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{textcomp}
@@ -31,6 +31,7 @@
 \usepackage{multirow}
 \usepackage{arydshln}
 \usepackage{subfigure} % 子图包
+
 % \usepackage{makecell}
 
 
@@ -257,10 +258,10 @@
         The building block of our work is a brand new 2PC-$\mathtt{comparison}$ protocol,
         which does not utilize the asymmetric cryptography or the bit-level operations
         and only consists of three rounds of interactions to calculate the sign of the secret input value.
-        The computation is $l\times$ faster than the Sharemind \cite{Sharemind}
-        when the secret input is a $l-$bit value.
-        % Equiped with the novel 2PC-$\mathtt{comparison}$ protocol, we design schemes for more complicated functions
-        % like maximum function and piecewise functions.
+        The computation is $10\times$ faster than the ABY \cite{ABY}
+        and the communication size is reduced to $\frac{1}{91}$ of the size of ABY,
+        when the secret input is a $32-$bit value.
+
         \item
         We theoretically prove that our scheme satisfies the
         \textbf{security} definition of the two-party computation.
@@ -305,7 +306,7 @@
 
 \section{Preliminaries}
     % \subsection{Notations}
-    \textbf{Notations}:
+    \textbf{Notations.}
     \begin{table}
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{l||l}
@@ -345,7 +346,7 @@
         -1 & \text{ if } x<0
     \end{cases}$$
 
-    \subsubsection{Multi-Party Computation and Two-Party Computation:}
+    \subsubsection{Multi-Party Computation and Two-Party Computation.}
     MPC enables multiple participants to jointly compute a function over their private inputs without leaking
 	their individual input. It has broad applications where privacy is important, e.g. voting, auction,
 	data mining etc. Two-party computation (2PC) is a special case of MPC.
@@ -354,7 +355,7 @@
 		during the protocol execution.
 
 
-        \subsubsection{2PC secret sharing:}
+        \subsubsection{2PC secret sharing.}
     % Secret sharing is a method that a secret is split in some ways and each share is held by each participant    and
     2PC secret sharing means a secret value is shared between two parties.
     Our work involves two types of 2PC secret sharing methods:
@@ -405,14 +406,14 @@
     where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the ideal world
     is denoted as $\mathsf{view}_{1}^{\mathcal{S}_{1}}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
 
-    \subsubsection{Definition 1 (Security).}
-    A 2PC protocol for $\mathsf{f}$ is secure in the presence of semi-honest adversaries
+    \subsubsection{Definition 1 (2PC-Security).}
+    A 2PC protocol $\pi$ for $\mathsf{f}$ is secure in the presence of semi-honest adversaries
     if there exist simulators $\mathcal{S}_{0}$ and $\mathcal{S}_{1}$ such that
     % the view of adversary in the real world is indistinguishable to that in the ideal world.
     $\mathsf{view}_{i}^{\mathcal{S}_{i}}$ is indistinguishable with $\mathsf{view}_{i}^{\pi}$.
     More precisely,
-    for every polynomial-time algorithm $\mathsf{D}$ and every input $\langle \mathbf{x}\rangle ^{i}$ ($\varepsilon $ is negligible ):
-        $$\lvert Pr[\mathsf{D}(\mathsf{view}_{i}^{\mathcal{S}_{i}})=1]-Pr[\mathsf{D}(\mathsf{view}_{i}^{\pi})=1]\leq \varepsilon  \rvert $$
+    for every polynomial-time algorithm $\mathsf{D}$ and every input $\langle \mathbf{x}\rangle ^{i}$: ($\varepsilon $ is negligible)
+        $$\lvert Pr[\mathsf{D}(\mathsf{view}_{i}^{\mathcal{S}_{i}})=1]-Pr[\mathsf{D}(\mathsf{view}_{i}^{\pi})=1]\rvert \leq \varepsilon   $$
 
 
     \subsubsection{Auxiliary tuples:}
@@ -476,7 +477,7 @@
 
     % \subsection{Addition}
 
-    \textbf{2PC-Addition:}
+    \textbf{2PC-Addition.}
     \emph{computing}
     $ \langle z\rangle  = \langle x\rangle  + \langle y\rangle $. This operation can be done without interaction by
     $\mathcal{P}_{0}$ setting $\langle z\rangle^{0}  = \langle x\rangle^{0}  + \langle y\rangle^{0} $ and
@@ -514,7 +515,7 @@
     % The 2PC-addition protocol is shown in Figure \ref{2PC-addition}.
 
     % \subsection{Multiplication}
-    \textbf{2PC-Multiplication:}
+    \textbf{2PC-Multiplication.}
     \emph{computing}
     % \textbf{2PC-Multiplication: computing}
     $ \langle z\rangle  = \langle x\rangle  \otimes \langle y\rangle $.
@@ -640,12 +641,12 @@
         \label{2PC-matrix_multiplication}
     \end{figure}
 
-    \textbf{2PC-Matrix multiplication:}
+    \textbf{2PC-Matrix multiplication.}
     \emph{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
     Similarly, the protocol for the 2PC-matrix multiplication is shown in Figure \ref{2PC-matrix_multiplication}.
 
     % \subsection{Comparison}
-    \textbf{2PC-Comparison:}
+    \textbf{2PC-Comparison.}
     % \emph{computing}
     The 2PC-$\mathtt{comparison}$ protocol is the most important building block of our work.
     Two questions will be discussed in this subsection:
@@ -743,40 +744,68 @@
     2PC-comparison protocol is shown in Figure \ref{2PC-comparison}.
 
 
+    % \textsc{Theorem 1.}
     \textbf{Theorem 1.}
     \emph{The $\mathtt{comparison}$ protocol in Figure \ref{2PC-comparison} is a secure 2PC protocol
     in the presence of semi-honest adversaries.}
 
-    \textbf{Proof:}
+    % \textsc{Proof.}
+    \textbf{Proof.}
     \emph{Security against $\mathcal{P}_{0}$:}
     Since the $\mathtt{comparison}$ protocol involves two $\mathtt{multiplication}$ protocols,
     messages transferred during the two $\mathtt{multiplication}$ protocols
     are marked with different subscripts: $1$ and $2$.
     An ideal world simulator $\mathcal{S}_{0}$ performs as follow.
-    \begin{itemize}
-        \item 1. recieves $\langle x\rangle ^{0}$,
+
+    \begin{enumerate}
+        \item recieves $\langle x\rangle ^{0}$,
         $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$,
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$,
         and $(\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})$
         from $\epsilon $.
 
-        \item 2. starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$,
+        \item starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$,
         $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
         and recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
 
-        \item 3. randomly chooses $(\langle e\rangle_{1}^{1},\langle f\rangle_{1}^{1})$ and sends them to $\mathcal{P}_{0}$.
+        \item randomly chooses $(\langle e\rangle_{1}^{1},\langle f\rangle_{1}^{1})$ and sends them to $\mathcal{P}_{0}$.
 
-        \item 4. randomly chooses $\langle z\rangle ^{1}$ and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
+        \item randomly chooses $\langle z\rangle ^{1}$ and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
 
-        \item 5. runs $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\langle z\rangle ^{1},\llbracket u \rrbracket ^{0})$.
+        \item runs $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\langle z\rangle ^{1},\llbracket u \rrbracket ^{0})$.
 
-        \item 6. runs $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
+        \item runs $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$
         and recieves $(\langle e\rangle_{2}^{0},\langle f\rangle_{2}^{0})$.
 
-        \item 7. randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
+        \item randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
 
-    \end{itemize}
+    \end{enumerate}
+
+    % \begin{itemize}
+    %     \item 1. recieves $\langle x\rangle ^{0}$,
+    %     $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$,
+    %     $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$,
+    %     and $(\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})$
+    %     from $\epsilon $.
+
+    %     \item 2. starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$,
+    %     $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
+    %     and recieves $(\langle e\rangle_{1}^{0},\langle f\rangle_{1}^{0})$.
+
+    %     \item 3. randomly chooses $(\langle e\rangle_{1}^{1},\langle f\rangle_{1}^{1})$ and sends them to $\mathcal{P}_{0}$.
+
+    %     \item 4. randomly chooses $\langle z\rangle ^{1}$ and sends $\langle z\rangle ^{1}$ to $\mathcal{P}_{0}$.
+
+    %     \item 5. runs $\mathcal{P}_{0}$ on input $(\langle z\rangle ^{0},\langle z\rangle ^{1},\llbracket u \rrbracket ^{0})$.
+
+    %     \item 6. runs $\mathcal{P}_{0}$ on input $\llbracket s \rrbracket^{0}$,
+    %     $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$
+    %     and recieves $(\langle e\rangle_{2}^{0},\langle f\rangle_{2}^{0})$.
+
+    %     \item 7. randomly chooses $(\langle e\rangle_{2}^{1},\langle f\rangle_{2}^{1})$ and sends them to $\mathcal{P}_{0}$.
+
+    % \end{itemize}
 
 
     The view of $\mathcal{P}_{0}$ in the real execution is $\mathsf{view}_{0}^{\pi}=(\langle x\rangle ^{0};
@@ -802,10 +831,10 @@
     So the view $\mathcal{S}_{0}$ simulates for $\mathcal{P}_{0}$ is indistinguishable
     from the view of $\mathcal{P}_{0}$ interacting in the real execution.
     Following the same idea, \emph{Security against $\mathcal{P}_{1}$} can also be proved and
-    this protocol is secure for both parties.
+    this protocol is secure for both parties. \rightline{$\square$ }
 
-    \textbf{2PC-maximum:}
-    \emph{Computing} $ \langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
+    \textbf{2PC-maximum.}
+    \emph{Computing} $ \langle m \rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle $.
        This part aims at providing a method to compute the maximum of two shared values $\langle x \rangle$ and $\langle y \rangle$.
        It is easy to see that
        $$\mathsf{max}(x,y) = \left\{\begin{matrix}
@@ -826,7 +855,7 @@
         \begin{tabular}{lcl}
             \hline
             \multicolumn{3}{l}{\textbf{Computation for $\mathsf{max}(x)$}:}\\
-            \multicolumn{3}{l}{\textbf{Target}: compute $\langle maximum\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle$}\\
+            \multicolumn{3}{l}{\textbf{Target}: compute $\langle m\rangle  = \langle \mathsf{max}(\langle x\rangle,\langle y\rangle)\rangle$}\\
             \textbf{Input}:\\
             $\mathcal{P}_{0}$ &  &  $\mathcal{P}_{1}$ \\
             $\{\langle x\rangle ^{0} , \langle y\rangle ^{0}\}$
@@ -848,8 +877,8 @@
             \hdashline
             \multicolumn{3}{c}{run $\mathtt{multiplication}$ protocol to}\\
             \multicolumn{3}{c}{compute
-            $\langle maximum\rangle=\frac{(\langle s\rangle+1)\otimes \langle x\rangle+ (-\langle s\rangle+1)\otimes \langle y\rangle}{2}$}\\
-            gets $\langle maximum\rangle ^{0}$& &gets $\langle maximum\rangle ^{1}$\\
+            $\langle m\rangle=\frac{(\langle s\rangle+1)\otimes \langle x\rangle+ (-\langle s\rangle+1)\otimes \langle y\rangle}{2}$}\\
+            gets $\langle m\rangle ^{0}$& &gets $\langle m\rangle ^{1}$\\
             \hdashline
             \hline
         \end{tabular}}
@@ -863,18 +892,13 @@
     Furthermore, we explore variations of $\mathsf{max}(x,y)$.
     Firstly, maximum of a vector $\mathsf{max}(\overrightarrow{\mathbf{x}})=\mathsf{max}(x_{0},x_{1},...x_{n})$
     can be computed by recursively running $\mathtt{comparison}$ protocol.
-    % Observing that
-    % \begin{align*}
-    %     \mathsf{max}(x_{0},x_{1},...x_{n}) &= \mathsf{max}(x_{0},\mathsf{max}(x_{1},x_{2},...x_{n})) \\
-    %     &= \mathsf{max}(x_{0},\mathsf{max}(x_{1},...\mathsf{max}(x_{n-1},x_{n})))
-    % \end{align*}
-    % So the maximum of vector $\overrightarrow{\mathbf{x}}$
+
 
     Secondly, because of $\mathsf{min}(x,y)=-\mathsf{max}(-x,-y)$,  $min(x,y)$ can also be computed.
     Combined with the above methods,
     any composite function constructed of $\mathsf{max}()$ and $min()$ can be computed following rules metioned above.
 
-    \textbf{2PC-Continuous piecewise function:}
+    \textbf{2PC-Continuous piecewise function.}
     \emph{computing}
     % \subsection{Continuous piecewise function}
     % \textbf{Computing}
@@ -976,8 +1000,8 @@
         \label{framework}
     \end{figure}
 
-    \textbf{System framework}~~
-    as shown in Figure \ref{framework}, in our framework,
+    \textbf{System framework.}~~
+    As shown in Figure \ref{framework}, in our framework,
     the data owner ($\mathcal{DO}$) provides the input data
     and the model provider ($\mathcal{MP}$) provides the model parameters.
     $\mathcal{DO}$ and $\mathcal{MP}$ take the role of
@@ -993,7 +1017,7 @@
 
 
 
-    \subsubsection{Convolution layer}
+    \subsubsection{Convolution layer.}
 
 
     When convolution is operated in practice,
@@ -1023,7 +1047,7 @@
     Each element of matrix is marked with different color and number.
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=4cm]{new_unrolling2.png}
+        \includegraphics[width=3cm]{new_unrolling2.png}
         \caption{Rearranged matrix and weight}
         \label{rearrangement of matrix and weight}
     \end{figure}
@@ -1036,33 +1060,53 @@
     The duplicated elements can be blinded by only one random number
     and two parties can  blind $(\mathbf{X},\mathbf{W})$ and
     construct the blinded $(\mathbf{X}',\mathbf{W}')$ locally instead of blinding $(\mathbf{X}',\mathbf{W}')$ directly.
-    The optimization of 2PC-convolution is given below.
+    The optimization version is given below.
 
-    \textbf{Protocol procedure}:
-    \begin{itemize}
-        \item \textbf{1.} $TTP$ randomly chooses the matrix $(\mathbf{A},\mathbf{B})$ of the same size
+    \textbf{2PC-Convolution protocol procedure}:
+    \begin{enumerate}
+        \item $TTP$ randomly chooses the matrix $(\mathbf{A},\mathbf{B})$ of the same size
         as the original feature $\mathbf{X}$ and the filter weight $\mathbf{W}$.
-        \item \textbf{2.} $TTP$ evaluates $( \mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$
+        \item $TTP$ evaluates $( \mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$
         and $\mathbf{C}' =\mathbf{A}'\cdot \mathbf{B}' $.
         Then, $TTP$ sends $(\langle \mathbf{A}\rangle ^{i},\langle \mathbf{B}\rangle ^{i},\langle \mathbf{C}'\rangle ^{i})$
         to $\mathcal{P}_{i}$.
-        \item \textbf{3.} $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-
+        \item $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-
         \langle \mathbf{A}\rangle ^{i}$
         and $\langle \mathbf{F}\rangle ^{i}=\langle \mathbf{W}\rangle ^{i}-\langle \mathbf{B}\rangle ^{i}$
         and transmits $(\langle \mathbf{E}\rangle ^{i},\langle \mathbf{F}\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
-        \item \textbf{4.} $\mathcal{P}_{i}$ reconstructs $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
+        \item $\mathcal{P}_{i}$ reconstructs $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
         $\mathbf{F} = \langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$
         and rearranges $(\mathbf{E}',\mathbf{F}')=\mathsf{Unroll}(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$.
-        \item \textbf{5.} $\mathcal{P}_{i}$ sets
+        \item $\mathcal{P}_{i}$ sets
         $\langle \mathbf{Z}\rangle^{i}=i\cdot \mathbf{E}' \cdot \mathbf{F}' +
         \langle \mathbf{A}'\rangle^{i} \cdot \mathbf{F}' + \mathbf{E}' \cdot \langle \mathbf{B}'\rangle^{i} + \langle \mathbf{C}'\rangle^{i}$.
 
-    \end{itemize}
+    \end{enumerate}
+
+    % \begin{itemize}
+    %     \item \textbf{1.} $TTP$ randomly chooses the matrix $(\mathbf{A},\mathbf{B})$ of the same size
+    %     as the original feature $\mathbf{X}$ and the filter weight $\mathbf{W}$.
+    %     \item \textbf{2.} $TTP$ evaluates $( \mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$
+    %     and $\mathbf{C}' =\mathbf{A}'\cdot \mathbf{B}' $.
+    %     Then, $TTP$ sends $(\langle \mathbf{A}\rangle ^{i},\langle \mathbf{B}\rangle ^{i},\langle \mathbf{C}'\rangle ^{i})$
+    %     to $\mathcal{P}_{i}$.
+    %     \item \textbf{3.} $\mathcal{P}_{i}$ sets $\langle \mathbf{E}\rangle ^{i}=\langle \mathbf{X}\rangle ^{i}-
+    %     \langle \mathbf{A}\rangle ^{i}$
+    %     and $\langle \mathbf{F}\rangle ^{i}=\langle \mathbf{W}\rangle ^{i}-\langle \mathbf{B}\rangle ^{i}$
+    %     and transmits $(\langle \mathbf{E}\rangle ^{i},\langle \mathbf{F}\rangle ^{i})$ to $\mathcal{P}_{1-i}$.
+    %     \item \textbf{4.} $\mathcal{P}_{i}$ reconstructs $\mathbf{E} = \langle \mathbf{E}\rangle ^{0}+\langle \mathbf{E}\rangle ^{1}$,
+    %     $\mathbf{F} = \langle \mathbf{F}\rangle ^{0}+\langle \mathbf{F}\rangle ^{1}$
+    %     and rearranges $(\mathbf{E}',\mathbf{F}')=\mathsf{Unroll}(\mathbf{E},\mathbf{F})$ and $(\mathbf{A}',\mathbf{B}')=\mathsf{Unroll}(\mathbf{A},\mathbf{B})$.
+    %     \item \textbf{5.} $\mathcal{P}_{i}$ sets
+    %     $\langle \mathbf{Z}\rangle^{i}=i\cdot \mathbf{E}' \cdot \mathbf{F}' +
+    %     \langle \mathbf{A}'\rangle^{i} \cdot \mathbf{F}' + \mathbf{E}' \cdot \langle \mathbf{B}'\rangle^{i} + \langle \mathbf{C}'\rangle^{i}$.
+
+    % \end{itemize}
     By this way, communication overhead can be reduced to almost $ \frac{1}{w^{2}} $ of the original,
     where $w$ is the width of the filter.
 
 
-    \subsubsection{Pooling layer}
+    \subsubsection{Pooling layer.}
 
     There are two types of pooling layer: average pooling and maximum pooling,
     which output the average or the maximum of $n\times n$ size submatrices respectively
@@ -1078,12 +1122,13 @@
         \langle X_{10}\rangle ^{1}& \langle X_{11}\rangle ^{1}
        \end{bmatrix}$$
 
-    2PC-average pooling is easy to implement by local division.
+    2PC-average pooling is easy to implement by local division
+    without interactions.
     To get the average of elements in submatrix $\mathbf{X}$,
     $\mathcal{P}_{0}$ sets $\langle y_{avg}\rangle^{0} = \frac{\langle X_{00}\rangle ^{0}+ \langle X_{01}\rangle ^{0}+
     \langle X_{10}\rangle ^{0}+ \langle X_{11}\rangle ^{0}}{4}$ and
     $\mathcal{P}_{1}$ sets $\langle y_{avg}\rangle^{1} = \frac{\langle X_{00}\rangle ^{1}+ \langle X_{01}\rangle ^{1}+
-    \langle X_{10}\rangle ^{1}+ \langle X_{11}\rangle ^{1}}{4}$. This process can be done without interaction.
+    \langle X_{10}\rangle ^{1}+ \langle X_{11}\rangle ^{1}}{4}$.
 
     2PC-maximum pooling layer can be computed by recursively running $\mathtt{comparison}$ protocol.
     % The approach has been briefly discussed before and now we give it in detail.
@@ -1123,40 +1168,26 @@
     Other activation functions like $\mathsf{Sigmoid}$ can be evaluated by
     approximate piecewise functions.
 
+    \subsubsection{Fully connection layer.}
+    Fully connection layer can be evaluated by running a 2PC-matrix
+    multiplication protocol.
 
-    % \section{Theoretical Analysis}
-    % \begin{table}[!ht]
-
-    %     % \center
-    %     \resizebox{0.45\textwidth}{!}{
-    %     \begin{tabular}{|c|c|c|c|c|}\hline
-
-    %     \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
-    %     &   &    computation       &     (bits)      &            \\ \hline
-    %     \multirow{3}{*}{comparison}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2$ &6\\\cline{2-5}
-    %     &Sharemind&               0&     6$l^{2}$               &$l$\\\cline{2-5}
-    %     &PrivNNP&                   0&   5$l$                  &3 \\\hline
-
-    %     &ABY&                   54$l$& $21l\cdot \kappa+(l^{2}+l)3/2+12$ &16\\\cline{2-5}
-    %     pooling&Sharemind&               0&     18$l^{2}$ +12$l$              &$2l+4$\\\cline{2-5}
-    %     &PrivNNP&                   0&   27$l$                  &10 \\\hline
-
-    %     \multirow{3}{*}{ReLU}&ABY&                   18$l$& $7l\cdot \kappa+(l^{2}+l)/2+2$ &7\\\cline{2-5}
-    %     &Sharemind&               0&     $6l^{2}+2l$             &$l+1$\\\cline{2-5}
-    %     &PrivNNP&                   0&   7$l$                  &4 \\\hline
-
-
-    %     \end{tabular}}
-    %     \caption{Overhead of different 2PC schemes with $l$-bits value inputs and  $\kappa$ security parameters }
-    %     \label{Overhead of methods}
-    % \end{table}
 
     \section{Theoretical Analysis}
+    In this section we compare our PrivNNP with ABY and Sharemind
+    in terms of computation and communication cost.
+    Table \ref{complexities} shows the complexities of
+    overhead of 2PC schemes.
+    Computation time and communication consumption of these schemes for
+     comparison, $2\times 2$ maximum pooling
+    and ReLU function is shown in Table \ref{Overhead of methods}.
+    For each operation, we run the schemes with 1000000 input units in parallel and
+    list the average consumption of one unit.
+    Among these schemes, PrivNNP performs best in all respects.
     \begin{table}[!ht]
-
         % \center
         \resizebox{0.45\textwidth}{!}{
-        \begin{tabular}{c|c|c|c|c}\hline
+        \begin{tabular}{c|c||c|c|c}\hline
 
         \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
         &   &    computation       &     (bits)      &            \\ \hline
@@ -1172,7 +1203,7 @@
 
         % \center
         \resizebox{0.45\textwidth}{!}{
-        \begin{tabular}{c|c|c|c|c}\hline
+        \begin{tabular}{c|c||c|c|c}\hline
 
         \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &computation & communication & \multirow{2}{*}{rounds}     \\
         &   &    time($\mu s$)       &     (Bytes)      &            \\ \hline
@@ -1194,19 +1225,10 @@
         \caption{Overhead of 2PC schemes for different tasks ($32$-bits input vlaue and $\kappa=128$ )}
         \label{Overhead of methods}
     \end{table}
-    Table \ref{complexities} shows the complexities of
-    overhead of 2PC algorithms including
-    ABY, Sharemind and PrivNNP
-    for comparison.
-    And accurate time and communication consumption of these schemes for
-     comparison, $2\times 2$ maximum pooling
-    and ReLU function is shown in Table \ref{Overhead of methods}.
-    For each operation, we run one 1000000 times in parallel and
-    list the consumption of one unit.
-    Among these schemes, PrivNNP performs best in all respects.
+
 
     \section{Experimental result}
-    To evaluate the performance of our work, we conduct simulation experiments on a desktop (CPU: AMD Ryzen 7 5800H with 3.20GHz).
+    To evaluate the performance of our work, we conduct simulation experiments on a desktop (CPU: AMD Ryzen 7 5800H, 3.20GHz).
     We use two independent folders placed on different physical hard drives to simulate two servers belonging to the
     data owner and the model provider for measuring the time cost of computation.
     % and we calculate the communication consumption by counting all of floating-point numbers needed to be passed.
@@ -1215,9 +1237,8 @@
     Files are written in form of npy format supported by Python, where a floating-point number occupies about 0.0078Kb.
     For accurate and stable measurement, file transfer rate between servers is fixed at 10M/s.
     Each experiment was repeated 10 times.
-
     The experiments are divided into three parts: basic operations, neural network layers and neural network implementation.
-    \subsubsection{Operations}
+    \subsubsection{Operations.}
     \begin{figure}[htbp]
         \subfigure[multiplication] %第一张子图
         {
@@ -1237,19 +1258,20 @@
                 \label{operation_matrix_mul}
             \end{minipage}
         }
-        \caption{Experiment I-Overhead of 2PC-multiplication and matrix multiplication}
+        \caption{Overhead of 2PC-multiplication and matrix multiplication}
         \label{multiplication and matrix multiplication}
     \end{figure}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=5cm]{operation_compare.pdf}
-        \caption{Experiment I-Overhead of 2PC-comparison}
+        \includegraphics[width=4cm]{operation_compare.pdf}
+        \caption{Overhead of 2PC-comparison}
         \label{operation_compare}
     \end{figure}
-    In Experiment I, time consumption of basic operations including multiplication, comparison and matrix multiplication are measured.
+    Time consumption of basic operations including multiplication, comparison and matrix multiplication are measured
+    and the data obtained is shown in Figure \ref{multiplication and matrix multiplication} and Figure \ref{operation_compare}.
     % Experiment results of multiplication and matrix multiplication are shown in \ref{operation_mul}
-    For benchmark test, we give the time consumption of one server operating directly as a reference.
-    The data obtained is shown in Figure \ref{multiplication and matrix multiplication} and Figure \ref{operation_compare}.
+    For basic test, we give the time consumption of one server operating directly as a reference.
+
 
     The time cost of secure two-party calculation is divided into two parts:
     local calculation and online communication.
@@ -1259,19 +1281,19 @@
     for file writing and reading operations.
 
     The three operations show the same trend that
-    when the number of elements achieves 10k and more,
+    when the number of elements is more than 10k,
     the communication time becomes longer than the calculation time.
     Take matrix multiplication as an example,
     when the width is $1000$, the communication costs $3.12$s, accounting for $96\%$ of total time.
 
-    \subsubsection{Neural network layers}
+    \subsubsection{Neural network layers.}
     \begin{table}[!ht]
 
         \center
         \resizebox{0.45\textwidth}{!}{
-        \begin{tabular}{|c|c|c|c|c|c|}\hline
+        \begin{tabular}{c|c||c|c|c|c}\hline
 
-        \multicolumn{6}{|c|}{Convolution Layer}\\ \hline
+        \multicolumn{6}{c}{Convolution Layer}\\ \hline
         \multirow{2}{*}{feature size}&\multirow{2}{*}{size of filter}& \multicolumn{3}{c|}{cost time(s)}&communication \\
 
         \cline{3-5}
@@ -1281,42 +1303,39 @@
         (256,14,14)& (256,256,3,3) & 0.20 & 0.50 & 0.70 & 0.096\\ \hline
         (1024,7,7)& (2048,1024,1,1) & 0.21 & 1.68 & 1.89 & 0.086 \\ \hline \hline
 
-        \multicolumn{6}{|c|}{Pooling Layer}\\ \hline
-        \multicolumn{2}{|c|}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
+        \multicolumn{6}{c}{Pooling Layer}\\ \hline
+        \multicolumn{2}{c||}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
 
         \cline{3-5}
-        \multicolumn{2}{|c|}{}&computation&communication&all&size(Mb)\\ \hline
-        \multicolumn{2}{|c|}{(256,14,14)} & 0.088  & 0.26 & 0.35 &2.6	\\ \hline
-        \multicolumn{2}{|c|}{(256,28,28)} & 0.107 & 1.05 & 1.16 & 10.5 \\ \hline
-        \multicolumn{2}{|c|}{(256,56,56)} & 0.240  & 4.23 & 4.47 &42.3	\\ \hline
-        \multicolumn{2}{|c|}{(256,112,112)} & 0.746 & 16.93 & 17.68 & 169.3 \\ \hline          \hline
+        \multicolumn{2}{c||}{}&computation&communication&all&size(Mb)\\ \hline
+        \multicolumn{2}{c||}{(256,14,14)} & 0.088  & 0.26 & 0.35 &2.6	\\ \hline
+        \multicolumn{2}{c||}{(256,28,28)} & 0.107 & 1.05 & 1.16 & 10.5 \\ \hline
+        \multicolumn{2}{c||}{(256,56,56)} & 0.240  & 4.23 & 4.47 &42.3	\\ \hline
+        \multicolumn{2}{c||}{(256,112,112)} & 0.746 & 16.93 & 17.68 & 169.3 \\ \hline          \hline
 
-        \multicolumn{6}{|c|}{ReLU}\\ \hline
-        \multicolumn{2}{|c|}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
+        \multicolumn{6}{c}{ReLU}\\ \hline
+        \multicolumn{2}{c||}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
 
         \cline{3-5}
-        \multicolumn{2}{|c|}{} &computation&communication&all&size(Mb)\\ \hline
-        \multicolumn{2}{|c|}{(256,14,14)} & 0.025  & 0.27 & 0.29 &2.7	\\ \hline
-        \multicolumn{2}{|c|}{(256,28,28)} & 0.054 & 1.09 & 1.15 & 10.9 \\ \hline
-        \multicolumn{2}{|c|}{(256,56,56)} & 0.160  & 4.39 & 4.55 &43.9	\\ \hline
-        \multicolumn{2}{|c|}{(256,112,112)} & 0.631 & 17.56 & 18.19 & 175.6 \\ \hline
+        \multicolumn{2}{c||}{} &computation&communication&all&size(Mb)\\ \hline
+        \multicolumn{2}{c||}{(256,14,14)} & 0.025  & 0.27 & 0.29 &2.7	\\ \hline
+        \multicolumn{2}{c||}{(256,28,28)} & 0.054 & 1.09 & 1.15 & 10.9 \\ \hline
+        \multicolumn{2}{c||}{(256,56,56)} & 0.160  & 4.39 & 4.55 &43.9	\\ \hline
+        \multicolumn{2}{c||}{(256,112,112)} & 0.631 & 17.56 & 18.19 & 175.6 \\ \hline
 
         \end{tabular}}
 
-        \caption{Experiment II-Layers consumption}
+        \caption{Layers consumption}
         \label{Layers_consumption}
     \end{table}
-    In Experiment II, overhead of neural network layers including
-    convolution layer, pooling layer and $\mathsf{ReLU}$ function are measured.
-    % For different neural network layers,
-    % we select several representative shapes of features and filters
-    % to test the time cost.
-    The result is shown in Table \ref{Layers_consumption}.
+    Overhead of neural network layers including
+    convolution layer, pooling layer and $\mathsf{ReLU}$ function is
+    shown in Table \ref{Layers_consumption}.
     In general, the computational overhead of neural network layers has been reduced to an acceptable range
     and the communication cost still accounts for the vast majority.
 
 
-    \subsubsection{Neural networks}
+    \subsubsection{Neural networks.}
     In Experiment III, we conduct
     time-consuming tests on a medium network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
     The MNIST dataset \cite{MNIST} is used for training neural network models, which consists of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
@@ -1329,14 +1348,14 @@
     \begin{table}[!ht]
         \center
         \resizebox{0.45\textwidth}{!}{
-        \begin{tabular}{|c|c|c|c|c|}\hline
+        \begin{tabular}{c||c|c|c|c}\hline
         \multirow{2}{*}{model}& \multicolumn{3}{c|}{time(s)}&communication  \\
         \cline{2-4}
         \multirow{2}{*}{ }&computation&communication&all&size(Mb) \\ \hline
         Lenet-5 & 0.375  & 0.32 & 0.69 &3.2	\\ \hline
         Resnet50 & 23.85 & 100.13 & 123.98 & 1001.3 \\ \hline
         \end{tabular}}
-        \caption{Experiment III-Neural networks consumption}
+        \caption{Neural networks consumption}
         \label{neural networks consumption}
     \end{table}
     As shown in Table \ref{neural networks consumption}, PrivNNP shows an excellent performance
