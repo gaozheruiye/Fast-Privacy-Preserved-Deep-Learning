@@ -910,7 +910,7 @@
 
 
     To solve this problem, we need to compute a vector of
-    $\overrightarrow{v}=(v_{0},v_{1},...,v_{n-1})$ to represent which span is $x$ in.
+    $\overrightarrow{\textbf{v}}=(v_{0},v_{1},...,v_{n-1})$ to represent which span is $x$ in.
     Let $v_{j} = \frac{1-\mathsf{sign}(d_{j-1}-x)\cdot \mathsf{sign}(d_{j}-x)}{2}$.
     In view of $-\infty =d_{0}$ and $d_{n}=+\infty$,
     we set $\mathsf{sign}(d_{0}-x)=-1$ and $\mathsf{sign}(d_{n}-x)=1$.
@@ -924,7 +924,7 @@
     If $x\in (d_{j-1},d_{j})$, then, $v_{j}=1$ and $v_{k}=0 (k\neq j)$, $\mathsf{F}(x)=v_{j}\cdot \mathsf{f}_{j}(x)=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
     If $x=d_{j} $, $ d_{j}\in {d_{1},...,d_{n-1}}$,
-    then, $v_{j}=v_{j+1}=\frac{1}{2}$ and $v_{k}=0$ ($ k\notin \{j,j+1\}$),
+    then, $v_{j}=v_{j+1}=\frac{1}{2}$ and $v_{k}=0$ ($ k\notin \{j,j+1\}$).
     Since $\mathsf{F}(x)$ is a continuous function,
     $\mathsf{F}(x)=\mathsf{f}_{j}(x)=\mathsf{f}_{j+1}(x)=\frac{\mathsf{f}_{j}(x)}{2}+\frac{\mathsf{f}_{j+1}(x)}{2}=\sum_{j=1}^{n}v_{j}\cdot \mathsf{f}_{j}(x)$.
 
@@ -1011,8 +1011,8 @@
 
 \subsection{2PC protocols for neural network layers}
     Neural network has various architectures and
-    most of these architectures are constructed of convolution layer,
-    pooling layer, activation function layer, and other variant layers.
+    most of these architectures are constructed of convolution layers,
+    pooling layers, activation function layers and other variant layers.
     We design the 2PC algorithms for these basic layers.
 
 
@@ -1029,7 +1029,7 @@
     $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'+\mathbf{B}'$, where $\mathbf{B}'$ is a matrix rearranged from the bias vector $\overrightarrow{\mathbf{b}}$ and
     $\mathbf{Y}$ is the output of convolution.
     Since the addition is easy to implement, we ignore the bias vector in this section by setting $\overrightarrow{\mathbf{b}}=\overrightarrow{\mathbf{0}}$.
-    So the convolution can be simplified to $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'$.
+    The convolution can be simplified to $\mathbf{Y}=\mathbf{X}'\cdot \mathbf{W}'$.
     % In order to elaborate better, we presents a mini-convolution to roughly show how this works.
 
     Using $\mathtt{multiplication}$ protocol,
@@ -1151,7 +1151,7 @@
         0 & \text{ if } x \leqslant 0  \\
         x & \text{ if } x > 0
         \end{cases}$$
-    $\mathsf{ReLU}$ function has three dividing points: $d_{0}= -\infty ,d_{1}= 0, d_{n}=+\infty$ and two sub-functions:
+    $\mathsf{ReLU}$ function has three dividing points: $d_{0}= -\infty ,d_{1}= 0, d_{2}=+\infty$ and two sub-functions:
     $\mathsf{f}_{1}(x)= 0 ,\mathsf{f}_{2}(x)= x$.
     With $v_{j} = (1-\mathsf{sign}(d_{j-1}-x)\cdot \mathsf{sign}(d_{j}-x))/2$, this function can be represented as
     % $$\mathsf{ReLU}(x)=\sum_{j=1}^{2}v_{j}\cdot \mathsf{f}_{j}(x)=v_{1}\cdot \mathsf{f}_{1}(x)+v_{2}\cdot \mathsf{f}_{2}(x)=v_{1}\cdot 0 +v_{2}\cdot x=v_{2}\cdot x$$
@@ -1274,7 +1274,7 @@
 
 
     The time cost of secure two-party calculation is divided into two parts:
-    local calculation and online communication.
+    local computation and online communication.
     the time consumption of online communication increases linearly with the increase of the number of elements,
     while local computation time is more complicated.
     There will be a lot of fixed time consumption of calling system file functions
