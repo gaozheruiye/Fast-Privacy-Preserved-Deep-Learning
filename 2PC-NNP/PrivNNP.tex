@@ -645,7 +645,7 @@
         \caption{2PC-matrix multiplication}
         \label{2PC-matrix_multiplication}
     \end{figure}
-    % \subsection{Comparison}
+
     \textbf{2PC-Comparison.}
     % \emph{computing}
     The 2PC-$\mathtt{comparison}$ protocol is the most important building block of our work.
@@ -654,7 +654,8 @@
 
 
     \emph{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
-    The $\mathtt{comparison}$ protocol for computing the sign of the shared value utilizes the comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
+    The $\mathtt{comparison}$ protocol for computing the sign of the shared value utilizes the
+    prepared comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
 
     In our scheme, the two parties first compute $ \langle z\rangle = \langle x\rangle\otimes \langle u\rangle$
     via $\mathtt{multiplication}$ protocol
@@ -910,7 +911,7 @@
 
 
     To solve this problem, we need to compute a vector of
-    $\overrightarrow{\textbf{v}}=(v_{0},v_{1},...,v_{n-1})$ to represent which span is $x$ in.
+    $\overrightarrow{\textbf{v}}=(v_{1},v_{2},...,v_{n})$ to represent which span is $x$ in.
     Let $v_{j} = \frac{1-\mathsf{sign}(d_{j-1}-x)\cdot \mathsf{sign}(d_{j}-x)}{2}$.
     In view of $-\infty =d_{0}$ and $d_{n}=+\infty$,
     we set $\mathsf{sign}(d_{0}-x)=-1$ and $\mathsf{sign}(d_{n}-x)=1$.
@@ -946,10 +947,10 @@
         &
         $\{\langle x\rangle ^{1} ,  \mathsf{F}(),(d_{0},...,d_{n}),$
         \\
-        $(\mathsf{f}_{0}(),...,\mathsf{f}_{n}())\}$
+        $(\mathsf{f}_{1}(),...,\mathsf{f}_{n}())\}$
         &
         &
-        $(\mathsf{f}_{0}(),...,\mathsf{f}_{n}())\}$
+        $(\mathsf{f}_{1}(),...,\mathsf{f}_{n}())\}$
         \\
 
         \textbf{Procedure}:\\
@@ -962,7 +963,7 @@
         ~~~~~~~gets $\langle s_{j}\rangle ^{0}$& &~~~~~~~gets $\langle s_{j}\rangle ^{1}$\\
         \hdashline
         \hdashline
-        \multicolumn{3}{l}{\textbf{For} each $v_{j},j\in\{1,2,...,n-1\}$:}\\
+        \multicolumn{3}{l}{\textbf{For} each $v_{j},j\in\{1,2,...,n\}$:}\\
 
         \multicolumn{3}{c}{run $\mathtt{multiplication}$ protocol to}\\
         \multicolumn{3}{c}{compute
