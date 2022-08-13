@@ -404,7 +404,7 @@
     The view of the $\mathcal{P}_{i}$ in the real world
     is denoted as $\mathsf{view}_{i}^{\pi}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$,
     where $m^{i}_{j}$ is the $j$th message it recieved. The view of the $\mathcal{P}_{i}$ in the ideal world
-    is denoted as $\mathsf{view}_{1}^{\mathcal{S}_{1}}=(\langle \mathbf{x}\rangle ^{i};m^{i}_{1},...,m^{i}_{t})$.
+    is denoted as $\mathsf{view}_{i}^{\mathcal{S}_{i}}=(\langle \mathbf{x}\rangle ^{i};m'^{i}_{1},...,m'^{i}_{t})$.
 
     \subsubsection{Definition 1 (2PC-Security).}
     A 2PC protocol $\pi$ for $\mathsf{f}$ is secure in the presence of semi-honest adversaries
@@ -591,6 +591,11 @@
 
 
 
+
+
+    \textbf{2PC-Matrix multiplication.}
+    \emph{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
+    Similarly, the protocol for the 2PC-matrix multiplication is shown in Figure \ref{2PC-matrix_multiplication}.
     \begin{figure}[ht]
         % \centering{\bf Two-party secure computation protocol for operations}
         \resizebox{0.48\textwidth}{!}{
@@ -640,11 +645,6 @@
         \caption{2PC-matrix multiplication}
         \label{2PC-matrix_multiplication}
     \end{figure}
-
-    \textbf{2PC-Matrix multiplication.}
-    \emph{Computing} $ \langle \mathbf{Z}\rangle  = \langle \mathbf{X}\rangle  \otimes \langle \mathbf{Y}\rangle$.
-    Similarly, the protocol for the 2PC-matrix multiplication is shown in Figure \ref{2PC-matrix_multiplication}.
-
     % \subsection{Comparison}
     \textbf{2PC-Comparison.}
     % \emph{computing}
