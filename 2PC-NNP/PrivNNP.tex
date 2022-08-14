@@ -197,8 +197,11 @@
 
     We propose PrivNNP, a two-party computation (2PC) framework for efficient neural network predictions.
     PrivNNP is highly efficient because it does not use any asymmetric cryptography to simultaneously preserve model privacy and input data privacy.
-    The core of PrivNNP is a novel and efficient two-party comparison protocol,
-    which consists of three rounds of interactions without any oblivious transfer.
+    The core of PrivNNP is a novel and efficient two-party comparison protocol.
+    Compared to the previous work ABY, it
+    reduces the computation time from 1.232$\mu s$ to 0.13$\mu s$ and
+    the communication size from 1094 Bytes to 12 Bytes
+    for evaluating the sign of a secret value.
     From this building block, we construct the complete scheme for evaluating layers of the neural network, including the convolution layer, the pooling layer and the activation function.
 	We formally prove that PrivNNP is secure and also fully implement it with Python.
     Comprehensive experiments show that PrivNNP on resnet50
@@ -254,19 +257,23 @@
     \begin{itemize}
         \item We present \textbf{PrivNNP}, an efficient two-party computation framework
         for evaluating neural network predictions.
-
         The building block of our work is a brand new 2PC-$\mathtt{comparison}$ protocol,
         which does not utilize the asymmetric cryptography or the bit-level operations
         and only consists of three rounds of interactions to calculate the sign of the secret input value.
-        The computation is $10\times$ faster than the ABY \cite{ABY}
-        and the communication size is reduced to $\frac{1}{91}$ of the size of ABY,
-        when the secret input is a $32-$bit value.
 
         \item
         We theoretically prove that our scheme satisfies the
         \textbf{security} definition of the two-party computation.
 
         \item
+        \textbf{Theoretical analysis} shows that compared to ABY \cite{ABY},
+        our 2PC-$\mathtt{comparison}$ protocol
+        reduces the computation from 1.232$\mu s$ to 0.13$\mu s$
+        and reduces the communication size from 1094 Bytes to 12 Bytes
+        for evaluating the sign of a secret value.
+        % The computation is $10\times$ faster than the ABY \cite{ABY}
+        % and the communication size is reduced to $\frac{1}{91}$ of the size of ABY,
+        % when the secret input is a $32-$bit value.
         To demonstrate the performance of our work,
         we implement PrivNNP and conduct \textbf{experiments} on the classical
         neural network model Resnet50 and
@@ -1365,13 +1372,18 @@
     both in medium and large neural networks.
     A prediction of Resnet50 costs 23.85s for computation and 100.13s for communication.
 
-    \section{Conclusion and Future Work}
+    \section{Conclusion}
     In this work, we presented PrivNNP, a two-party computation framework for neural network predictions.
-    This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol which does not involve asymmetric cryptographic operations.
-    We design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
-    This framework has great potential
-    since we only consider the WAN setting where the communication speed is limited.
-    Future work can utilize the LAN to reduce the communication time cost.
+    This framework is based on a novel 2PC-$\mathtt{comparison}$ protocol,
+    which does not involve asymmetric cryptographic operations.
+    It costs 12 Bytes in communication and 0.13$\mu s$ in computation,
+    compared to 1094 Bytes and 1.232$\mu s$ in ABY.
+    % The communication cost of running one $\mathtt{comparison}$ protocol is reduced from 1094 Bytes to 12 Bytes
+    % and .
+    Moreover, we design methods to evaluate each layer in neural network and implement an experiment on Resnet50.
+    % This framework has great potential
+    % since we only consider the WAN setting where the communication speed is limited.
+    % Future work can utilize the LAN to reduce the communication time cost.
 \bibliography{aaai23}
 
 \end{document}
