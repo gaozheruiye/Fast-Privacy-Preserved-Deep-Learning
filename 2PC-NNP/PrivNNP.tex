@@ -237,7 +237,7 @@
     To address this issue, secure multi-party computation (MPC) can be employed to preserve both the model privacy
     and the input data privacy in deep learning prediction.
     Generally, MPC enables multiple participants
-    to compute outputs from their private inputs without leaking privacy.
+    to compute outputs from their private inputs without leaking privacy \cite{MPCmethod1}.
     A particular case of MPC, the two-party computation (2PC) setting
     which only involves two parties, is used throughout the paper.
 
@@ -349,7 +349,7 @@
     \subsubsection{Multi-Party Computation and Two-Party Computation.}
     MPC enables multiple participants to jointly compute a function over their private inputs without leaking
 	their individual input. It has broad applications where privacy is important, e.g. voting, auction,
-	data mining etc. Two-party computation (2PC) is a special case of MPC.
+	data mining \cite{DataMining} etc. Two-party computation (2PC) is a special case of MPC.
     In this work, we consider semi-honest participants
     who will not deviate from the protocol but may try to gain private information of another party
 		during the protocol execution.
@@ -575,7 +575,7 @@
         \label{2PC-multiplication}
 
     \end{figure}
-    The 2PC-$\mathtt{multiplication}$ protocol is shown in Figure \ref{2PC-multiplication}.
+    The 2PC-$\mathtt{multiplication}$ protocol is shown in Figure \ref{2PC-multiplication} \cite{EfficientMultipartyProtocols}.
 
     Moreover, if the private input data is not in the share state,
     such as $\mathcal{P}_{0}$ holding the secret value $x$
@@ -655,7 +655,7 @@
 
     \emph{Computing} $\langle s\rangle  = \langle \mathsf{sign}(\langle x\rangle)\rangle $.
     The $\mathtt{comparison}$ protocol for computing the sign of the shared value utilizes the
-    prepared comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
+    prepared auxiliary comparison bigram $(\langle u\rangle,\llbracket u \rrbracket )$.
 
     In our scheme, the two parties first compute $ \langle z\rangle = \langle x\rangle\otimes \langle u\rangle$
     via $\mathtt{multiplication}$ protocol
@@ -1178,13 +1178,8 @@
     In this section we compare our PrivNNP with ABY and Sharemind
     in terms of computation and communication cost.
     Table \ref{complexities} shows the complexities of
-    overhead of 2PC schemes.
-    Computation time and communication consumption of these schemes for
-     comparison, $2\times 2$ maximum pooling
-    and ReLU function is shown in Table \ref{Overhead of methods}.
-    For each operation, we run the schemes with 1000000 input units in parallel and
-    list the average consumption of one unit.
-    Among these schemes, PrivNNP performs best in all respects.
+    the overhead of 2PC schemes.
+
     \begin{table}[!ht]
         % \center
         \resizebox{0.45\textwidth}{!}{
@@ -1197,9 +1192,16 @@
         &PrivNNP&                   0&   $O(l)$                  &3 \\\hline
 
         \end{tabular}}
-        \caption{consumptions of different 2PC-comparison schemes with $l$-bits value inputs and  asymmetric security parameters $\kappa$ }
+        \caption{consumptions of different 2PC-comparison schemes with $l$-bits value input and  asymmetric security parameters $\kappa$ }
         \label{complexities}
     \end{table}
+
+    Computation time and communication consumption of these schemes for
+    comparison, $2\times 2$ maximum pooling
+   and ReLU function is shown in Table \ref{Overhead of methods}.
+   For each operation, we run the schemes with 1000000 input units in parallel and
+   list the average consumption of one unit.
+   Among these schemes, PrivNNP performs best in all respects.
     \begin{table}[!ht]
 
         % \center
@@ -1268,13 +1270,13 @@
         \caption{Overhead of 2PC-comparison}
         \label{operation_compare}
     \end{figure}
-    Time consumption of basic operations including multiplication, comparison and matrix multiplication are measured
+    The time consumption of basic operations including multiplication, comparison and matrix multiplication is measured
     and the data obtained is shown in Figure \ref{multiplication and matrix multiplication} and Figure \ref{operation_compare}.
     % Experiment results of multiplication and matrix multiplication are shown in \ref{operation_mul}
     For basic test, we give the time consumption of one server operating directly as a reference.
 
 
-    The time cost of secure two-party calculation is divided into two parts:
+    The time cost of secure two-party computation is divided into two parts:
     local computation and online communication.
     the time consumption of online communication increases linearly with the increase of the number of elements,
     while local computation time is more complicated.
@@ -1329,7 +1331,7 @@
         \caption{Layers consumption}
         \label{Layers_consumption}
     \end{table}
-    Overhead of neural network layers including
+    The overhead of neural network layers including
     convolution layer, pooling layer and $\mathsf{ReLU}$ function is
     shown in Table \ref{Layers_consumption}.
     In general, the computational overhead of neural network layers has been reduced to an acceptable range
@@ -1337,7 +1339,7 @@
 
 
     \subsubsection{Neural networks.}
-    In Experiment III, we conduct
+    We conduct
     time-consuming tests on a medium network Lenet-5 \cite{Lenet5} and a large network Resnet50\cite{DeepResidualLearning}.
     The MNIST dataset \cite{MNIST} is used for training neural network models, which consists of about 70000 images of size $1\times 28 \times 28$ with $10$ classes
     for handwriting recognition.
