@@ -293,12 +293,12 @@
 
     To reduce the overhead of homomorphic encryption operations,
     some more efficient schemes for MPC operations are presented.
-    On a very high level, the MPC multiplication is easy to be implemented by the Beaver triple \cite{EfficientMultipartyProtocols}
+    On a very high level, the MPC multiplication is easy to implement by the Beaver triple \cite{EfficientMultipartyProtocols}
     but the MPC comparison is very hard to realize.
     To avoid the expensive cost of comparison,
     a modified deep learning model \cite{CryptoNets} using square activation function and the mean pooling so that
     no comparison operation is needed in MPC neural network.
-    Obviously, this architecture has a narrow application scope.
+    Obviously, this architecture has a narrow range of applications.
 
     In order to realize practical comparison protocol, ABY framework \cite{ABY} is proposed
     and then be extended to ABY3 \cite{ABY3} which can be performed among 3 parties.
@@ -354,7 +354,7 @@
     \end{cases}$$
 
     \subsubsection{Multi-Party Computation and Two-Party Computation.}
-    MPC enables multiple participants to jointly compute a function over their private inputs without leaking
+    Multi-Party Computation (MPC) enables multiple participants to jointly compute a function over their private inputs without leaking
 	their individual input. It has broad applications where privacy is important, e.g. voting, auction,
 	data mining \cite{DataMining} etc. Two-party computation (2PC) is a special case of MPC.
     In this work, we consider semi-honest participants
@@ -394,13 +394,13 @@
     $\langle x\rangle, \langle y\rangle$ and obtaining the
     the additive share of the product.
     $\mathcal{P}_{i}$ can only get the value of $\langle x\rangle ^{i}$, $\langle y\rangle ^{i}$ and $\langle z\rangle ^{i}$ ($i \in \{0,1\}$).
-    This enable two parties to run multiple rounds of different protocols while keeping secret state input.
+    This enables two parties to run multiple rounds of different protocols while keeping secret state input.
 
     \subsubsection{Definition of security of 2PC protocols:}
     Let $\pi $ be a deterministic 2PC protocol for computing
     function $\mathsf{f}$,
     where the $\mathcal{P}_{i}$ inputs $\langle \mathbf{x}\rangle ^{i}$
-    and wishs to obtain $\langle \mathsf{f}(\mathbf{x}) \rangle ^{i}$, $i \in \{0,1\}$.
+    and wishes to obtain $\langle \mathsf{f}(\mathbf{x}) \rangle ^{i}$, $i \in \{0,1\}$.
 
     The ideal world/real world paradigm \cite{SecurityProof} is that
     in the real world, parties interact following the protocol,
