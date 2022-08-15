@@ -464,7 +464,7 @@
             \end{cases}
         \end{align*}
         Most of the activation functions are continuous piecewise function ($\mathsf{ReLU}$)
-        or can be roughly evaluated by approximate piecewise function ($\mathsf{Sigmoid}$)
+        or can be roughly evaluated by approximate piecewise function ($\mathsf{Sigmoid}$).
         In the paper, we mainly introduce method to compute $\mathsf{ReLU}$ function.
         Other functions can be computed by similar approach.
     \end{itemize}
@@ -475,7 +475,7 @@
     In this section we introduce 2PC protocols for basic operations,
     including addition, comparison, maximum and piecewise function.
     Our protocols all operate on shares, which means
-    the input and the output is in the form of additive shares.
+    the input and the output are in the form of additive shares.
     This enables two parties to run multiple rounds of different
     protocols while keeping the input secret
     and facilitate further processing to implement a complex system.
@@ -681,7 +681,7 @@
     =\mathsf{sign}(\frac{z}{\llbracket u \rrbracket^{0}})
     \cdot \mathsf{sign}(\frac{1}{\llbracket u \rrbracket^{1}})$$
 
-    Because the $(\llbracket u \rrbracket^{0},z)$ and $\llbracket u \rrbracket^{1}$
+    Because $(\llbracket u \rrbracket^{0},z)$ and $\llbracket u \rrbracket^{1}$
     is held by $\mathcal{P}_{0}$ and $\mathcal{P}_{1}$ respectively.
     Therefore, the multiplicative share of $\mathsf{sign}(x)$ can be obtained by
     $\mathcal{P}_{0}$ setting $\llbracket s \rrbracket^{0}
@@ -770,7 +770,7 @@
         $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$,
         $(\langle a\rangle_{2}^{0},\langle b\rangle_{2}^{0},\langle c\rangle_{2}^{0})$,
         and $(\langle u\rangle ^{0},\llbracket u \rrbracket ^{0})$
-        from $\epsilon $.
+        from the environment $\epsilon $.
 
         \item starts running $\mathcal{P}_{0}$ on input $(\langle x\rangle ^{0},\langle u\rangle ^{0})$,
         $(\langle a\rangle_{1}^{0},\langle b\rangle_{1}^{0},\langle c\rangle_{1}^{0})$
@@ -920,7 +920,7 @@
     To solve this problem, we need to compute a vector of
     $\overrightarrow{\textbf{v}}=(v_{1},v_{2},...,v_{n})$ to represent which span is $x$ in.
     Let $v_{j} = \frac{1-\mathsf{sign}(d_{j-1}-x)\cdot \mathsf{sign}(d_{j}-x)}{2}$.
-    In view of $-\infty =d_{0}$ and $d_{n}=+\infty$,
+    In view of $d_{0}=-\infty $ and $d_{n}=+\infty$,
     we set $\mathsf{sign}(d_{0}-x)=-1$ and $\mathsf{sign}(d_{n}-x)=1$.
     It is easy to see that
     $$v_{j}=\begin{cases}
@@ -1172,7 +1172,7 @@
     \end{align*}
 
     Parties can follow $\mathtt{multiplication}$ protocol and $\mathtt{comparison}$ protocol to compute
-    $\langle y\rangle=\langle \mathsf{ReLU}(\langle x\rangle)\rangle=\frac{(1+\langle \mathsf{sign}(\langle x\rangle)\rangle)\otimes \langle x\rangle}{2}$.
+    $\langle \mathsf{ReLU}(\langle x\rangle)\rangle=\frac{(1+\langle \mathsf{sign}(\langle x\rangle)\rangle)\otimes \langle x\rangle}{2}$.
     Other activation functions like $\mathsf{Sigmoid}$ can be evaluated by
     approximate piecewise functions.
 
@@ -1245,7 +1245,7 @@
     We use Python 3.9.7 to implement our system and use functions in the SPDZ library \cite{SPDZ}.
     All operations involved in the experiments are floating-point operations.
     Files are written in form of npy format supported by Python, where a floating-point number occupies about 0.0078Kb.
-    For accurate and stable measurement, file transfer rate between servers is fixed at 10M/s.
+    For accurate and stable measurement, file transferring rate between servers is fixed at 10M/s.
     Each experiment was repeated 10 times.
     The experiments are divided into three parts: basic operations, neural network layers and neural network implementation.
     \subsubsection{Operations.}
@@ -1285,7 +1285,7 @@
 
     The time cost of secure two-party computation is divided into two parts:
     local computation and online communication.
-    the time consumption of online communication increases linearly with the increase of the number of elements,
+    the time consumption of online communication increases linearly with the number of elements,
     while local computation time is more complicated.
     There will be a lot of fixed time consumption of calling system file functions
     for file writing and reading operations.
