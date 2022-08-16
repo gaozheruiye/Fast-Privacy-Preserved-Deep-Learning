@@ -1192,9 +1192,9 @@
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{c|c||c|c|c}\hline
 
-        \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &asymmetric & communication & \multirow{2}{*}{rounds}     \\
+        \multirow{2}{*}{2PC task}& \multirow{2}{*}{Schemes} &Asymmetric & Communication & \multirow{2}{*}{Rounds}     \\
         &   &    computation       &     (bits)      &            \\ \hline
-        \multirow{3}{*}{comparison}&ABY&                   $O(l)$& $O(l\cdot \kappa)$ &$4$\\\cline{2-5}
+        \multirow{3}{*}{Comparison}&ABY&                   $O(l)$& $O(l\cdot \kappa)$ &$4$\\\cline{2-5}
         &Sharemind&               0&     $O(l^{2})$              &$O(l)$\\\cline{2-5}
         &PrivNNP&                   0&   $O(l)$                  &3 \\\hline
 
@@ -1215,15 +1215,15 @@
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{c|c||c|c|c}\hline
 
-        \multirow{2}{*}{2PC task}& \multirow{2}{*}{schemes} &computation & communication & \multirow{2}{*}{rounds}     \\
+        \multirow{2}{*}{2PC task}& \multirow{2}{*}{Schemes} &Computation & Communication & \multirow{2}{*}{Rounds}     \\
         &   &    time($\mu s$)       &     (Bytes)      &            \\ \hline
-        \multirow{3}{*}{comparison}
+        \multirow{3}{*}{Comparison}
         &ABY&           1.232&      1094 &4\\\cline{2-5}
         &Sharemind&       5.208&      372     &31\\\cline{2-5}
         &\textbf{PrivNNP}&   \textbf{0.13}&    \textbf{12}  &\textbf{3} \\\hline
 
         &ABY&         3.864&    3924       &10\\\cline{2-5}
-        pooling
+        Pooling
         &Sharemind&       15.792&    1128       &64\\\cline{2-5}
         &\textbf{PrivNNP}& \textbf{0.726}  & \textbf{60}       &\textbf{10} \\\hline
 
@@ -1250,7 +1250,7 @@
     The experiments are divided into three parts: basic operations, neural network layers and neural network implementation.
     \subsubsection{Operations.}
     \begin{figure}[htbp]
-        \subfigure[multiplication] %第一张子图
+        \subfigure[Multiplication] %第一张子图
         {
             \begin{minipage}{0.45\linewidth}
                 \centering
@@ -1259,7 +1259,7 @@
                 \label{operation_mul}
             \end{minipage}
         }
-        \subfigure[matrix multiplication] %第二张子图
+        \subfigure[Matrix multiplication] %第二张子图
         {
             \begin{minipage}{0.45\linewidth}
                 \centering
@@ -1304,7 +1304,7 @@
         \begin{tabular}{c|c||c|c|c|c}\hline
 
         \multicolumn{6}{c}{Convolution Layer}\\ \hline
-        \multirow{2}{*}{feature size}&\multirow{2}{*}{size of filter}& \multicolumn{3}{c|}{cost time(s)}&communication \\
+        \multirow{2}{*}{Feature size}&\multirow{2}{*}{Size of filter}& \multicolumn{3}{c|}{Cost time(s)}&Communication \\
 
         \cline{3-5}
         \multirow{2}{*}{ }&\multirow{2}{*}{ }&computation&communication&all&size(Mb)  \\ \hline
@@ -1314,7 +1314,7 @@
         (1024,7,7)& (2048,1024,1,1) & 0.21 & 1.68 & 1.89 & 16.76 \\ \hline \hline
 
         \multicolumn{6}{c}{Pooling Layer}\\ \hline
-        \multicolumn{2}{c||}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
+        \multicolumn{2}{c||}{\multirow{2}{*}{Feature size}}& \multicolumn{3}{c|}{Cost time(s)}&Communication   \\
 
         \cline{3-5}
         \multicolumn{2}{c||}{}&computation&communication&all&size(Mb)\\ \hline
@@ -1324,7 +1324,7 @@
         \multicolumn{2}{c||}{(256,112,112)} & 0.746 & 16.93 & 17.68 & 169.3 \\ \hline          \hline
 
         \multicolumn{6}{c}{ReLU}\\ \hline
-        \multicolumn{2}{c||}{\multirow{2}{*}{feature size}}& \multicolumn{3}{c|}{cost time(s)}&communication   \\
+        \multicolumn{2}{c||}{\multirow{2}{*}{Feature size}}& \multicolumn{3}{c|}{Cost time(s)}&Communication   \\
 
         \cline{3-5}
         \multicolumn{2}{c||}{} &computation&communication&all&size(Mb)\\ \hline
@@ -1359,7 +1359,7 @@
         \center
         \resizebox{0.45\textwidth}{!}{
         \begin{tabular}{c||c|c|c|c}\hline
-        \multirow{2}{*}{model}& \multicolumn{3}{c|}{time(s)}&communication  \\
+        \multirow{2}{*}{Model}& \multicolumn{3}{c|}{Mime(s)}&Communication  \\
         \cline{2-4}
         \multirow{2}{*}{ }&computation&communication&all&size(Mb) \\ \hline
         Lenet-5 & 0.375  & 0.32 & 0.69 &3.2	\\ \hline
